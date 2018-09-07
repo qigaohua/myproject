@@ -1,0 +1,114 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+BITS_ALL_SET	GHepoll.h	13;"	d
+BITS_ANY_SET	GHepoll.h	12;"	d
+BOOL	GHepoll.h	/^typedef int BOOL;$/;"	t
+CHECK_FMT	util.h	15;"	d
+EPOLL_MAX_SIZE	GHepoll.h	6;"	d
+EVENT_TYPE_E	GHepoll.h	/^} EVENT_TYPE_E;$/;"	t	typeref:enum:__anon3
+EVENT_TYPE_ERROR	GHepoll.h	/^    EVENT_TYPE_ERROR   = (1 << 5), \/\/ $/;"	e	enum:__anon3
+EVENT_TYPE_ET	GHepoll.h	/^    EVENT_TYPE_ET      = (1 << 6), $/;"	e	enum:__anon3
+EVENT_TYPE_ONESHOT	GHepoll.h	/^    EVENT_TYPE_ONESHOT = (1 << 7),$/;"	e	enum:__anon3
+EVENT_TYPE_PRI	GHepoll.h	/^    EVENT_TYPE_PRI     = (1 << 4), \/\/ $/;"	e	enum:__anon3
+EVENT_TYPE_READ	GHepoll.h	/^    EVENT_TYPE_READ    = (1 << 2), \/\/ 读$/;"	e	enum:__anon3
+EVENT_TYPE_SIGNAL	GHepoll.h	/^    EVENT_TYPE_SIGNAL  = (1 << 1),$/;"	e	enum:__anon3
+EVENT_TYPE_TIMEOUT	GHepoll.h	/^    EVENT_TYPE_TIMEOUT = (1 << 0),$/;"	e	enum:__anon3
+EVENT_TYPE_WRITE	GHepoll.h	/^    EVENT_TYPE_WRITE   = (1 << 3), \/\/ 写$/;"	e	enum:__anon3
+False	GHepoll.h	8;"	d
+GHEPOLL_TYPE_E	GHepoll.h	/^} GHEPOLL_TYPE_E;$/;"	t	typeref:enum:__anon2
+GHEPOLL_TYPE_ERROR	GHepoll.h	/^    GHEPOLL_TYPE_ERROR,$/;"	e	enum:__anon2
+GHEPOLL_TYPE_FD	GHepoll.h	/^    GHEPOLL_TYPE_FD,$/;"	e	enum:__anon2
+GHEPOLL_TYPE_SIGNAL	GHepoll.h	/^    GHEPOLL_TYPE_SIGNAL,$/;"	e	enum:__anon2
+GHEPOLL_TYPE_TIMEOUT	GHepoll.h	/^    GHEPOLL_TYPE_TIMEOUT,$/;"	e	enum:__anon2
+GHEPOLL_TYPE_TIMEOUT_LOOP	GHepoll.h	/^    GHEPOLL_TYPE_TIMEOUT_LOOP, \/\/ add 循环执行定时任务$/;"	e	enum:__anon2
+GHepoll_add_event	GHepoll.c	/^int GHepoll_add_event (GHepoll_s *base, event_s *event)$/;"	f
+GHepoll_check_event_type	GHepoll.c	/^GHEPOLL_TYPE_E GHepoll_check_event_type(uint32_t events)$/;"	f
+GHepoll_create_event	GHepoll.c	/^event_s* GHepoll_create_event (int fd, struct timeout_t *tt, uint32_t events,$/;"	f
+GHepoll_del_event	GHepoll.c	/^int GHepoll_del_event (GHepoll_s *base, event_s *event)$/;"	f
+GHepoll_event_convert	GHepoll.c	/^uint32_t GHepoll_event_convert(uint32_t events)$/;"	f
+GHepoll_event_free	GHepoll.c	/^void GHepoll_event_free(event_s *event)$/;"	f
+GHepoll_isFdEvent	GHepoll.c	/^inline BOOL GHepoll_isFdEvent(uint32_t events)$/;"	f
+GHepoll_isSignalEvent	GHepoll.c	/^inline BOOL GHepoll_isSignalEvent(uint32_t events)$/;"	f
+GHepoll_isTimeoutEvent	GHepoll.c	/^inline BOOL GHepoll_isTimeoutEvent(uint32_t events)$/;"	f
+GHepoll_loop	GHepoll.c	/^void GHepoll_loop (GHepoll_s *base)$/;"	f
+GHepoll_p	GHepoll.h	/^} GHepoll_s, *GHepoll_p;$/;"	t	typeref:struct:_GHepoll
+GHepoll_s	GHepoll.h	/^} GHepoll_s, *GHepoll_p;$/;"	t	typeref:struct:_GHepoll
+LOG_LEVEL_DEBUG	util.h	/^    LOG_LEVEL_DEBUG,$/;"	e	enum:__anon1
+LOG_LEVEL_EMERG	util.h	/^    LOG_LEVEL_EMERG = 0,$/;"	e	enum:__anon1
+LOG_LEVEL_ERROR	util.h	/^    LOG_LEVEL_ERROR,$/;"	e	enum:__anon1
+LOG_LEVEL_INFO	util.h	/^    LOG_LEVEL_INFO,$/;"	e	enum:__anon1
+LOG_LEVEL_NUM	util.h	13;"	d
+LOG_LEVEL_WARN	util.h	/^    LOG_LEVEL_WARN,$/;"	e	enum:__anon1
+PIPE_READ	GHepoll.c	213;"	d	file:
+PIPE_WRITE	GHepoll.c	214;"	d	file:
+SIGNAL_NUM_MAX	GHepoll.h	16;"	d
+TEST	GHepoll.c	626;"	d	file:
+True	GHepoll.h	9;"	d
+_GHepoll	GHepoll.h	/^typedef struct _GHepoll {$/;"	s
+_GHepoll_global_signal_init	GHepoll.c	/^void _GHepoll_global_signal_init()$/;"	f
+_GHepoll_signal_hander	GHepoll.c	/^int _GHepoll_signal_hander(int signum)$/;"	f
+_GHepoll_signal_pipe	GHepoll.c	/^int _GHepoll_signal_pipe(int pipefd[2]) $/;"	f
+__Q_EPOLL_H_	GHepoll.h	2;"	d
+__UTIL_H_	util.h	2;"	d
+_add_fd_event	GHepoll.c	/^int _add_fd_event(GHepoll_s *base, event_s *event)$/;"	f
+_add_signal_event	GHepoll.c	/^int _add_signal_event (GHepoll_s *base, event_s *event)$/;"	f
+_add_timeout_event	GHepoll.c	/^int _add_timeout_event (GHepoll_s *base, event_s *event)$/;"	f
+_debug	util.h	16;"	d
+_emerg	util.h	20;"	d
+_epoll_mod	GHepoll.c	/^int _epoll_mod (GHepoll_s *base, event_s *event) $/;"	f
+_error	util.h	19;"	d
+_event	GHepoll.h	/^typedef struct _event {$/;"	s
+_event_free	GHepoll.c	/^void _event_free(event_s *event)$/;"	f
+_info	util.h	17;"	d
+_signal_handler	GHepoll.c	/^void _signal_handler(int signum)$/;"	f
+_warn	util.h	18;"	d
+accept_callback	GHepoll.c	/^void accept_callback(event_s *ev)$/;"	f
+args	GHepoll.h	/^    void *args;$/;"	m	struct:_event
+callback	GHepoll.h	/^    proc_callback callback;$/;"	m	struct:_event
+client_callback	GHepoll.c	/^void client_callback(event_s *ev)$/;"	f
+create_fd_event	GHepoll.c	/^event_s* create_fd_event (int fd, uint32_t events, proc_callback cfunc, void *data, size_t datalen)$/;"	f
+create_new_epoll	GHepoll.c	/^GHepoll_s *create_new_epoll (size_t epoll_size) $/;"	f
+create_signal_event	GHepoll.c	/^event_s* create_signal_event (int signum, uint32_t events, proc_callback cfunc, void *data, size_t datalen)$/;"	f
+create_timeout_event	GHepoll.c	/^event_s* create_timeout_event (struct timeout_t *tt, proc_callback cfunc, void *data, size_t datalen)$/;"	f
+epoll_curr_size	GHepoll.h	/^    size_t epoll_curr_size;$/;"	m	struct:_GHepoll
+epoll_event_size	GHepoll.h	/^    size_t epoll_event_size;$/;"	m	struct:_GHepoll
+epoll_fd	GHepoll.h	/^    int epoll_fd;$/;"	m	struct:_GHepoll
+event	GHepoll.h	/^    uint32_t event;$/;"	m	struct:_event
+event_s	GHepoll.h	/^} event_s;$/;"	t	typeref:struct:_event
+events	GHepoll.h	/^    struct epoll_event events[0];$/;"	m	struct:_GHepoll	typeref:struct:_GHepoll::epoll_event
+fd	GHepoll.h	/^    int fd;$/;"	m	struct:_event
+fd_event	GHepoll.h	/^    struct _event *fd_event;$/;"	m	struct:_GHepoll	typeref:struct:_GHepoll::_event
+g_local_level	util.c	/^static int g_local_level = LOG_LEVEL_INFO;$/;"	v	file:
+get_monotonic	util.c	/^int get_monotonic(struct timeval *tv)$/;"	f
+global_pipe_fd	GHepoll.c	/^static int global_pipe_fd[SIGNAL_NUM_MAX + 1];$/;"	v	file:
+global_signal_init	GHepoll.c	/^static BOOL global_signal_init = False; $/;"	v	file:
+log_level_type	util.c	/^static const char *log_level_type[] = {$/;"	v	file:
+loop_time	GHepoll.h	/^    struct timeval loop_time;$/;"	m	struct:timeout_t	typeref:struct:timeout_t::timeval
+main	GHepoll.c	/^int main ()$/;"	f
+main	test_epoll.c	/^int main ()$/;"	f
+next	GHepoll.h	/^    struct _event *next;$/;"	m	struct:_event	typeref:struct:_event::_event
+now	GHepoll.h	/^    struct timeval now;$/;"	m	struct:_GHepoll	typeref:struct:_GHepoll::timeval
+owner	GHepoll.h	/^    GHepoll_s *owner;$/;"	m	struct:_event
+proc_callback	GHepoll.h	/^typedef void (*proc_callback)(struct _event *);$/;"	t
+set_cloexec	util.c	/^int set_cloexec (int fd) $/;"	f
+set_nonblock	util.c	/^int set_nonblock (int fd)$/;"	f
+signal	GHepoll.h	/^    int signal;$/;"	m	struct:_event
+signal_callback	GHepoll.c	/^void signal_callback(event_s *ev)$/;"	f
+start_time	GHepoll.h	/^    struct timeval start_time;$/;"	m	struct:timeout_t	typeref:struct:timeout_t::timeval
+tcp_socket	GHepoll.c	/^int tcp_socket(const char *host, uint16_t port)$/;"	f
+tcp_socket	test_epoll.c	/^int tcp_socket(const char *host, uint16_t port)$/;"	f
+timeout_callback	GHepoll.c	/^void timeout_callback(event_s *ev)$/;"	f
+timeout_curr_size	GHepoll.h	/^    size_t timeout_curr_size;$/;"	m	struct:_GHepoll
+timeout_t	GHepoll.h	/^struct timeout_t {$/;"	s
+timeouts	GHepoll.h	/^    struct _event *timeouts;$/;"	m	struct:_GHepoll	typeref:struct:_GHepoll::_event
+type	GHepoll.h	/^    GHEPOLL_TYPE_E type;$/;"	m	struct:_event
+util_log	util.c	/^int util_log (int level, const char *fmt, ...) $/;"	f
+util_set_log_level	util.c	/^void util_set_log_level (int level)$/;"	f
+when	GHepoll.h	/^    struct timeout_t when;$/;"	m	struct:_event	typeref:struct:_event::timeout_t
+xmalloc	util.c	/^void* xmalloc(size_t size)$/;"	f
+xrealloc	util.c	/^void* xrealloc(void *ptr, size_t size)$/;"	f
+xzalloc	util.c	/^void* xzalloc(size_t size)$/;"	f
