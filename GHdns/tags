@@ -1,0 +1,195 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+ANSWER	GHdns.h	/^    ANSWER = (1 << 15),$/;"	e	enum:__anon1
+AdditionalRRS	GHdns.h	/^    uint16_t AdditionalRRS;$/;"	m	struct:_dns_header
+AnswerRRs	GHdns.h	/^    uint16_t AnswerRRs;$/;"	m	struct:_dns_header
+AuthorityRRs	GHdns.h	/^    uint16_t AuthorityRRs;$/;"	m	struct:_dns_header
+BITS_ALL_SET	GHdns.h	14;"	d
+BITS_ANY_SET	GHdns.h	13;"	d
+BOOL	GHdns.h	/^typedef int  BOOL;$/;"	t
+CC	Makefile	/^CC = gcc$/;"	m
+CFLAGS	Makefile	/^CFLAGS = -Wall -O2 -s -D_DUBUG_$/;"	m
+CHECK_FMT	log.h	14;"	d
+Class	GHdns.h	/^    uint16_t Class;$/;"	m	struct:_dns_answers
+Class	GHdns.h	/^    uint16_t Class;$/;"	m	struct:_dns_queries
+DEFAULT_DNS_FILE	GHdns.h	17;"	d
+DEPS	Makefile	/^DEPS = $(patsubst %.o,%.d,$(OBJS))$/;"	m
+DNS_HEADER_LENGTH	GHdns.h	71;"	d
+DNS_SERVER	GHdns.h	18;"	d
+DNS_TYPE_A	GHdns.h	/^    DNS_TYPE_A = 1, \/* 由域名获得IPv4地址 *\/$/;"	e	enum:__anon2
+DNS_TYPE_AAAA	GHdns.h	/^    DNS_TYPE_AAAA = 28,\/* 由域名获得IPv6地址 *\/$/;"	e	enum:__anon2
+DNS_TYPE_CNAME	GHdns.h	/^    DNS_TYPE_CNAME = 5,\/* 查询规范名称 *\/$/;"	e	enum:__anon2
+DNS_TYPE_NS	GHdns.h	/^    DNS_TYPE_NS = 2,\/* 查询域名服务器 *\/$/;"	e	enum:__anon2
+DNS_TYPE_PTR	GHdns.h	/^    DNS_TYPE_PTR = 12, \/* 把IP地址转换成域名 *\/$/;"	e	enum:__anon2
+Data	GHdns.h	/^    uint8_t *Data;$/;"	m	struct:_dns_answers
+DataLen	GHdns.h	/^    uint16_t DataLen;$/;"	m	struct:_dns_answers
+ELOOP_H	eloop.h	29;"	d
+ELOOP_QUEUE	eloop.h	34;"	d
+FLAGS_AA	GHdns.h	/^    FLAGS_AA = (1 << 10),\/* 表示授权回答 *\/$/;"	e	enum:__anon1
+FLAGS_RA	GHdns.h	/^    FLAGS_RA = (1 << 7), \/* 表示可用递归 *\/$/;"	e	enum:__anon1
+FLAGS_RD	GHdns.h	/^    FLAGS_RD = (1 << 8), \/* 表示期望递归 *\/$/;"	e	enum:__anon1
+FLAGS_TC	GHdns.h	/^    FLAGS_TC = (1 << 9), \/* 表示可截断的 *\/$/;"	e	enum:__anon1
+False	GHdns.h	7;"	d
+Flags	GHdns.h	/^    uint16_t Flags;$/;"	m	struct:_dns_header
+GH_LOG_DEBUG	log.h	9;"	d
+GH_LOG_ERROR	log.h	6;"	d
+GH_LOG_MSG	log.h	8;"	d
+GH_LOG_WARN	log.h	7;"	d
+KEEP_LINE	log.h	12;"	d
+LIBS	Makefile	/^LIBS=-lpthread -L\/usr\/lib64\/mysql -lmysqlclient$/;"	m
+LOCK_FILE	GHdns.h	25;"	d
+LOCK_MODE	GHdns.h	26;"	d
+LOGG_INFO	log.h	38;"	d
+LOGG_WARN	log.h	44;"	d
+LOG_ERROR	log.h	32;"	d
+LOG_FILE	GHdns.h	23;"	d
+MAX_LINE	log.h	11;"	d
+MISSING_DEPS	Makefile	/^MISSING_DEPS = $(filter-out $(wildcard $(DEPS)),$(DEPS))$/;"	m
+MISSING_DEPS_SOURCES	Makefile	/^MISSING_DEPS_SOURCES = $(wildcard $(patsubst %.d,%.c,$(MISSING_DEPS)))$/;"	m
+NO_MONOTONIC	util.c	111;"	d	file:
+Name	GHdns.h	/^    uint8_t *Name;$/;"	m	struct:_dns_answers
+Name	GHdns.h	/^    uint8_t *Name;$/;"	m	struct:_dns_queries
+OBJS	Makefile	/^OBJS = $(patsubst %.c,%.o,$(wildcard *.c))$/;"	m
+OPCODE_INVERSE_QUERY	GHdns.h	/^    OPCODE_INVERSE_QUERY = (1 << 11),  \/* 反向查询 *\/$/;"	e	enum:__anon1
+OPCODE_SERVER_STATUS_QUERY	GHdns.h	/^    OPCODE_SERVER_STATUS_QUERY = (2 << 11), \/* 服务器状态请求 *\/$/;"	e	enum:__anon1
+OPCODE_STANDARD_QUERY	GHdns.h	/^    OPCODE_STANDARD_QUERY = (0 << 11), \/* 标准查询 *\/$/;"	e	enum:__anon1
+PROGREM	GHdns.h	28;"	d
+QDNS_PORT	GHdns.h	21;"	d
+QDNS_SERVER	GHdns.h	20;"	d
+QUERY	GHdns.h	/^    QUERY = (0 << 15), \/* 查询\/响应标志，0为查询，1为响应 *\/$/;"	e	enum:__anon1
+Qdns_recvclient_callback	GHdns.c	/^void Qdns_recvclient_callback(void *data, int fd)$/;"	f
+Qdns_recvuserdata_callback	GHdns.c	/^void Qdns_recvuserdata_callback(void *data, int fd)$/;"	f
+Qdns_result_callback	GHdns.c	/^void Qdns_result_callback(void *data, int dns_fd)$/;"	f
+Questions	GHdns.h	/^    uint16_t Questions;$/;"	m	struct:_dns_header
+RCODE_ERROR	GHdns.h	/^    RCODE_ERROR = (1 << 0), \/* 名字差错 *\/ $/;"	e	enum:__anon1
+RCODE_SERVER_FAILURE	GHdns.h	/^    RCODE_SERVER_FAILURE = (2 << 0), \/* 服务器错误 *\/$/;"	e	enum:__anon1
+RCODE_TURE	GHdns.h	/^    RCODE_TURE = (0 << 0), \/* 返回码 成功 *\/$/;"	e	enum:__anon1
+Recvfrom	GHdns.c	/^ssize_t Recvfrom(int sockfd, void *buff, size_t len, int flags, struct sockaddr *src_addr, socklen_t *addrlen )$/;"	f
+System	log.c	/^int System(char *cmd)$/;"	f
+TARGET	Makefile	/^TARGET=Qdns$/;"	m
+TTL	GHdns.h	/^    uint32_t TTL;$/;"	m	struct:_dns_answers
+TransactionID	GHdns.h	/^    uint16_t TransactionID;$/;"	m	struct:_dns_header
+Ture	GHdns.h	8;"	d
+Type	GHdns.h	/^    uint16_t Type;$/;"	m	struct:_dns_answers
+Type	GHdns.h	/^    uint16_t Type;$/;"	m	struct:_dns_queries
+UNCONST	util.h	7;"	d
+_DEBUG_	GHdns.h	5;"	d
+__LOG_H__	log.h	2;"	d
+__QDNS_H_	GHdns.h	2;"	d
+__UTIL_H_	util.h	2;"	d
+_dns_answers	GHdns.h	/^typedef struct _dns_answers {$/;"	s
+_dns_header	GHdns.h	/^typedef struct _dns_header {$/;"	s
+_dns_queries	GHdns.h	/^typedef struct _dns_queries {$/;"	s
+_dns_result	GHdns.h	/^typedef struct _dns_result {$/;"	s
+_dns_server	GHdns.h	/^typedef struct _dns_server {$/;"	s
+_noreturn	util.h	19;"	d
+_noreturn	util.h	23;"	d
+_packed	util.h	20;"	d
+_packed	util.h	24;"	d
+_set_dns_header_flags	GHdns.c	/^uint16_t _set_dns_header_flags()$/;"	f
+_unused	util.h	21;"	d
+_unused	util.h	25;"	d
+add_event	eloop.c	/^add_event(int fd, void (*callback)(void *, int), void *arg)$/;"	f
+add_q_timeout_sec	eloop.c	/^add_q_timeout_sec(int queue, time_t when, void (*callback)(void *), void *arg)$/;"	f
+add_q_timeout_tv	eloop.c	/^add_q_timeout_tv(int queue,$/;"	f
+add_timeout_sec	eloop.h	38;"	d
+add_timeout_tv	eloop.h	37;"	d
+ans_answers_p	GHdns.h	/^} dns_answers_t, *ans_answers_p;$/;"	t	typeref:struct:_dns_answers
+answers	GHdns.h	/^    struct _dns_answers *answers;$/;"	m	struct:_dns_result	typeref:struct:_dns_result::_dns_answers
+arg	eloop.c	/^	void *arg;$/;"	m	struct:event	file:
+arg	eloop.c	/^	void *arg;$/;"	m	struct:timeout	file:
+callback	eloop.c	/^	void (*callback)(void *);$/;"	m	struct:timeout	file:
+callback	eloop.c	/^	void (*callback)(void *, int);$/;"	m	struct:event	file:
+cleanup	eloop.c	/^cleanup(void)$/;"	f	file:
+clock_monotonic	util.c	/^int clock_monotonic;$/;"	v
+copy_uint16	util.c	/^int copy_uint16(void *dst, void *src)$/;"	f
+copy_uint32	util.c	/^int copy_uint32(void *dst, void *src)$/;"	f
+create_dns_header	GHdns.c	/^void create_dns_header(dns_header_t *dns_header)$/;"	f
+create_dns_queries	GHdns.c	/^void create_dns_queries(dns_queries_t *dns_queries, char *domain)$/;"	f
+create_dns_senddata	GHdns.c	/^int create_dns_senddata(char *buff,  char *domain)$/;"	f
+daemon_init	util.c	/^void daemon_init() $/;"	f
+delete_event	eloop.c	/^delete_event(int fd)$/;"	f
+delete_q_timeout	eloop.c	/^delete_q_timeout(int queue, void (*callback)(void *), void *arg)$/;"	f
+delete_q_timeouts	eloop.c	/^delete_q_timeouts(int queue, void *arg, void (*callback)(void *), ...)$/;"	f
+delete_timeout	eloop.h	39;"	d
+delete_timeouts	eloop.h	40;"	d
+dns_answers_t	GHdns.h	/^} dns_answers_t, *ans_answers_p;$/;"	t	typeref:struct:_dns_answers
+dns_header_p	GHdns.h	/^} dns_header_t, *dns_header_p;$/;"	t	typeref:struct:_dns_header
+dns_header_t	GHdns.h	/^} dns_header_t, *dns_header_p;$/;"	t	typeref:struct:_dns_header
+dns_parse_userdata	GHdns.c	/^int dns_parse_userdata(char *buff, int fd)$/;"	f
+dns_queries_p	GHdns.h	/^} dns_queries_t, *dns_queries_p;$/;"	t	typeref:struct:_dns_queries
+dns_queries_t	GHdns.h	/^} dns_queries_t, *dns_queries_p;$/;"	t	typeref:struct:_dns_queries
+dns_recv_result	GHdns.c	/^int dns_recv_result(int sockfd)$/;"	f
+dns_resolve_name	GHdns.c	/^int dns_resolve_name(void *p_dns, void *dns_offset, char *name)$/;"	f
+dns_result_free	GHdns.c	/^void dns_result_free(void *ptr)$/;"	f
+dns_result_p	GHdns.h	/^} dns_result_t, *dns_result_p;$/;"	t	typeref:struct:_dns_result
+dns_result_t	GHdns.h	/^} dns_result_t, *dns_result_p;$/;"	t	typeref:struct:_dns_result
+dns_send_result	GHdns.c	/^int dns_send_result(int sockfd, dns_result_t *dns_result)$/;"	f
+dns_server_p	GHdns.h	/^} dns_server_t, *dns_server_p;$/;"	t	typeref:struct:_dns_server
+dns_server_t	GHdns.h	/^} dns_server_t, *dns_server_p;$/;"	t	typeref:struct:_dns_server
+doit_num	GHdns.h	/^    uint8_t doit_num;$/;"	m	struct:domain_info
+domain_info	GHdns.h	/^struct domain_info {$/;"	s
+dump	util.c	/^void dump(FILE *out, const char *buff, size_t len)$/;"	f
+dump_line	util.c	/^void dump_line(FILE *fp, const char *addr, const size_t len)$/;"	f
+each_paragraph_count	GHdns.h	/^    uint8_t each_paragraph_count[5];$/;"	m	struct:domain_info
+event	eloop.c	/^static struct event {$/;"	s	file:
+events	eloop.c	/^} *events;$/;"	v	typeref:struct:event	file:
+fd	eloop.c	/^	int fd;$/;"	m	struct:event	file:
+fds	eloop.c	/^static struct pollfd *fds;$/;"	v	typeref:struct:pollfd	file:
+fds_len	eloop.c	/^static size_t fds_len;$/;"	v	file:
+free_events	eloop.c	/^static struct event *free_events;$/;"	v	typeref:struct:event	file:
+free_timeouts	eloop.c	/^static struct timeout *free_timeouts;$/;"	v	typeref:struct:timeout	file:
+get_dns_server	GHdns.c	/^int get_dns_server(char *dns_server, const char *filename)$/;"	f
+get_file_lines	log.c	/^int get_file_lines(const char *file)$/;"	f
+get_monotonic	util.c	/^get_monotonic(struct timeval *tp)$/;"	f
+header	GHdns.h	/^    struct _dns_header header;$/;"	m	struct:_dns_result	typeref:struct:_dns_result::_dns_header
+is_already_running	GHdns.c	/^int is_already_running(const char *lock_file, mode_t lock_mode) {$/;"	f
+is_ture_domain	GHdns.c	/^int is_ture_domain(char *domain)$/;"	f
+log_debug	log.c	/^void log_debug(const char *fmt, ...)$/;"	f
+log_error	log.c	/^void log_error(int errcode, const char *fmt, ...)$/;"	f
+log_exit	log.c	/^static void log_exit(int errcode)$/;"	f	file:
+log_exit_cb	log.c	/^log_exit_func  log_exit_cb = NULL;$/;"	v
+log_exit_func	log.h	/^typedef void (*log_exit_func)(int);$/;"	t
+log_print	log.c	/^static void log_print(int severity, const char *fmt,  const char *errstr, va_list ap, FILE* fp)$/;"	f	file:
+log_print_cb	log.c	/^log_print_func log_print_cb = NULL;$/;"	v
+log_print_func	log.h	/^typedef void (*log_print_func)(int, const char*);$/;"	t
+log_print_of_severity	log.c	/^static void log_print_of_severity(int severity, const char *msg, FILE* fp)$/;"	f	file:
+log_recold_file	log.c	/^void log_recold_file(int severity, const char *file, const char *fmt, ...)$/;"	f
+log_set_exit_cb	log.c	/^void log_set_exit_cb(log_exit_func cb)$/;"	f
+log_set_print_cb	log.c	/^void log_set_print_cb(log_print_func cb)$/;"	f
+log_warn	log.c	/^void log_warn(const char *fmt, ...)$/;"	f
+log_xerror	log.c	/^void log_xerror(int errcode, const char *fmt, ...)$/;"	f
+log_xmsg	log.c	/^void log_xmsg(const char *fmt, ...)$/;"	f
+log_xwarn	log.c	/^void log_xwarn(const char *fmt, ...)$/;"	f
+main	GHdns.c	/^int main()$/;"	f
+next	GHdns.h	/^    struct _dns_answers *next;$/;"	m	struct:_dns_answers	typeref:struct:_dns_answers::_dns_answers
+next	GHdns.h	/^    struct _dns_server *next;$/;"	m	struct:_dns_server	typeref:struct:_dns_server::_dns_server
+next	eloop.c	/^	struct event *next;$/;"	m	struct:event	typeref:struct:event::event	file:
+next	eloop.c	/^	struct timeout *next;$/;"	m	struct:timeout	typeref:struct:timeout::timeout	file:
+now	eloop.c	/^static struct timeval now;$/;"	v	typeref:struct:timeval	file:
+parse_dns_recvdata	GHdns.c	/^dns_result_p parse_dns_recvdata(void *buff, ssize_t len)$/;"	f
+parse_domain	GHdns.c	/^void parse_domain (char *domain, struct domain_info *dinfo)$/;"	f
+queries	GHdns.h	/^    struct _dns_queries queries;$/;"	m	struct:_dns_result	typeref:struct:_dns_result::_dns_queries
+queue	eloop.c	/^	int queue;$/;"	m	struct:timeout	file:
+random_uint16	util.c	/^uint16_t random_uint16(void)$/;"	f
+send_dns_request	GHdns.c	/^int send_dns_request(int sockfd, char *domain)$/;"	f
+server	GHdns.h	/^    char *server;$/;"	m	struct:_dns_server
+set_cloexec	GHdns.c	/^int set_cloexec(int fd) $/;"	f
+set_nonblock	GHdns.c	/^int set_nonblock(int fd)$/;"	f
+start_eloop	eloop.c	/^start_eloop(void)$/;"	f
+tcp_socket	GHdns.c	/^int tcp_socket(const char *host, uint16_t port)$/;"	f
+timeout	eloop.c	/^static struct timeout {$/;"	s	file:
+timeouts	eloop.c	/^} *timeouts;$/;"	v	typeref:struct:timeout	file:
+timernorm	util.h	10;"	d
+timeval_to_double	util.h	9;"	d
+truncate_file	log.c	/^int truncate_file(const char *file, int truncate_line)$/;"	f
+v_delete_q_timeouts	eloop.c	/^v_delete_q_timeouts(int queue, void *arg, void (*callback)(void *), va_list v)$/;"	f	file:
+valid	GHdns.h	/^    BOOL valid;$/;"	m	struct:_dns_server
+when	eloop.c	/^	struct timeval when;$/;"	m	struct:timeout	typeref:struct:timeout::timeval	file:
+xmalloc	util.c	/^void* xmalloc(size_t size)$/;"	f
+xrealloc	util.c	/^void* xrealloc(void *ptr, size_t size)$/;"	f
+xzalloc	util.c	/^void* xzalloc(size_t size)$/;"	f
