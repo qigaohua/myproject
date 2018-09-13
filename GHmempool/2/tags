@@ -1,0 +1,44 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+HAVE_MULTITHREADING	GHmempool.h	6;"	d
+TEST	GHmempool.c	412;"	d	file:
+__GH_MEMPOOL_	GHmempool.h	2;"	d
+block	GHmempool.h	/^    block_t *block;$/;"	m	struct:mempool_block_info_s
+block_s	GHmempool.h	/^struct block_s {$/;"	s
+block_t	GHmempool.h	/^typedef struct block_s    block_t;$/;"	t	typeref:struct:block_s
+blockcount	GHmempool.h	/^    int blockcount ;$/;"	m	struct:block_s
+blockcount	GHmempool.h	/^    int blockcount;$/;"	m	struct:gh_mempool_s
+blocksize	GHmempool.h	/^    size_t blocksize;$/;"	m	struct:block_s
+blocksize	GHmempool.h	/^    size_t blocksize;$/;"	m	struct:gh_mempool_s
+d	GHmempool.h	/^    void *d;$/;"	m	struct:gh_mempool_block_s
+gh_calloc	GHmempool.c	/^static void *gh_calloc(size_t size)$/;"	f	file:
+gh_free	GHmempool.c	18;"	d	file:
+gh_malloc	GHmempool.c	/^static void *gh_malloc(size_t size)$/;"	f	file:
+gh_memalign	GHmempool.c	/^static void *gh_memalign (size_t alignment, size_t size)$/;"	f	file:
+gh_mempool_alloc	GHmempool.c	/^void *gh_mempool_alloc (gh_mempool_t **mpool, size_t size)$/;"	f
+gh_mempool_block_s	GHmempool.h	/^struct gh_mempool_block_s {$/;"	s
+gh_mempool_block_t	GHmempool.h	/^typedef struct gh_mempool_block_s gh_mempool_block_t;$/;"	t	typeref:struct:gh_mempool_block_s
+gh_mempool_create	GHmempool.c	/^gh_mempool_t **gh_mempool_create (mempool_block_info_t *binfo)$/;"	f
+gh_mempool_destory	GHmempool.c	/^void gh_mempool_destory (gh_mempool_t **mpool)$/;"	f
+gh_mempool_echo_info	GHmempool.c	/^void gh_mempool_echo_info (gh_mempool_t **mpool)$/;"	f
+gh_mempool_free	GHmempool.c	/^int gh_mempool_free (gh_mempool_t **mpool, void *f)$/;"	f
+gh_mempool_quick_sort	GHmempool.c	/^int gh_mempool_quick_sort(block_t *bk, int start, int end)$/;"	f
+gh_mempool_s	GHmempool.h	/^struct gh_mempool_s {$/;"	s
+gh_mempool_sort_block	GHmempool.c	/^int gh_mempool_sort_block (mempool_block_info_t *binfo)$/;"	f
+gh_mempool_t	GHmempool.h	/^typedef struct gh_mempool_s gh_mempool_t;$/;"	t	typeref:struct:gh_mempool_s
+ghmempool_lock	GHmempool.c	/^static   pthread_mutex_t    ghmempool_lock;$/;"	v	file:
+main	GHmempool.c	/^int main () $/;"	f
+mempool_block_info_s	GHmempool.h	/^struct mempool_block_info_s {$/;"	s
+mempool_block_info_t	GHmempool.h	/^typedef struct mempool_block_info_s mempool_block_info_t;$/;"	t	typeref:struct:mempool_block_info_s
+mpool	GHmempool.c	/^gh_mempool_t **mpool;$/;"	v
+next	GHmempool.h	/^    gh_mempool_block_t *next;$/;"	m	struct:gh_mempool_block_s
+pthread_func1	GHmempool.c	/^void *pthread_func1(void *data)$/;"	f
+pthread_func2	GHmempool.c	/^void *pthread_func2(void *data)$/;"	f
+total	GHmempool.h	/^    int total;$/;"	m	struct:gh_mempool_s
+total	GHmempool.h	/^    int total;$/;"	m	struct:mempool_block_info_s
+unused	GHmempool.h	/^    gh_mempool_block_t *unused;$/;"	m	struct:gh_mempool_s
+used	GHmempool.h	/^    gh_mempool_block_t *used;$/;"	m	struct:gh_mempool_s
