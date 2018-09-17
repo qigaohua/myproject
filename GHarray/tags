@@ -1,0 +1,31 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+TEST	GHarray.c	144;"	d	file:
+__GH_ARRAY_H	GHarray.h	2;"	d
+_array_print	GHarray.c	11;"	d	file:
+_array_print	GHarray.c	14;"	d	file:
+_check_param	GHarray.c	18;"	d	file:
+a	GHarray.c	/^    char  *a;$/;"	m	struct:test_s	file:
+alloc	GHarray.h	/^    int    alloc;$/;"	m	struct:gh_array_s
+callback	GHarray.h	/^    handle_callback callback;$/;"	m	struct:gh_array_s
+d	GHarray.h	/^    void   *d;$/;"	m	struct:gh_array_s
+gh_array_create	GHarray.c	/^gh_array_t *gh_array_create(size_t size, int n, handle_callback func)$/;"	f
+gh_array_destory	GHarray.c	/^int gh_array_destory (gh_array_t *array)$/;"	f
+gh_array_push	GHarray.c	/^void *gh_array_push (gh_array_t *array)$/;"	f
+gh_array_push_n	GHarray.c	/^void *gh_array_push_n (gh_array_t *array, int n)$/;"	f
+gh_array_s	GHarray.h	/^struct gh_array_s {$/;"	s
+gh_array_t	GHarray.h	/^typedef struct gh_array_s gh_array_t;$/;"	t	typeref:struct:gh_array_s
+handle_callback	GHarray.h	/^typedef void (*handle_callback)(void *data);$/;"	t
+i	GHarray.c	/^    int   i;$/;"	m	struct:test_s	file:
+j	GHarray.c	/^    short j;$/;"	m	struct:test_s	file:
+main	GHarray.c	/^int main ()$/;"	f
+size	GHarray.h	/^    size_t size;$/;"	m	struct:gh_array_s
+str	GHarray.c	/^    char str[16];$/;"	m	struct:test_s	file:
+test_free	GHarray.c	/^void test_free(void *data)$/;"	f
+test_s	GHarray.c	/^typedef struct test_s {$/;"	s	file:
+test_t	GHarray.c	/^} test_t;$/;"	t	typeref:struct:test_s	file:
+useds	GHarray.h	/^    int    useds; $/;"	m	struct:gh_array_s
