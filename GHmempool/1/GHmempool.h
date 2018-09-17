@@ -11,7 +11,7 @@
 
 // 字节对齐
 #define gh_memalign_ptr(p, a) \
-    (char *)(((unsigned long)(p) + ((unsigned long)a - 1)) & ~((unsigned long)a - 1))
+    (char *)(((uintptr_t)(p) + ((uintptr_t)a - 1)) & ~((uintptr_t)a - 1))
 
 
 typedef struct gh_mempool_s                 gh_mempool_t;
