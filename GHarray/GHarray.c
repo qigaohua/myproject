@@ -102,11 +102,14 @@ void *gh_array_push (gh_array_t *array)
         void *alloc;
 
         if (array->useds == array->alloc) {
-            array->d = realloc(array->d, array->alloc * array->size * 2); 
-            if (NULL == array->d) {
+            /*bug fix: 避免申请失败, 引发的内存泄露 */
+            void *p = realloc(array->d, array->alloc * array->size * 2); 
+            if (NULL == p) {
                 _array_print(stderr, "realloc failed [%m]");
                 return NULL;
             }
+            array->d = p;
+
             array->alloc *= 2;
             _array_print(stdout, "array realloc success: %zu @%d",
                     array->size, array->alloc);
