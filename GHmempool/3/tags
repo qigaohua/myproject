@@ -1,0 +1,96 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+BLACK	gh_rbtree.h	/^    BLACK = 1,$/;"	e	enum:__anon1
+BOOL	gh_rbtree.h	/^typedef int BOOL;$/;"	t
+Color	gh_rbtree.h	/^} Color;$/;"	t	typeref:enum:__anon1
+False	gh_rbtree.h	5;"	d
+RED	gh_rbtree.h	/^    RED   = 0,$/;"	e	enum:__anon1
+True	gh_rbtree.h	6;"	d
+Type	gh_rbtree.c	/^typedef struct test_s Type;$/;"	t	typeref:struct:test_s	file:
+Type	gh_rbtree.c	/^} Type;$/;"	t	typeref:struct:test_s	file:
+Type	gh_rbtree.h	/^typedef void * Type;$/;"	t
+__GH_MEMPOOL_	GHmempool.h	2;"	d
+__GH_RB_TREE__	gh_rbtree.h	2;"	d
+_red_black_tree	gh_rbtree.h	/^struct _red_black_tree {$/;"	s
+a	gh_rbtree.c	/^    char a;$/;"	m	struct:test_s	file:
+alloc	GHmempool.c	/^static void *alloc(gh_mempool_t *mp, rbt_pt root, size_t size)$/;"	f	file:
+b	gh_rbtree.c	/^    char *b;$/;"	m	struct:test_s	file:
+blocksize	GHmempool.h	/^    size_t blocksize; $/;"	m	struct:gh_mempool_node_s
+c	gh_rbtree.c	/^    int c;$/;"	m	struct:test_s	file:
+color	gh_rbtree.h	/^    Color  color; $/;"	m	struct:_red_black_tree
+d	GHmempool.h	/^    void   *d;$/;"	m	struct:gh_mempool_node_s
+d	GHmempool.h	/^    void   *d;$/;"	m	struct:gh_mempool_s
+data	gh_rbtree.h	/^	Type data;$/;"	m	struct:_red_black_tree
+default_node_free	gh_rbtree.c	/^void default_node_free (void *node)$/;"	f
+default_value_cmp	gh_rbtree.c	/^int default_value_cmp(Type *d1, Type *d2)$/;"	f
+default_value_print	gh_rbtree.c	/^void default_value_print(void *d)$/;"	f
+example_node_free	gh_rbtree.c	/^void example_node_free(void *d)$/;"	f
+example_value_cmp	gh_rbtree.c	/^int example_value_cmp(void *d1, void *d2)$/;"	f
+example_value_print	gh_rbtree.c	/^void example_value_print(void *d)$/;"	f
+gh_calloc	GHmempool.c	/^static void *gh_calloc(size_t size)$/;"	f	file:
+gh_create_mempool	GHmempool.c	/^gh_mempool_t *gh_create_mempool (size_t size)$/;"	f
+gh_malloc	GHmempool.c	/^static void *gh_malloc(size_t size)$/;"	f	file:
+gh_mempool_alloc	GHmempool.c	/^void *gh_mempool_alloc(gh_mempool_t *mp, size_t size)$/;"	f
+gh_mempool_destroy	GHmempool.c	/^void gh_mempool_destroy(gh_mempool_t *mp)$/;"	f
+gh_mempool_free	GHmempool.c	/^void gh_mempool_free(void *f)$/;"	f
+gh_mempool_integrate	GHmempool.c	/^void gh_mempool_integrate(gh_mempool_t *mp)$/;"	f
+gh_mempool_node_s	GHmempool.h	/^struct gh_mempool_node_s {$/;"	s
+gh_mempool_node_t	GHmempool.h	/^typedef struct gh_mempool_node_s gh_mempool_node_t;$/;"	t	typeref:struct:gh_mempool_node_s
+gh_mempool_print	GHmempool.c	/^static void gh_mempool_print (void *p)$/;"	f	file:
+gh_mempool_pt	GHmempool.h	/^typedef struct gh_mempool_s gh_mempool_t, *gh_mempool_pt;$/;"	t	typeref:struct:
+gh_mempool_s	GHmempool.h	/^struct gh_mempool_s {$/;"	s
+gh_mempool_t	GHmempool.h	/^typedef struct gh_mempool_s gh_mempool_t, *gh_mempool_pt;$/;"	t	typeref:struct:gh_mempool_s
+gh_mempool_value_cmp	GHmempool.c	/^static int gh_mempool_value_cmp(Type *d1, Type *d2)$/;"	f	file:
+index	GHmempool.h	/^    unsigned long  index;$/;"	m	struct:gh_mempool_node_s
+integrate	GHmempool.c	/^static void integrate(gh_mempool_t *mp, rbt_pt root)$/;"	f	file:
+is_used	GHmempool.h	/^    BOOL   is_used;$/;"	m	struct:gh_mempool_node_s
+lchild	gh_rbtree.h	/^	rbt_t  *lchild;$/;"	m	struct:_red_black_tree
+main	GHmempool.c	/^int main ()$/;"	f
+main	gh_rbtree.c	/^int main ()$/;"	f
+min_key	GHmempool.h	/^    unsigned long min_key;$/;"	m	struct:gh_mempool_s
+mpool	GHmempool.c	/^gh_mempool_t *mpool;$/;"	v
+node_free	gh_rbtree.c	/^static value_handle node_free = default_node_free;$/;"	v	file:
+node_info_print	gh_rbtree.c	/^void node_info_print(rbt_pt node)$/;"	f
+node_value	gh_rbtree.c	108;"	d	file:
+parent	gh_rbtree.h	/^    rbt_t  *parent;$/;"	m	struct:_red_black_tree
+rbnode_is_black	gh_rbtree.h	10;"	d
+rbnode_is_red	gh_rbtree.h	9;"	d
+rbnode_parent	gh_rbtree.h	14;"	d
+rbnode_set_black	gh_rbtree.h	11;"	d
+rbnode_set_red	gh_rbtree.h	12;"	d
+rbt_new_node	gh_rbtree.c	/^rbt_pt rbt_new_node (Type d, Color color)$/;"	f
+rbt_pt	gh_rbtree.h	/^typedef struct _red_black_tree rbt_t, *rbt_pt;$/;"	t	typeref:struct:
+rbt_t	gh_rbtree.h	/^typedef struct _red_black_tree rbt_t, *rbt_pt;$/;"	t	typeref:struct:_red_black_tree
+rbtree_delete_fixup	gh_rbtree.c	/^int rbtree_delete_fixup(rbt_pt *root, rbt_pt node, rbt_pt parent) $/;"	f
+rbtree_destroy	gh_rbtree.c	/^void rbtree_destroy(rbt_pt node)$/;"	f
+rbtree_for_cmp	gh_rbtree.c	/^static rbt_pt rbtree_for_cmp(rbt_pt *root, Type data)$/;"	f	file:
+rbtree_for_delete	gh_rbtree.c	/^int rbtree_for_delete(rbt_pt *root, Type data)$/;"	f
+rbtree_for_inorder	gh_rbtree.c	/^void rbtree_for_inorder(rbt_pt root)$/;"	f
+rbtree_for_insert	gh_rbtree.c	/^int rbtree_for_insert(rbt_pt *root, Type data)$/;"	f
+rbtree_for_postorder	gh_rbtree.c	/^void rbtree_for_postorder(rbt_pt root)$/;"	f
+rbtree_for_preorder	gh_rbtree.c	/^void rbtree_for_preorder(rbt_pt root)$/;"	f
+rbtree_insert_fixup	gh_rbtree.c	/^int rbtree_insert_fixup(rbt_pt *root, rbt_pt node)$/;"	f
+rbtree_left_rotate	gh_rbtree.c	/^static void rbtree_left_rotate(rbt_pt *root, rbt_pt x)$/;"	f	file:
+rbtree_max_node	gh_rbtree.c	/^rbt_pt rbtree_max_node(rbt_pt node)$/;"	f
+rbtree_min_node	gh_rbtree.c	/^rbt_pt rbtree_min_node(rbt_pt node)$/;"	f
+rbtree_predecessor	gh_rbtree.c	/^rbt_pt rbtree_predecessor(rbt_pt node) $/;"	f
+rbtree_print	gh_rbtree.c	17;"	d	file:
+rbtree_print	gh_rbtree.c	20;"	d	file:
+rbtree_right_rotate	gh_rbtree.c	/^static void rbtree_right_rotate(rbt_pt *root, rbt_pt y)$/;"	f	file:
+rbtree_search	gh_rbtree.c	/^rbt_pt rbtree_search (rbt_pt *root, Type data) $/;"	f
+rbtree_set_cmp	gh_rbtree.c	/^void rbtree_set_cmp (value_comple func)$/;"	f
+rbtree_set_free	gh_rbtree.c	/^void rbtree_set_free (value_handle func)$/;"	f
+rbtree_set_print	gh_rbtree.c	/^void rbtree_set_print (value_handle func)$/;"	f
+rbtree_successor	gh_rbtree.c	/^rbt_pt rbtree_successor(rbt_pt node)$/;"	f
+rchild	gh_rbtree.h	/^    rbt_t  *rchild;$/;"	m	struct:_red_black_tree
+root	GHmempool.h	/^    rbt_pt root;$/;"	m	struct:gh_mempool_s
+size	GHmempool.h	/^    size_t size;$/;"	m	struct:gh_mempool_s
+test_s	gh_rbtree.c	/^typedef struct test_s {$/;"	s	file:
+value_cmp	gh_rbtree.c	/^static value_comple value_cmp = default_value_cmp;$/;"	v	file:
+value_comple	gh_rbtree.h	/^typedef int (*value_comple)(Type *, Type*);$/;"	t
+value_handle	gh_rbtree.h	/^typedef void (*value_handle)(void *);$/;"	t
+value_print	gh_rbtree.c	/^static value_handle value_print = default_value_print;$/;"	v	file:
