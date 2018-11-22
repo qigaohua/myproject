@@ -1,0 +1,62 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+BOOL	threadpool.h	6;"	d
+False	threadpool.h	7;"	d
+GET_USE_RATE_INTERVAL	threadpool.c	125;"	d	file:
+INT32	threadpool.h	/^typedef int          INT32;$/;"	t
+MAX	threadpool.c	123;"	d	file:
+MINIFY_THREAD_POOL_INTERVAL	threadpool.c	126;"	d	file:
+MIN_USE_RATE	threadpool.c	124;"	d	file:
+TEST	threadpool.c	455;"	d	file:
+TP_THREAD_IS_WAIT	threadpool.c	378;"	d	file:
+True	threadpool.h	8;"	d
+UINT32	threadpool.h	/^typedef unsigned int UINT32;$/;"	t
+_DEBUG	threadpool.c	18;"	d	file:
+_DEBUG	threadpool.c	22;"	d	file:
+_DEBUG_	threadpool.c	10;"	d	file:
+_ERROR	threadpool.c	13;"	d	file:
+__THREAD_POOL_H_	threadpool.h	2;"	d
+cond	threadpool.h	/^    pthread_cond_t cond;$/;"	m	struct:thread_info_s
+create_thread_pool	threadpool.c	/^thread_pool_info_t *create_thread_pool(UINT32 min, UINT32 max)$/;"	f
+cur	threadpool.h	/^    UINT32 cur;  \/\/ 当前线程数$/;"	m	struct:thread_pool_info_s
+is_busy	threadpool.h	/^    BOOL is_busy;$/;"	m	struct:thread_info_s
+is_exit	threadpool.h	/^    BOOL is_exit;$/;"	m	struct:thread_info_s
+is_wait	threadpool.h	/^    BOOL is_wait;$/;"	m	struct:thread_info_s
+main	threadpool.c	/^int main()$/;"	f
+max	threadpool.h	/^    UINT32 max;  \/\/ 最大线程数$/;"	m	struct:thread_pool_info_s
+min	threadpool.h	/^    UINT32 min;  \/\/ 最小线程数$/;"	m	struct:thread_pool_info_s
+mutex	threadpool.h	/^    pthread_mutex_t mutex;$/;"	m	struct:thread_info_s
+mutex	threadpool.h	/^    pthread_mutex_t mutex;$/;"	m	struct:thread_pool_info_s
+param	threadpool.h	/^    void *param;$/;"	m	struct:thread_info_s
+pid	threadpool.h	/^    pthread_t pid;$/;"	m	struct:thread_info_s
+thread_func_hander	threadpool.c	/^void thread_func_hander(int signal)$/;"	f
+thread_info_s	threadpool.h	/^struct thread_info_s {$/;"	s
+thread_info_t	threadpool.h	/^typedef struct thread_info_s thread_info_t;$/;"	t	typeref:struct:thread_info_s
+thread_pool_destroy	threadpool.c	/^INT32 thread_pool_destroy(thread_pool_info_t *tp)$/;"	f
+thread_pool_exaggerate	threadpool.c	/^INT32 thread_pool_exaggerate(thread_pool_info_t *tp)$/;"	f
+thread_pool_func	threadpool.c	/^void *thread_pool_func(void *args)$/;"	f
+thread_pool_get_use_rate	threadpool.c	/^float thread_pool_get_use_rate(thread_pool_info_t *tp)$/;"	f
+thread_pool_info_s	threadpool.h	/^struct thread_pool_info_s {$/;"	s
+thread_pool_info_t	threadpool.h	/^typedef struct thread_pool_info_s thread_pool_info_t;$/;"	t	typeref:struct:thread_pool_info_s
+thread_pool_init	threadpool.c	/^INT32 thread_pool_init(thread_pool_info_t *tp)$/;"	f
+thread_pool_manage_func	threadpool.c	/^void *thread_pool_manage_func(void *args)$/;"	f
+thread_pool_minify	threadpool.c	/^INT32 thread_pool_minify(thread_pool_info_t *tp)$/;"	f
+thread_pool_process_job	threadpool.c	/^INT32 thread_pool_process_job(thread_pool_info_t *tp, void* (*job)(void *), void *args)$/;"	f
+thread_work	threadpool.h	/^    void* (*thread_work)(void *args);$/;"	m	struct:thread_info_s
+threads	threadpool.h	/^    thread_info_t *threads;$/;"	m	struct:thread_pool_info_s
+tp_destroy	threadpool.h	/^    INT32 (*tp_destroy)(thread_pool_info_t*);$/;"	m	struct:thread_pool_info_s
+tp_exaggerate	threadpool.h	/^    INT32 (*tp_exaggerate)(thread_pool_info_t*);$/;"	m	struct:thread_pool_info_s
+tp_get_thread_by_id	threadpool.h	/^    INT32 (*tp_get_thread_by_id)(pthread_t pid);$/;"	m	struct:thread_pool_info_s
+tp_get_use_rate	threadpool.h	/^    float (*tp_get_use_rate)(thread_pool_info_t*);$/;"	m	struct:thread_pool_info_s
+tp_init	threadpool.h	/^    INT32 (*tp_init)(thread_pool_info_t*);$/;"	m	struct:thread_pool_info_s
+tp_manage_pid	threadpool.h	/^    pthread_t tp_manage_pid;$/;"	m	struct:thread_pool_info_s
+tp_minify	threadpool.h	/^    INT32 (*tp_minify)(thread_pool_info_t*);$/;"	m	struct:thread_pool_info_s
+tp_process_job	threadpool.h	/^    INT32 (*tp_process_job)(thread_pool_info_t*, void* (*thread_callback_func)(void *), void *args);$/;"	m	struct:thread_pool_info_s
+user_job	threadpool.c	/^void* user_job(void* args)$/;"	f
+user_job2	threadpool.c	/^void* user_job2(void* args)$/;"	f
+user_job3	threadpool.c	/^void* user_job3(void* args)$/;"	f
+user_job4	threadpool.c	/^void* user_job4(void* args)$/;"	f
