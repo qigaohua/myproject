@@ -85,5 +85,8 @@ rbt_pt rbtree_search (rbt_pt *root, Type data);
 /* 添加删除 */
 int rbtree_for_insert(rbt_pt *root, Type data);
 int rbtree_for_delete(rbt_pt *root, Type data);
+
+/* 销毁 */
+void rbtree_destroy(rbt_pt node);
 #endif
 

@@ -23,12 +23,12 @@
 #endif
 
 
-#define _check_param(x, ret)   \
-    do {  \
+#define _check_param(x, ret)                           \
+    do {                                               \
         if (x) {                                       \
-            _array_print(stderr, "Invalid param."); \
-            errno = EINVAL;                              \
-            return ret;                                  \
+            _array_print(stderr, "Invalid param.");    \
+            errno = EINVAL;                            \
+            return ret;                                \
         } \
     } while (0)                                        
 
@@ -39,7 +39,7 @@
  *
  * @param size 每个数据块大小
  * @param n    数据块的数量
- * @param func 释放数据时的回调函数，主要释放用户申请的内存
+ * @param func 释放数据时的回调函数，主要释放用户申请的内存, 可以为NULL
  *
  * @return  
  */
@@ -134,7 +134,7 @@ void *gh_array_push_n (gh_array_t *array, int n)
         void *alloc;
 
         if (array->useds + n > array->alloc) {
-            /*bug fix: 避免申请失败, 引发的内存泄露 */
+            /* bug fix: 避免申请失败, 引发的内存泄露 */
             void *p = realloc(array->d, 
                     (array->alloc + n) * 2 * array->size);
             if (NULL == p) {

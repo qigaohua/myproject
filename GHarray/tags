@@ -4,12 +4,12 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
-TEST	GHarray.c	144;"	d	file:
+TEST	GHarray.c	168;"	d	file:
 __GH_ARRAY_H	GHarray.h	2;"	d
-_array_print	GHarray.c	11;"	d	file:
-_array_print	GHarray.c	14;"	d	file:
-_check_param	GHarray.c	18;"	d	file:
-a	GHarray.c	/^    char  *a;$/;"	m	struct:test_s	file:
+_array_print	GHarray.c	19;"	d	file:
+_array_print	GHarray.c	22;"	d	file:
+_check_param	GHarray.c	26;"	d	file:
+a	GHarray.c	/^    char  *a;  \/\/ 测试回调函数$/;"	m	struct:test_s	file:
 alloc	GHarray.h	/^    int    alloc;$/;"	m	struct:gh_array_s
 callback	GHarray.h	/^    handle_callback callback;$/;"	m	struct:gh_array_s
 d	GHarray.h	/^    void   *d;$/;"	m	struct:gh_array_s

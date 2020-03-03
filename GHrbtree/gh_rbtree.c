@@ -860,6 +860,20 @@ int rbtree_for_delete(rbt_pt *root, Type data)
 }
 
 
+void rbtree_destroy(rbt_pt node)
+{
+    if (NULL == node) 
+        return ;
+
+    if (node->lchild)
+        rbtree_destroy(node->lchild);
+    if (node->rchild)
+        rbtree_destroy(node->rchild);
+
+    node_free(node);
+}
+
+
 /**
  * @brief node_info_print 打印节点信息
  *
@@ -910,7 +924,7 @@ void rbtree_for_postorder(rbt_pt root)
 
 
 /*************************************************************************/
-/*                        Red&Black tree test                            */
+/*                        Red&Black Tree test                            */
 /*************************************************************************/
 
 #define TEST
@@ -946,6 +960,8 @@ int main ()
 
 	printf("delete after\n");  
 	rbtree_for_preorder(root);  
+
+    rbtree_destroy(root);
 	  
 	return 0;  
 }

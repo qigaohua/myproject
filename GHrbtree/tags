@@ -9,12 +9,12 @@ BOOL	gh_rbtree.h	/^typedef int BOOL;$/;"	t
 Color	gh_rbtree.h	/^} Color;$/;"	t	typeref:enum:__anon1
 False	gh_rbtree.h	5;"	d
 RED	gh_rbtree.h	/^    RED   = 0,$/;"	e	enum:__anon1
-TEST	gh_rbtree.c	916;"	d	file:
+TEST	gh_rbtree.c	929;"	d	file:
 True	gh_rbtree.h	6;"	d
 Type	gh_rbtree.c	/^typedef struct test_s Type;$/;"	t	typeref:struct:test_s	file:
 Type	gh_rbtree.c	/^} Type;$/;"	t	typeref:struct:test_s	file:
 Type	gh_rbtree.h	/^typedef unsigned int Type;$/;"	t
-__BIN_SEARCH_TREE__	gh_rbtree.h	2;"	d
+__GH_RB_TREE__	gh_rbtree.h	2;"	d
 _red_black_tree	gh_rbtree.h	/^struct _red_black_tree {$/;"	s
 a	gh_rbtree.c	/^    char a;$/;"	m	struct:test_s	file:
 b	gh_rbtree.c	/^    char *b;$/;"	m	struct:test_s	file:
@@ -42,6 +42,7 @@ rbt_new_node	gh_rbtree.c	/^rbt_pt rbt_new_node (Type d, Color color)$/;"	f
 rbt_pt	gh_rbtree.h	/^typedef struct _red_black_tree rbt_t, *rbt_pt;$/;"	t	typeref:struct:
 rbt_t	gh_rbtree.h	/^typedef struct _red_black_tree rbt_t, *rbt_pt;$/;"	t	typeref:struct:_red_black_tree
 rbtree_delete_fixup	gh_rbtree.c	/^int rbtree_delete_fixup(rbt_pt *root, rbt_pt node, rbt_pt parent) $/;"	f
+rbtree_destroy	gh_rbtree.c	/^void rbtree_destroy(rbt_pt node)$/;"	f
 rbtree_for_cmp	gh_rbtree.c	/^static rbt_pt rbtree_for_cmp(rbt_pt *root, Type data)$/;"	f	file:
 rbtree_for_delete	gh_rbtree.c	/^int rbtree_for_delete(rbt_pt *root, Type data)$/;"	f
 rbtree_for_inorder	gh_rbtree.c	/^void rbtree_for_inorder(rbt_pt root)$/;"	f
