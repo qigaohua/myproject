@@ -1,0 +1,87 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+ARRAY_SIZE	kfifo.h	46;"	d
+DECLARE_KFIFO	kfifo.h	143;"	d
+DECLARE_KFIFO_PTR	kfifo.h	135;"	d
+DEFINE_KFIFO	kfifo.h	168;"	d
+INIT_KFIFO	kfifo.h	149;"	d
+STRUCT_KFIFO	kfifo.h	77;"	d
+STRUCT_KFIFO_PTR	kfifo.h	86;"	d
+STRUCT_KFIFO_REC_1	kfifo.h	110;"	d
+STRUCT_KFIFO_REC_2	kfifo.h	113;"	d
+_LINUX_KFIFO_H	kfifo.h	8;"	d
+__KFIFO_PEEK	kfifo.c	209;"	d	file:
+__KFIFO_POKE	kfifo.c	229;"	d	file:
+__STRUCT_KFIFO	kfifo.h	71;"	d
+__STRUCT_KFIFO_COMMON	kfifo.h	61;"	d
+__STRUCT_KFIFO_PTR	kfifo.h	80;"	d
+__is_kfifo_ptr	kfifo.h	127;"	d
+__kfifo	kfifo.h	/^struct __kfifo {$/;"	s
+__kfifo_alloc	kfifo.c	/^int __kfifo_alloc(struct __kfifo *fifo, unsigned int size,$/;"	f
+__kfifo_free	kfifo.c	/^void __kfifo_free(struct __kfifo *fifo)$/;"	f
+__kfifo_in	kfifo.c	/^unsigned int __kfifo_in(struct __kfifo *fifo,$/;"	f
+__kfifo_in_r	kfifo.c	/^unsigned int __kfifo_in_r(struct __kfifo *fifo, const void *buf,$/;"	f
+__kfifo_init	kfifo.c	/^int __kfifo_init(struct __kfifo *fifo, void *buffer,$/;"	f
+__kfifo_int_must_check_helper	kfifo.h	/^__kfifo_int_must_check_helper(int val)$/;"	f
+__kfifo_len_r	kfifo.c	/^unsigned int __kfifo_len_r(struct __kfifo *fifo, size_t recsize)$/;"	f
+__kfifo_max_r	kfifo.c	/^unsigned int __kfifo_max_r(unsigned int len, size_t recsize)$/;"	f
+__kfifo_out	kfifo.c	/^unsigned int __kfifo_out(struct __kfifo *fifo,$/;"	f
+__kfifo_out_peek	kfifo.c	/^unsigned int __kfifo_out_peek(struct __kfifo *fifo,$/;"	f
+__kfifo_out_peek_r	kfifo.c	/^unsigned int __kfifo_out_peek_r(struct __kfifo *fifo, void *buf,$/;"	f
+__kfifo_out_r	kfifo.c	/^unsigned int __kfifo_out_r(struct __kfifo *fifo, void *buf,$/;"	f
+__kfifo_peek_n	kfifo.c	/^static unsigned int __kfifo_peek_n(struct __kfifo *fifo, size_t recsize)$/;"	f	file:
+__kfifo_poke_n	kfifo.c	/^static void __kfifo_poke_n(struct __kfifo *fifo, unsigned int n, size_t recsize)$/;"	f	file:
+__kfifo_skip_r	kfifo.c	/^void __kfifo_skip_r(struct __kfifo *fifo, size_t recsize)$/;"	f
+__kfifo_uint_must_check_helper	kfifo.h	/^__kfifo_uint_must_check_helper(unsigned int val)$/;"	f
+__must_check	kfifo.h	45;"	d
+a	test.c	/^    int a;$/;"	m	struct:t	file:
+b	test.c	/^    unsigned char b;$/;"	m	struct:t	file:
+data	kfifo.h	/^    void		*data;$/;"	m	struct:__kfifo
+esize	kfifo.h	/^    unsigned int	esize;$/;"	m	struct:__kfifo
+in	kfifo.h	/^    unsigned int	in;$/;"	m	struct:__kfifo
+is_power_of_2	kfifo.c	23;"	d	file:
+kfifo_alloc	kfifo.h	344;"	d
+kfifo_avail	kfifo.h	288;"	d
+kfifo_copy_in	kfifo.c	/^static void kfifo_copy_in(struct __kfifo *fifo, const void *src,$/;"	f	file:
+kfifo_copy_out	kfifo.c	/^static void kfifo_copy_out(struct __kfifo *fifo, void *dst,$/;"	f	file:
+kfifo_esize	kfifo.h	212;"	d
+kfifo_free	kfifo.h	359;"	d
+kfifo_get	kfifo.h	436;"	d
+kfifo_in	kfifo.h	513;"	d
+kfifo_in_locked	kfifo.h	546;"	d
+kfifo_in_spinlocked	kfifo.h	535;"	d
+kfifo_init	kfifo.h	378;"	d
+kfifo_initialized	kfifo.h	206;"	d
+kfifo_is_empty	kfifo.h	268;"	d
+kfifo_is_full	kfifo.h	278;"	d
+kfifo_len	kfifo.h	258;"	d
+kfifo_out	kfifo.h	561;"	d
+kfifo_out_copy_r	kfifo.c	/^static unsigned int kfifo_out_copy_r(struct __kfifo *fifo,$/;"	f	file:
+kfifo_out_locked	kfifo.h	598;"	d
+kfifo_out_peek	kfifo.h	769;"	d
+kfifo_out_spinlocked	kfifo.h	585;"	d
+kfifo_peek	kfifo.h	475;"	d
+kfifo_peek_len	kfifo.h	321;"	d
+kfifo_put	kfifo.h	399;"	d
+kfifo_recsize	kfifo.h	218;"	d
+kfifo_reset	kfifo.h	234;"	d
+kfifo_reset_out	kfifo.h	248;"	d
+kfifo_size	kfifo.h	224;"	d
+kfifo_skip	kfifo.h	304;"	d
+kfifo_unused	kfifo.c	/^static inline unsigned int kfifo_unused(struct __kfifo *fifo)$/;"	f	file:
+main	test.c	/^int main() $/;"	f
+mask	kfifo.h	/^    unsigned int	mask;$/;"	m	struct:__kfifo
+min	kfifo.c	20;"	d	file:
+out	kfifo.h	/^    unsigned int	out;$/;"	m	struct:__kfifo
+read_thread	test.c	/^void* read_thread(void* arg) $/;"	f
+rounddown_pow_of_two	kfifo.c	/^static unsigned int rounddown_pow_of_two(unsigned int n) {$/;"	f	file:
+roundup_pow_of_two	kfifo.c	/^static inline unsigned int roundup_pow_of_two(unsigned int v) {$/;"	f	file:
+smp_wmb	kfifo.h	49;"	d
+t	test.c	/^struct t {$/;"	s	file:
+tbuff	test.c	/^struct t tbuff[512];$/;"	v	typeref:struct:t
+typeof	kfifo.h	48;"	d
+write_thread	test.c	/^void* write_thread(void* arg) $/;"	f
