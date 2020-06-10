@@ -1,0 +1,66 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+CC	Makefile	/^CC = gcc$/;"	m
+CFLAGS	Makefile	/^CFLAGS = -Wall -O2 -s$/;"	m
+CHECK_FMT	tool_log.h	14;"	d
+DEPS	Makefile	/^DEPS = $(patsubst %.o,%.d,$(OBJS))$/;"	m
+GH_LOG_DEBUG	tool_log.h	9;"	d
+GH_LOG_ERROR	tool_log.h	6;"	d
+GH_LOG_MSG	tool_log.h	8;"	d
+GH_LOG_WARN	tool_log.h	7;"	d
+KEEP_LINE	tool_log.h	12;"	d
+LIBS	Makefile	/^LIBS=-lpthread -L\/usr\/lib64\/mysql -lmysqlclient$/;"	m
+LOGG_INFO	tool_log.h	38;"	d
+LOGG_WARN	tool_log.h	44;"	d
+LOG_ERROR	tool_log.h	32;"	d
+MAX_LINE	tool_log.h	11;"	d
+MISSING_DEPS	Makefile	/^MISSING_DEPS = $(filter-out $(wildcard $(DEPS)),$(DEPS))$/;"	m
+MISSING_DEPS_SOURCES	Makefile	/^MISSING_DEPS_SOURCES = $(wildcard $(patsubst %.d,%.c,$(MISSING_DEPS)))$/;"	m
+OBJS	Makefile	/^OBJS = $(patsubst %.c,%.o,$(wildcard *.c))$/;"	m
+PARSE_DNS	tool_option.h	/^    PARSE_DNS = 1,$/;"	e	enum:__anon1
+PARSE_ERROR	tool_option.h	/^    PARSE_ERROR = -1,$/;"	e	enum:__anon1
+PARSE_TIMESTAMP_CHANGEOVER	tool_option.h	/^    PARSE_TIMESTAMP_CHANGEOVER = 2,$/;"	e	enum:__anon1
+PARSE_TIME_CHANGEOVER	tool_option.h	/^    PARSE_TIME_CHANGEOVER = 3,$/;"	e	enum:__anon1
+PROCESS_NAME	tool_util.h	5;"	d
+System	tool_log.c	/^int System(char *cmd)$/;"	f
+TARGET	Makefile	/^TARGET=miniTool$/;"	m
+_XOPEN_SOURCE	tool_util.c	1;"	d	file:
+__LOG_H__	tool_log.h	2;"	d
+__TOOL_DNS_	tool_dns.h	2;"	d
+__TOOL_OPTION_	tool_option.h	2;"	d
+__TOOL_UTIL_	tool_util.h	2;"	d
+check_dns	tool_dns.c	/^int check_dns(const char* domain)$/;"	f
+domain_dns	tool_dns.h	/^const char* domain_dns;$/;"	v
+get_file_lines	tool_log.c	/^int get_file_lines(const char *file)$/;"	f
+is_ture_domain	tool_util.c	/^int is_ture_domain(char *domain)$/;"	f
+log_debug	tool_log.c	/^void log_debug(const char *fmt, ...)$/;"	f
+log_error	tool_log.c	/^void log_error(int errcode, const char *fmt, ...)$/;"	f
+log_exit	tool_log.c	/^static void log_exit(int errcode)$/;"	f	file:
+log_exit_cb	tool_log.c	/^log_exit_func  log_exit_cb = NULL;$/;"	v
+log_exit_func	tool_log.h	/^typedef void (*log_exit_func)(int);$/;"	t
+log_print	tool_log.c	/^static void log_print(int severity, const char *fmt,  const char *errstr, va_list ap, FILE* fp)$/;"	f	file:
+log_print_cb	tool_log.c	/^log_print_func log_print_cb = NULL;$/;"	v
+log_print_func	tool_log.h	/^typedef void (*log_print_func)(int, const char*);$/;"	t
+log_print_of_severity	tool_log.c	/^static void log_print_of_severity(int severity, const char *msg, FILE* fp)$/;"	f	file:
+log_recold_file	tool_log.c	/^void log_recold_file(int severity, const char *file, const char *fmt, ...)$/;"	f
+log_set_exit_cb	tool_log.c	/^void log_set_exit_cb(log_exit_func cb)$/;"	f
+log_set_print_cb	tool_log.c	/^void log_set_print_cb(log_print_func cb)$/;"	f
+log_warn	tool_log.c	/^void log_warn(const char *fmt, ...)$/;"	f
+log_xerror	tool_log.c	/^void log_xerror(int errcode, const char *fmt, ...)$/;"	f
+log_xmsg	tool_log.c	/^void log_xmsg(const char *fmt, ...)$/;"	f
+log_xwarn	tool_log.c	/^void log_xwarn(const char *fmt, ...)$/;"	f
+long_opt	tool_option.c	/^const struct option long_opt[] = {$/;"	v	typeref:struct:option
+main	main.c	/^int main(int argc, char **argv)$/;"	f
+optstr	tool_option.c	/^const char *optstr = "hvd:t:T:";$/;"	v
+parse_args	tool_option.c	/^int parse_args(int argc, char **argv, void **data)$/;"	f
+print_opt_help	tool_option.c	30;"	d	file:
+str2timestamp	tool_util.c	/^time_t str2timestamp(const char *timestr)$/;"	f
+time_convert	main.c	/^void time_convert(void *userdata)$/;"	f
+timestamp2str	tool_util.c	/^char* timestamp2str(time_t timesec, char **buf)$/;"	f
+timestamp_convert	main.c	/^void timestamp_convert(void *userdata)$/;"	f
+truncate_file	tool_log.c	/^int truncate_file(const char *file, int truncate_line)$/;"	f
+usage	tool_option.c	/^void usage()$/;"	f
