@@ -4,81 +4,45 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
-NOTES_FILE_EXTENSION	main.c	35;"	d	file:
-PROGRAM	1/main.c	55;"	d	file:
-PROGRAM	main.c	56;"	d	file:
-SAVE_DOC_INFO_FILE	1/main.c	34;"	d	file:
-SAVE_DOC_INFO_FILE	main.c	34;"	d	file:
-__CMD_H_	1/cmd.h	2;"	d
+NOTES_FILE_EXTENSION	main.c	38;"	d	file:
+NOTES_FILE_PATH	main.c	36;"	d	file:
+PAGER	main.c	34;"	d	file:
+PROGRAM	main.c	59;"	d	file:
+SAVE_DOC_INFO_FILE	main.c	37;"	d	file:
 __CMD_H_	cmd.h	2;"	d
-__DEBUG__	1/main.c	17;"	d	file:
 __DEBUG__	main.c	17;"	d	file:
-_file	1/main.c	/^typedef struct _file {$/;"	s	file:
 _file	main.c	/^typedef struct _file {$/;"	s	file:
-_title	1/main.c	/^typedef struct _title {$/;"	s	file:
 _title	main.c	/^typedef struct _title {$/;"	s	file:
-cmd_error	1/main.c	/^char  cmd_error;$/;"	v
 cmd_error	main.c	/^char  cmd_error;$/;"	v
-cmd_file	1/main.c	/^char *cmd_file;$/;"	v
 cmd_file	main.c	/^char *cmd_file;$/;"	v
-cmd_info	1/main.c	/^char  cmd_info;$/;"	v
 cmd_info	main.c	/^char  cmd_info;$/;"	v
 cmd_info_file	main.c	/^char *cmd_info_file;$/;"	v
-cmd_title	1/main.c	/^char *cmd_title;$/;"	v
 cmd_title	main.c	/^char *cmd_title;$/;"	v
-collect_files	1/main.c	/^int collect_files(const char *dirpath)$/;"	f
+cmd_update	main.c	/^char  cmd_update;$/;"	v
 collect_files	main.c	/^int collect_files(const char *dirpath)$/;"	f
-collect_titles	1/main.c	/^int collect_titles(file_t *file)$/;"	f
 collect_titles	main.c	/^int collect_titles()$/;"	f
-doc_info_update	1/main.c	/^static int doc_info_update;$/;"	v	file:
 doc_info_update	main.c	/^static int doc_info_update;$/;"	v	file:
-doc_t	1/main.c	/^} doc_t;$/;"	t	typeref:struct:__anon1	file:
-doc_t	main.c	/^} doc_t;$/;"	t	typeref:struct:__anon2	file:
-f_name	1/main.c	/^    char f_name[256];$/;"	m	struct:_file	file:
+doc_t	main.c	/^} doc_t;$/;"	t	typeref:struct:__anon1	file:
 f_name	main.c	/^    char f_name[256];$/;"	m	struct:_file	file:
-file_num	1/main.c	/^    unsigned int file_num;$/;"	m	struct:__anon1	file:
-file_num	main.c	/^    unsigned int file_num;$/;"	m	struct:__anon2	file:
-file_t	1/main.c	/^} file_t;$/;"	t	typeref:struct:_file	file:
+file_num	main.c	/^    unsigned int file_num;$/;"	m	struct:__anon1	file:
 file_t	main.c	/^} file_t;$/;"	t	typeref:struct:_file	file:
-files	1/main.c	/^    file_t files[128];$/;"	m	struct:__anon1	file:
-files	main.c	/^    file_t files[128];$/;"	m	struct:__anon2	file:
-g_doc	1/main.c	/^doc_t g_doc;$/;"	v
+files	main.c	/^    file_t files[128];$/;"	m	struct:__anon1	file:
 g_doc	main.c	/^doc_t g_doc;$/;"	v
-load_doc_info	1/main.c	/^int load_doc_info()$/;"	f
 load_doc_info	main.c	/^int load_doc_info()$/;"	f
-log_error	1/main.c	19;"	d	file:
 log_error	main.c	19;"	d	file:
-log_info	1/main.c	27;"	d	file:
-log_info	1/main.c	30;"	d	file:
 log_info	main.c	27;"	d	file:
 log_info	main.c	30;"	d	file:
-log_warn	1/main.c	23;"	d	file:
 log_warn	main.c	23;"	d	file:
-long_opt	1/cmd.c	/^const struct option long_opt[] = {$/;"	v	typeref:struct:option
 long_opt	cmd.c	/^const struct option long_opt[] = {$/;"	v	typeref:struct:option
-main	1/main.c	/^int main(int argc, char *argv[])$/;"	f
 main	main.c	/^int main(int argc, char *argv[])$/;"	f
-offset	1/main.c	/^    long  offset;$/;"	m	struct:_title	file:
 offset	main.c	/^    long  offset;$/;"	m	struct:_title	file:
-option_parse	1/cmd.c	/^int option_parse(char argc, char **argv)$/;"	f
 option_parse	cmd.c	/^int option_parse(char argc, char **argv)$/;"	f
-optstr	1/cmd.c	/^const char *optstr = "hvf:t:i";$/;"	v
-optstr	cmd.c	/^const char *optstr = "hvf:t:i::";$/;"	v
-parse_files	1/main.c	/^int parse_files()$/;"	f
-parse_files	main.c	/^int parse_files()$/;"	f
-print_doc_info	1/main.c	/^int print_doc_info()$/;"	f
+optstr	cmd.c	/^const char *optstr = "hvf:t:i::u";$/;"	v
 print_doc_info	main.c	/^int print_doc_info(const char *filename)$/;"	f
-query_text	1/main.c	/^int query_text(const char *file, const char *const title)$/;"	f
 query_text	main.c	/^int query_text(const char *file, const char *const title)$/;"	f
-save_doc_info	1/main.c	/^int save_doc_info()$/;"	f
 save_doc_info	main.c	/^int save_doc_info()$/;"	f
-t_name	1/main.c	/^    char t_name[256];$/;"	m	struct:_title	file:
 t_name	main.c	/^    char t_name[256];$/;"	m	struct:_title	file:
-title	1/main.c	/^    title_t title[128];$/;"	m	struct:_file	file:
 title	main.c	/^    title_t title[128];$/;"	m	struct:_file	file:
-title_num	1/main.c	/^    int title_num;$/;"	m	struct:_file	file:
 title_num	main.c	/^    int title_num;$/;"	m	struct:_file	file:
-title_t	1/main.c	/^} title_t;$/;"	t	typeref:struct:_title	file:
 title_t	main.c	/^} title_t;$/;"	t	typeref:struct:_title	file:
-usage	1/main.c	/^const char *usage = "NAME:\\n  "$/;"	v
 usage	main.c	/^const char *usage = "名称:\\n"$/;"	v

@@ -31,6 +31,8 @@
 #endif
 
 
+#define PAGER   "${PAGER:-more}"
+
 #define NOTES_FILE_PATH     "/home/qigaohua/work/gitcode/stydyNotes/"
 #define SAVE_DOC_INFO_FILE   NOTES_FILE_PATH"doc.info"
 #define NOTES_FILE_EXTENSION ".xx"   // 笔记文件扩展名
@@ -65,7 +67,8 @@ const char *usage = "名称:\n"
                     "-i后面加上文件名显示指定笔记文件所有的内容标题\n"
                     "    --file,   -f   指定笔记文件，后面必须加上-t选项\n"
                     "    --title,  -t   指定要显示的内容标题，前面须加上-f选项\n"
-                    "    --update, -u   更新笔记内容的本地缓存文件\n";
+                    "    --update, -u   更新笔记内容的本地缓存文件\n"
+                    "    --简写         直接hzdoc file title, 不需要输入-f和-t\n";
 
 doc_t g_doc;
 // file_t *g_file;
@@ -183,7 +186,7 @@ int collect_titles()
     int i = 0;
 
     for (; i < g_doc.file_num ; file ++, i ++) {
-        snprintf(newfile, sizeof newfile, "%s"NOTES_FILE_EXTENSION, file->f_name);
+        snprintf(newfile, sizeof newfile, NOTES_FILE_PATH"%s"NOTES_FILE_EXTENSION, file->f_name);
 
         fp = fopen(newfile, "r");
         if ( !fp ) {
@@ -230,9 +233,11 @@ int collect_titles()
 
 int query_text(const char *file, const char *const title)
 {
-    FILE *fp;
+    FILE *fp, *pfp = NULL;
     // file_t *f = g_file;
     char linebuf[1024] = {0};
+
+
 
     if (!file || !title) {
         log_warn("invalid param.");
@@ -242,7 +247,6 @@ int query_text(const char *file, const char *const title)
     file_t *f = &g_doc.files[0];
 
     for (int i = 0; i < g_doc.file_num ; f ++, i ++) {
-    // for (; f; f = f->next) {
         if (strncmp(f->f_name, file, strlen(file)))
             continue;
         for (int i = 0; i < f->title_num; i ++) {
@@ -256,16 +260,39 @@ int query_text(const char *file, const char *const title)
                 return -2;
             }
             fseek(fp, f->title[i].offset, SEEK_CUR);
+
+            /* 分页显示 */
+            pfp = popen(PAGER, "w");
+            if ( !pfp ) {
+               log_warn("popen `%s' failed: %m", PAGER);
+               goto ERROR;
+            }
+
             while(fgets(linebuf, sizeof newfile, fp)) {
                 if (!strncmp(linebuf, "<<<<<", 5))
                     break;
-                printf("\t%s", linebuf);
+                // printf("\t%s", linebuf);
+                if (fputs(linebuf, pfp) == EOF) {
+                    log_warn("fputs failed: %m");
+                    goto ERROR;
+                }
             }
+            if (ferror(pfp) != 0) {
+                log_warn("PAGER: error.");
+                goto ERROR;
+            }
+
+            fclose(pfp);
             fclose(fp);
         }
     }
 
     return 0;
+
+ERROR:
+    if (fp)  fclose(fp);
+    if (pfp) fclose(pfp);
+    return -3;
 }
 
 
@@ -317,8 +344,19 @@ int main(int argc, char *argv[])
         print_doc_info(cmd_info_file);
     }
 
-    if (cmd_file && cmd_title)
+    if ( cmd_title && cmd_file )
         query_text(cmd_file, cmd_title);
+    else if ( cmd_file && !cmd_title ) {
+        log_warn("-t option not specified");
+    }
+    else if ( !cmd_file && cmd_title ) {
+        log_warn("-f option not specified");
+    }
+
+    // 加上简写模式，hzdoc file title
+    if (argc == 3 && !cmd_update && !cmd_info && !cmd_file && !cmd_title) {
+        query_text(argv[1], argv[2]);
+    }
 
     if (doc_info_update)
         save_doc_info();

@@ -62,7 +62,6 @@ int option_parse(char argc, char **argv)
 
             default:
                 cmd_error = 1;
-                ;
         }
     }
 
