@@ -5,7 +5,7 @@
 #include <string.h>
 
 
-const char *optstr = "hvf:t:i:u";
+const char *optstr = "hvf:t:i::u";
 
 const struct option long_opt[] = {
     {"help",    0, NULL, 'h'},
