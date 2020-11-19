@@ -22,14 +22,14 @@
 
 event_s* create_fd_event (int fd, uint32_t events, proc_callback cfunc, void *data, size_t datalen)
 {
-    event_s *new_event = NULL; 
+    event_s *new_event = NULL;
 
     if (fd <= 0 || cfunc == NULL) {
         _error("Invalid param");
         return NULL;
-    } 
+    }
 
-    new_event = (event_s *)xzalloc(sizeof(event_s)); 
+    new_event = (event_s *)xzalloc(sizeof(event_s));
     new_event->type = GHEPOLL_TYPE_FD;
     new_event->event = GHepoll_event_convert(events);
     new_event->fd = fd;
@@ -38,7 +38,7 @@ event_s* create_fd_event (int fd, uint32_t events, proc_callback cfunc, void *da
     if (data) {
         new_event->args = xzalloc(datalen);
         memcpy(new_event->args, data, datalen);
-    } 
+    }
 
     new_event->next = NULL;
 
@@ -65,7 +65,7 @@ int GHepoll_del_event (GHepoll_s *base, event_s *event)
             epoll_ctl(base->epoll_fd, EPOLL_CTL_DEL, ev->fd, NULL);
 
             /* 如果是信号处理事件，恢复信号默认处理 */
-            if (ev->type == GHEPOLL_TYPE_SIGNAL) 
+            if (ev->type == GHEPOLL_TYPE_SIGNAL)
                 signal(ev->signal, SIG_DFL);
 
             base->epoll_curr_size --;
@@ -90,12 +90,12 @@ int _add_fd_event(GHepoll_s *base, event_s *event)
             }
             ev = ev->next;
         }
-    } 
+    }
 
     struct epoll_event ev;
 
     ev.events = event->event;
-    // ev.data.fd = event->fd; 
+    // ev.data.fd = event->fd;
     ev.data.ptr = event;
 
     if (epoll_ctl(base->epoll_fd, EPOLL_CTL_ADD, event->fd, &ev) == -1) {
@@ -104,14 +104,14 @@ int _add_fd_event(GHepoll_s *base, event_s *event)
     }
     event->owner = base;
 
-    if (base->epoll_curr_size == 0) 
+    if (base->epoll_curr_size == 0)
         base->fd_event = event;
     else {
         event->next = base->fd_event;
         base->fd_event = event;
     }
     base->epoll_curr_size ++;
-    
+
     _debug("add event: %d, num: %lu", event->fd, base->epoll_curr_size);
     return 0;
 }
@@ -120,19 +120,19 @@ int _add_fd_event(GHepoll_s *base, event_s *event)
 
 event_s* create_timeout_event (struct timeout_t *tt, proc_callback cfunc, void *data, size_t datalen)
 {
-    event_s *new_event = NULL; 
+    event_s *new_event = NULL;
     struct timeval tv;
 
     if (tt->start_time.tv_sec <= 0 || NULL == cfunc) {
         _error("Invalid param");
         return NULL;
     }
-    new_event = (event_s *)xzalloc(sizeof(event_s)); 
+    new_event = (event_s *)xzalloc(sizeof(event_s));
 
     if (tt->loop_time.tv_sec == 0 && tt->loop_time.tv_usec == 0)
         new_event->type = GHEPOLL_TYPE_TIMEOUT;
-    else 
-        new_event->type = GHEPOLL_TYPE_TIMEOUT_LOOP; 
+    else
+        new_event->type = GHEPOLL_TYPE_TIMEOUT_LOOP;
 
     new_event->callback = cfunc;
 
@@ -146,7 +146,7 @@ event_s* create_timeout_event (struct timeout_t *tt, proc_callback cfunc, void *
     if (data) {
         new_event->args = xzalloc(datalen);
         memcpy(new_event->args, data, datalen);
-    } 
+    }
     new_event->next = NULL;
 
     return new_event;
@@ -166,11 +166,11 @@ int _add_timeout_event (GHepoll_s *base, event_s *event)
 
     /* remove existing timeout event */
     for (ev = base->timeouts; ev; ev = ev->next) {
-        if (ev->callback == event->callback && 
+        if (ev->callback == event->callback &&
                 ev->args == event->args) {
-            if (last) 
+            if (last)
                 last->next = ev->next;
-            else 
+            else
                 base->timeouts = ev->next;
 
             _event_free (ev);
@@ -180,7 +180,7 @@ int _add_timeout_event (GHepoll_s *base, event_s *event)
     }
 
     /* 如果插入超时事件最接近现在，将此事件插入在最前面 */
-    if (base->timeout_curr_size == 0 || 
+    if (base->timeout_curr_size == 0 ||
             timercmp(&(event->when.start_time), &(base->timeouts->when.start_time), <)) {
         event->next = base->timeouts;
         base->timeouts = event;
@@ -214,13 +214,13 @@ END:
 #define PIPE_WRITE  1
 
 static int global_pipe_fd[SIGNAL_NUM_MAX + 1];
-static BOOL global_signal_init = False; 
+static BOOL global_signal_init = False;
 
 void _signal_handler(int signum)
 {
     if (signum > 0 || signum <= SIGNAL_NUM_MAX) {
         int fd = global_pipe_fd[signum];
-        if (fd != -1) 
+        if (fd != -1)
             write(fd, &signum, sizeof(signum));
     } else
         _debug("_signal_handler error, signum out of range");
@@ -236,7 +236,7 @@ void _GHepoll_global_signal_init()
     }
 }
 
-int _GHepoll_signal_pipe(int pipefd[2]) 
+int _GHepoll_signal_pipe(int pipefd[2])
 {
     if (pipe(pipefd) == -1) {
         _error("pipe() falied");
@@ -270,7 +270,7 @@ event_s* create_signal_event (int signum, uint32_t events, proc_callback cfunc, 
         _error("Invalid param, signal out of range");
         return NULL;
     }
-        
+
     if (NULL == cfunc) {
         _error("Invalid param, callback is null'");
         return NULL;
@@ -286,21 +286,21 @@ event_s* create_signal_event (int signum, uint32_t events, proc_callback cfunc, 
     if (data) {
         new_event->args = xzalloc(datalen);
         memcpy(new_event->args, data, datalen);
-    } 
+    }
     new_event->next = NULL;
 
-    return new_event; 
+    return new_event;
 }
 
 int _add_signal_event (GHepoll_s *base, event_s *event)
 {
-    int pipe_fd[2]; 
+    int pipe_fd[2];
     event_s *ev, *last = NULL;
 
     event->owner = base;
     _GHepoll_global_signal_init();
 
-    if (_GHepoll_signal_pipe(pipe_fd) == -1) 
+    if (_GHepoll_signal_pipe(pipe_fd) == -1)
         return -1;
 
     /* 判断是否已经存在 */
@@ -337,18 +337,18 @@ ERROR:
 
 /***************************common**********************************/
 
-GHepoll_s *create_new_epoll (size_t epoll_size) 
+GHepoll_s *create_new_epoll (size_t epoll_size)
 {
     GHepoll_s *base = NULL;
 
-    if (epoll_size == 0) 
+    if (epoll_size == 0)
         epoll_size = EPOLL_MAX_SIZE;
     base = (GHepoll_s *)xzalloc(sizeof(GHepoll_s) + epoll_size * sizeof(struct epoll_event));
 
     base->epoll_fd = epoll_create(epoll_size);
     if (base->epoll_fd == -1) {
         _error("epoll_create failed");
-        free (base); 
+        free (base);
         return NULL;
     }
     base->epoll_event_size = epoll_size;
@@ -415,9 +415,9 @@ uint32_t GHepoll_event_convert(uint32_t events)
     return ret;
 }
 
-int _epoll_mod (GHepoll_s *base, event_s *event) 
+int _epoll_mod (GHepoll_s *base, event_s *event)
 {
-    struct epoll_event ev; 
+    struct epoll_event ev;
 
     if (!base || !event) {
         _error("Invalid param");
@@ -430,7 +430,7 @@ int _epoll_mod (GHepoll_s *base, event_s *event)
     if (-1 == epoll_ctl(base->epoll_fd, EPOLL_CTL_MOD, event->fd, &ev)) {
         _error("epoll_ctl[MOD] failed");
         return -1;
-    } 
+    }
 
     return 0;
 }
@@ -452,7 +452,7 @@ int GHepoll_add_event (GHepoll_s *base, event_s *event)
         case GHEPOLL_TYPE_TIMEOUT_LOOP:
         case GHEPOLL_TYPE_TIMEOUT:
            ret = _add_timeout_event(base, event);
-          break; 
+          break;
         case GHEPOLL_TYPE_SIGNAL:
           ret = _add_signal_event(base, event);
           break;
@@ -497,7 +497,7 @@ GHEPOLL_TYPE_E GHepoll_check_event_type(uint32_t events)
 
     if (GHepoll_isFdEvent(events)) {
         return GHEPOLL_TYPE_FD;
-    } 
+    }
     else if (GHepoll_isTimeoutEvent(events)) {
         return GHEPOLL_TYPE_TIMEOUT;
     }
@@ -512,7 +512,7 @@ GHEPOLL_TYPE_E GHepoll_check_event_type(uint32_t events)
 
 
 /**
- * @brief GHepoll_create_event 
+ * @brief GHepoll_create_event
  *
  * @param fd: 对于fd事件，代表描述符；对于定时事件，没用； 对于信号事件，代表信号
  * @param tt: 只用于定时事件，当tt中loop_time不为0时，则是循环定时事件
@@ -521,7 +521,7 @@ GHEPOLL_TYPE_E GHepoll_check_event_type(uint32_t events)
  * @param data: 传入给回调函数的额外数据
  * @param datalen: 额外数据长度
  *
- * @return 成功返回event_s结构体， 失败返回NULL 
+ * @return 成功返回event_s结构体， 失败返回NULL
  */
 event_s* GHepoll_create_event (int fd, struct timeout_t *tt, uint32_t events,
                     proc_callback pfunc, void *data, size_t datalen)
@@ -539,7 +539,7 @@ event_s* GHepoll_create_event (int fd, struct timeout_t *tt, uint32_t events,
            break;
         case GHEPOLL_TYPE_TIMEOUT:
            ev = create_timeout_event(tt, pfunc, data, datalen);
-          break; 
+          break;
         default:
           _warn("Invalid param [event type]");
           break;
@@ -558,7 +558,7 @@ void GHepoll_loop (GHepoll_s *base)
     if (NULL == base) {
         _error("Invalid param");
         exit(EXIT_FAILURE);
-    } 
+    }
 
     for (;;) {
         if (base->epoll_curr_size == 0 && base->timeout_curr_size == 0) {
@@ -583,7 +583,12 @@ void GHepoll_loop (GHepoll_s *base)
                         for (cur = base->timeouts; cur; cur = cur->next) {
                             if (timercmp(&cur->when.start_time, &ev->when.start_time, >)) {
                                 ev->next = cur;
-                                last->next = ev;
+                                if (cur == base->timeouts) {
+                                    base->timeouts = ev;
+                                }
+                                else {
+                                    last->next = ev;
+                                }
                                 break;
                             }
                             last = cur;
@@ -591,7 +596,7 @@ void GHepoll_loop (GHepoll_s *base)
                         if (!cur) {
                             ev->next = NULL;
                             last->next = ev;
-                        } 
+                        }
                     }
                 } else {
                     _event_free(ev);
@@ -605,9 +610,9 @@ void GHepoll_loop (GHepoll_s *base)
             if (tv.tv_sec > INT_MAX / 1000 ||
                     (tv.tv_sec == INT_MAX && (tv.tv_usec + 999) / 1000 > INT_MAX % 1000))
                 msecs = INT_MAX;
-            else 
+            else
                 msecs = tv.tv_sec * 1000 + (tv.tv_usec + 999) / 1000;
-        } else 
+        } else
             msecs = -1;
 
         _debug("all fd event: %lu, msecs: %d", base->epoll_curr_size, msecs);
@@ -632,7 +637,7 @@ void GHepoll_loop (GHepoll_s *base)
 
 
 /*************************************************************************/
-/*        测试 GHepoll (gcc -DTEST GHepoll.c util.c -o GHepoll)          */  
+/*        测试 GHepoll (gcc -DTEST GHepoll.c util.c -o GHepoll)          */
 /*****************************test****************************************/
 
 #ifdef TEST
@@ -660,8 +665,8 @@ int tcp_socket(const char *host, uint16_t port)
         if (NULL == hp) {
             _error("host not valid.");
             exit(EXIT_FAILURE);
-        } 
-        
+        }
+
         memcpy(&addr.sin_addr, &hp->h_addr, hp->h_length);
     }
 
@@ -758,12 +763,12 @@ int main ()
     int sockfd;
     GHepoll_s *base = NULL;
 
-    /* 设置日志等级为调试 */    
+    /* 设置日志等级为调试 */
     util_set_log_level (LOG_LEVEL_DEBUG);
     base = create_new_epoll(16);
 
     sockfd = tcp_socket("127.0.0.1", 12345);
-    
+
     /* 添加一个socke监听事件 */
     // event_s *event = create_fd_event(sockfd, EVENT_TYPE_READ, accept_callback, NULL, 0);
     event_s *event = GHepoll_create_event(sockfd, NULL, EVENT_TYPE_READ, accept_callback, NULL, 0);
