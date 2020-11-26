@@ -1,0 +1,471 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+BG_BLACK	log.h	29;"	d
+BG_BLUE	log.h	33;"	d
+BG_CYAN	log.h	35;"	d
+BG_GREEN	log.h	31;"	d
+BG_MAGENTA	log.h	34;"	d
+BG_RED	log.h	30;"	d
+BG_WHITE	log.h	36;"	d
+BG_YELLOW	log.h	32;"	d
+BITS_ALL_SET	event/GHepoll.h	12;"	d
+BITS_ANY_SET	event/GHepoll.h	11;"	d
+BKDRHash	common.h	/^static unsigned int BKDRHash(char *str)$/;"	f
+BKDRHash	hashmap/hashmap.c	/^static uint32_t BKDRHash(const char *str)$/;"	f	file:
+BLUE	log.h	16;"	d
+BLUE	log.h	47;"	d
+BOOL	event/GHepoll.h	/^typedef int BOOL;$/;"	t
+B_BLUE	log.h	40;"	d
+B_BLUE	log.h	9;"	d
+B_CYAN	log.h	11;"	d
+B_CYAN	log.h	42;"	d
+B_GREEN	log.h	38;"	d
+B_GREEN	log.h	7;"	d
+B_MAGENTA	log.h	10;"	d
+B_MAGENTA	log.h	41;"	d
+B_RED	log.h	37;"	d
+B_RED	log.h	6;"	d
+B_WHITE	log.h	12;"	d
+B_WHITE	log.h	43;"	d
+B_YELLOW	log.h	39;"	d
+B_YELLOW	log.h	8;"	d
+CC	Makefile	/^CC = gcc$/;"	m
+CFLAGS	Makefile	/^CFLAGS = -Wall -O2 -s$/;"	m
+CHECK_ARGS	rpc.c	22;"	d	file:
+CHECK_ARGS	rpc.h	77;"	d
+CHECK_FMT	event/util.h	15;"	d
+CHECK_FMT	log.h	68;"	d
+CYAN	log.h	18;"	d
+CYAN	log.h	49;"	d
+DEPS	Makefile	/^DEPS = $(patsubst %.o,%.d,$(OBJS))$/;"	m
+EPOLL_MAX_SIZE	event/GHepoll.h	15;"	d
+EVENT_TYPE_E	event/GHepoll.h	/^} EVENT_TYPE_E;$/;"	t	typeref:enum:__anon2
+EVENT_TYPE_ERROR	event/GHepoll.h	/^    EVENT_TYPE_ERROR   = (1 << 5), \/\/ $/;"	e	enum:__anon2
+EVENT_TYPE_ET	event/GHepoll.h	/^    EVENT_TYPE_ET      = (1 << 6), $/;"	e	enum:__anon2
+EVENT_TYPE_ONESHOT	event/GHepoll.h	/^    EVENT_TYPE_ONESHOT = (1 << 7),$/;"	e	enum:__anon2
+EVENT_TYPE_PRI	event/GHepoll.h	/^    EVENT_TYPE_PRI     = (1 << 4), \/\/ $/;"	e	enum:__anon2
+EVENT_TYPE_READ	event/GHepoll.h	/^    EVENT_TYPE_READ    = (1 << 2), \/\/ 读$/;"	e	enum:__anon2
+EVENT_TYPE_SIGNAL	event/GHepoll.h	/^    EVENT_TYPE_SIGNAL  = (1 << 1),$/;"	e	enum:__anon2
+EVENT_TYPE_TIMEOUT	event/GHepoll.h	/^    EVENT_TYPE_TIMEOUT = (1 << 0),$/;"	e	enum:__anon2
+EVENT_TYPE_WRITE	event/GHepoll.h	/^    EVENT_TYPE_WRITE   = (1 << 3), \/\/ 写$/;"	e	enum:__anon2
+FG_BLACK	log.h	21;"	d
+FG_BLUE	log.h	25;"	d
+FG_CYAN	log.h	27;"	d
+FG_GREEN	log.h	23;"	d
+FG_MAGENTA	log.h	26;"	d
+FG_RED	log.h	22;"	d
+FG_WHITE	log.h	28;"	d
+FG_YELLOW	log.h	24;"	d
+False	event/GHepoll.h	7;"	d
+GHEPOLL_TYPE_E	event/GHepoll.h	/^} GHEPOLL_TYPE_E;$/;"	t	typeref:enum:__anon1
+GHEPOLL_TYPE_ERROR	event/GHepoll.h	/^    GHEPOLL_TYPE_ERROR,$/;"	e	enum:__anon1
+GHEPOLL_TYPE_FD	event/GHepoll.h	/^    GHEPOLL_TYPE_FD,$/;"	e	enum:__anon1
+GHEPOLL_TYPE_SIGNAL	event/GHepoll.h	/^    GHEPOLL_TYPE_SIGNAL,$/;"	e	enum:__anon1
+GHEPOLL_TYPE_TIMEOUT	event/GHepoll.h	/^    GHEPOLL_TYPE_TIMEOUT,$/;"	e	enum:__anon1
+GHEPOLL_TYPE_TIMEOUT_LOOP	event/GHepoll.h	/^    GHEPOLL_TYPE_TIMEOUT_LOOP, \/\/ add 循环执行定时任务$/;"	e	enum:__anon1
+GH_LOG_DEBUG	log.h	57;"	d
+GH_LOG_ERROR	log.h	54;"	d
+GH_LOG_MAX	log.h	58;"	d
+GH_LOG_MSG	log.h	56;"	d
+GH_LOG_WARN	log.h	55;"	d
+GHepoll_add_event	event/GHepoll.c	/^int GHepoll_add_event (GHepoll_s *base, event_s *event)$/;"	f
+GHepoll_check_event_type	event/GHepoll.c	/^GHEPOLL_TYPE_E GHepoll_check_event_type(uint32_t events)$/;"	f
+GHepoll_create_event	event/GHepoll.c	/^event_s* GHepoll_create_event (int fd, struct timeout_t *tt, uint32_t events,$/;"	f
+GHepoll_del_event	event/GHepoll.c	/^int GHepoll_del_event (GHepoll_s *base, event_s *event)$/;"	f
+GHepoll_event_convert	event/GHepoll.c	/^uint32_t GHepoll_event_convert(uint32_t events)$/;"	f
+GHepoll_event_free	event/GHepoll.c	/^void GHepoll_event_free(event_s *event)$/;"	f
+GHepoll_isFdEvent	event/GHepoll.c	/^inline BOOL GHepoll_isFdEvent(uint32_t events)$/;"	f
+GHepoll_isSignalEvent	event/GHepoll.c	/^inline BOOL GHepoll_isSignalEvent(uint32_t events)$/;"	f
+GHepoll_isTimeoutEvent	event/GHepoll.c	/^inline BOOL GHepoll_isTimeoutEvent(uint32_t events)$/;"	f
+GHepoll_loop	event/GHepoll.c	/^void GHepoll_loop (GHepoll_s *base)$/;"	f
+GHepoll_p	event/GHepoll.h	/^} GHepoll_s, *GHepoll_p;$/;"	t	typeref:struct:_GHepoll
+GHepoll_s	event/GHepoll.h	/^} GHepoll_s, *GHepoll_p;$/;"	t	typeref:struct:_GHepoll
+GREEN	log.h	14;"	d
+GREEN	log.h	45;"	d
+HLIST_HEAD	hashmap/list.h	568;"	d
+HLIST_HEAD_INIT	hashmap/list.h	567;"	d
+INIT_HLIST_HEAD	hashmap/list.h	569;"	d
+INIT_HLIST_NODE	hashmap/list.h	/^static inline void INIT_HLIST_NODE(struct hlist_node *h)$/;"	f
+INIT_LIST_HEAD	hashmap/list.h	/^static inline void INIT_LIST_HEAD(struct list_head *list)$/;"	f
+LIBS	Makefile	/^LIBS=-lpthread$/;"	m
+LISTENQ	1/skt.c	233;"	d	file:
+LISTENQ	rpc_skt.c	160;"	d	file:
+LIST_HEAD	hashmap/list.h	24;"	d
+LIST_HEAD_INIT	hashmap/list.h	22;"	d
+LOG_FILE_MAXSIZE	log.h	62;"	d
+LOG_LEVEL_DEBUG	event/util.h	/^    LOG_LEVEL_DEBUG,$/;"	e	enum:__anon3
+LOG_LEVEL_EMERG	event/util.h	/^    LOG_LEVEL_EMERG = 0,$/;"	e	enum:__anon3
+LOG_LEVEL_ERROR	event/util.h	/^    LOG_LEVEL_ERROR,$/;"	e	enum:__anon3
+LOG_LEVEL_INFO	event/util.h	/^    LOG_LEVEL_INFO,$/;"	e	enum:__anon3
+LOG_LEVEL_NUM	event/util.h	13;"	d
+LOG_LEVEL_WARN	event/util.h	/^    LOG_LEVEL_WARN,$/;"	e	enum:__anon3
+MAGENTA	log.h	17;"	d
+MAGENTA	log.h	48;"	d
+MAX_ADDR_STRING	1/skt.c	24;"	d	file:
+MAX_RETRY_CNT	1/skt.c	26;"	d	file:
+MAX_RETRY_CNT	rpc_skt.c	26;"	d	file:
+MISSING_DEPS	Makefile	/^MISSING_DEPS = $(filter-out $(wildcard $(DEPS)),$(DEPS))$/;"	m
+MISSING_DEPS_SOURCES	Makefile	/^MISSING_DEPS_SOURCES = $(wildcard $(patsubst %.d,%.c,$(MISSING_DEPS)))$/;"	m
+MTU	1/skt.c	25;"	d	file:
+MTU	rpc_skt.c	25;"	d	file:
+OBJS	Makefile	/^OBJS = $(patsubst %.c,%.o,$(wildcard *.c .\/event\/*.c .\/hashmap\/*.c))$/;"	m
+PIPE_READ	event/GHepoll.c	215;"	d	file:
+PIPE_WRITE	event/GHepoll.c	216;"	d	file:
+RED	log.h	13;"	d
+RED	log.h	44;"	d
+RPC_BUILD_MSG_ID	rpc.h	201;"	d
+RPC_CMDID_BIT	rpc.h	199;"	d
+RPC_CMDID_MASK	rpc.h	198;"	d
+RPC_CMD_EXTER	rpc.h	/^    RPC_CMD_EXTER$/;"	e	enum:__anon9
+RPC_CMD_EXTER_0	test_server.c	/^    RPC_CMD_EXTER_0 = RPC_CMD_EXTER,$/;"	e	enum:__anon5	file:
+RPC_CMD_EXTER_1	test_server.c	/^    RPC_CMD_EXTER_1 ,$/;"	e	enum:__anon5	file:
+RPC_CMD_EXTER_2	test_server.c	/^    RPC_CMD_EXTER_2 ,$/;"	e	enum:__anon5	file:
+RPC_CMD_EXTER_3	test_server.c	/^    RPC_CMD_EXTER_3 ,$/;"	e	enum:__anon5	file:
+RPC_CMD_EXTER_4	test_server.c	/^    RPC_CMD_EXTER_4 ,$/;"	e	enum:__anon5	file:
+RPC_CMD_INNER_0	rpc.h	/^    RPC_CMD_INNER_0,$/;"	e	enum:__anon9
+RPC_CMD_INNER_1	rpc.h	/^    RPC_CMD_INNER_1,$/;"	e	enum:__anon9
+RPC_CMD_INNER_2	rpc.h	/^    RPC_CMD_INNER_2,$/;"	e	enum:__anon9
+RPC_CMD_INNER_3	rpc.h	/^    RPC_CMD_INNER_3,$/;"	e	enum:__anon9
+RPC_CMD_INNER_4	rpc.h	/^    RPC_CMD_INNER_4,$/;"	e	enum:__anon9
+RPC_CMD_INNER_5	rpc.h	/^    RPC_CMD_INNER_5,$/;"	e	enum:__anon9
+RPC_CMD_INNER_6	rpc.h	/^    RPC_CMD_INNER_6,$/;"	e	enum:__anon9
+RPC_CMD_INNER_7	rpc.h	/^    RPC_CMD_INNER_7,$/;"	e	enum:__anon9
+RPC_DIR_BIT	rpc.h	193;"	d
+RPC_DIR_MASK	rpc.h	192;"	d
+RPC_GROUP_BIT	rpc.h	187;"	d
+RPC_GROUP_EXTER	rpc.h	/^    RPC_GROUP_EXTER$/;"	e	enum:__anon8
+RPC_GROUP_EXTER_0	test_server.c	/^    RPC_GROUP_EXTER_0 = RPC_GROUP_EXTER,$/;"	e	enum:__anon4	file:
+RPC_GROUP_EXTER_1	test_server.c	/^    RPC_GROUP_EXTER_1 ,$/;"	e	enum:__anon4	file:
+RPC_GROUP_EXTER_2	test_server.c	/^    RPC_GROUP_EXTER_2 ,$/;"	e	enum:__anon4	file:
+RPC_GROUP_EXTER_3	test_server.c	/^    RPC_GROUP_EXTER_3 ,$/;"	e	enum:__anon4	file:
+RPC_GROUP_EXTER_4	test_server.c	/^    RPC_GROUP_EXTER_4 ,$/;"	e	enum:__anon4	file:
+RPC_GROUP_INNER_0	rpc.h	/^    RPC_GROUP_INNER_0,$/;"	e	enum:__anon8
+RPC_GROUP_INNER_1	rpc.h	/^    RPC_GROUP_INNER_1,$/;"	e	enum:__anon8
+RPC_GROUP_INNER_2	rpc.h	/^    RPC_GROUP_INNER_2,$/;"	e	enum:__anon8
+RPC_GROUP_INNER_3	rpc.h	/^    RPC_GROUP_INNER_3,$/;"	e	enum:__anon8
+RPC_GROUP_INNER_4	rpc.h	/^    RPC_GROUP_INNER_4,$/;"	e	enum:__anon8
+RPC_GROUP_INNER_5	rpc.h	/^    RPC_GROUP_INNER_5,$/;"	e	enum:__anon8
+RPC_GROUP_INNER_6	rpc.h	/^    RPC_GROUP_INNER_6,$/;"	e	enum:__anon8
+RPC_GROUP_INNER_7	rpc.h	/^    RPC_GROUP_INNER_7,$/;"	e	enum:__anon8
+RPC_GROUP_MASK	rpc.h	186;"	d
+RPC_HDR_LEN	rpc.h	108;"	d
+RPC_MSG_CMDID	rpc.h	220;"	d
+RPC_MSG_DIR	rpc.h	214;"	d
+RPC_MSG_GROUP_ID	rpc.h	208;"	d
+RPC_MSG_PARSE	rpc.h	217;"	d
+RPC_MSG_RET	rpc.h	211;"	d
+RPC_PARSE_BIT	rpc.h	196;"	d
+RPC_PARSE_MASK	rpc.h	195;"	d
+RPC_REGISTER_WORKS_MAP	rpc.h	231;"	d
+RPC_RET_BIT	rpc.h	190;"	d
+RPC_RET_MASK	rpc.h	189;"	d
+RPC_WORK_MAP_ADD	rpc.h	229;"	d
+RPC_WORK_MAP_BEGIN	rpc.h	225;"	d
+RPC_WORK_MAP_END	rpc.h	228;"	d
+SIGNAL_NUM_MAX	event/GHepoll.h	16;"	d
+TARGET1	Makefile	/^TARGET1=test_client$/;"	m
+TARGET2	Makefile	/^TARGET2=test_server$/;"	m
+True	event/GHepoll.h	8;"	d
+WHITE	log.h	19;"	d
+WHITE	log.h	50;"	d
+YELLOW	log.h	15;"	d
+YELLOW	log.h	46;"	d
+_GHepoll	event/GHepoll.h	/^typedef struct _GHepoll {$/;"	s
+_GHepoll_global_signal_init	event/GHepoll.c	/^void _GHepoll_global_signal_init()$/;"	f
+_GHepoll_signal_hander	event/GHepoll.c	/^int _GHepoll_signal_hander(int signum)$/;"	f
+_GHepoll_signal_pipe	event/GHepoll.c	/^int _GHepoll_signal_pipe(int pipefd[2])$/;"	f
+_LINUX_LIST_H	hashmap/list.h	2;"	d
+_RPC_SKT_H	rpc_skt.h	2;"	d
+__GH_RPC_H	rpc.h	2;"	d
+__HASH_MAP_H	hashmap/hashmap.h	2;"	d
+__LOG_H__	log.h	2;"	d
+__Q_EPOLL_H_	event/GHepoll.h	2;"	d
+__SKT_H__	1/skt.h	2;"	d
+__USE_SYSLOG__	log.h	65;"	d
+__UTIL_H_	event/util.h	2;"	d
+__hlist_del	hashmap/list.h	/^static inline void __hlist_del(struct hlist_node *n)$/;"	f
+__list_add	hashmap/list.h	/^static inline void __list_add(struct list_head *new,$/;"	f
+__list_cut_position	hashmap/list.h	/^static inline void __list_cut_position(struct list_head *list,$/;"	f
+__list_del	hashmap/list.h	/^static inline void __list_del(struct list_head * prev, struct list_head * next)$/;"	f
+__list_del_entry	hashmap/list.h	/^static inline void __list_del_entry(struct list_head *entry)$/;"	f
+__list_splice	hashmap/list.h	/^static inline void __list_splice(const struct list_head *list,$/;"	f
+_add_fd_event	event/GHepoll.c	/^int _add_fd_event(GHepoll_s *base, event_s *event)$/;"	f
+_add_signal_event	event/GHepoll.c	/^int _add_signal_event (GHepoll_s *base, event_s *event)$/;"	f
+_add_timeout_event	event/GHepoll.c	/^int _add_timeout_event (GHepoll_s *base, event_s *event)$/;"	f
+_debug	event/util.h	16;"	d
+_emerg	event/util.h	20;"	d
+_epoll_mod	event/GHepoll.c	/^int _epoll_mod (GHepoll_s *base, event_s *event)$/;"	f
+_error	event/util.h	19;"	d
+_event	event/GHepoll.h	/^typedef struct _event {$/;"	s
+_event_free	event/GHepoll.c	/^void _event_free(event_s *event)$/;"	f
+_hashmap	hashmap/hashmap.h	/^typedef struct _hashmap {$/;"	s
+_info	event/util.h	17;"	d
+_item	hashmap/hashmap.h	/^typedef struct _item {$/;"	s
+_signal_handler	event/GHepoll.c	/^void _signal_handler(int signum)$/;"	f
+_skt_connect	1/skt.c	/^static int _skt_connect(const char *host, uint16_t port, int type)$/;"	f	file:
+_skt_connect	rpc_skt.c	/^static int _skt_connect(const char *host, uint16_t port, int type)$/;"	f	file:
+_warn	event/util.h	18;"	d
+accept_callback	event/GHepoll.c	/^void accept_callback(event_s *ev)$/;"	f
+acept	rpc.h	/^    int (*acept)(rpc_t *r);$/;"	m	struct:rpc_ops
+args	event/GHepoll.h	/^    void *args;$/;"	m	struct:_event
+bind	rpc.h	/^    int (*bind)(rpc_t *r);$/;"	m	struct:rpc_ops
+bucket	hashmap/hashmap.h	/^    uint32_t bucket;$/;"	m	struct:_hashmap
+callback	event/GHepoll.h	/^    proc_callback callback;$/;"	m	struct:_event
+checksum	rpc.h	/^    uint32_t checksum;$/;"	m	struct:rpc_header
+client_callback	event/GHepoll.c	/^void client_callback(event_s *ev)$/;"	f
+cmdid	rpc.h	/^    uint8_t  cmdid;$/;"	m	struct:rpc_msg
+cond	rpc.c	/^pthread_cond_t cond;$/;"	v
+connect	rpc.h	/^    int (*connect)(rpc_t *r);$/;"	m	struct:rpc_ops
+container_of	hashmap/list.h	6;"	d
+create_fd_event	event/GHepoll.c	/^event_s* create_fd_event (int fd, uint32_t events, proc_callback cfunc, void *data, size_t datalen)$/;"	f
+create_new_epoll	event/GHepoll.c	/^GHepoll_s *create_new_epoll (size_t epoll_size)$/;"	f
+create_signal_event	event/GHepoll.c	/^event_s* create_signal_event (int signum, uint32_t events, proc_callback cfunc, void *data, size_t datalen)$/;"	f
+create_timeout_event	event/GHepoll.c	/^event_s* create_timeout_event (struct timeout_t *tt, proc_callback cfunc, void *data, size_t datalen)$/;"	f
+d_uuid	rpc.h	/^    uint32_t d_uuid;$/;"	m	struct:rpc_header
+deinit	rpc.h	/^    int (*deinit)(rpc_t *r);$/;"	m	struct:rpc_ops
+destroy	hashmap/hashmap.h	/^    void (*destroy)(void *);$/;"	m	struct:_hashmap
+dir	rpc.h	/^    uint8_t  dir;$/;"	m	struct:rpc_msg
+epoll_curr_size	event/GHepoll.h	/^    size_t epoll_curr_size;$/;"	m	struct:_GHepoll
+epoll_event_size	event/GHepoll.h	/^    size_t epoll_event_size;$/;"	m	struct:_GHepoll
+epoll_fd	event/GHepoll.h	/^    int epoll_fd;$/;"	m	struct:_GHepoll
+event	event/GHepoll.h	/^    uint32_t event;$/;"	m	struct:_event
+event_pthread	rpc.c	/^void *event_pthread(void *arg)$/;"	f
+event_s	event/GHepoll.h	/^} event_s;$/;"	t	typeref:struct:_event
+eventbases	rpc.h	/^    rpc_eventbases_t *eventbases;$/;"	m	struct:rpc
+events	event/GHepoll.h	/^    struct epoll_event events[0];$/;"	m	struct:_GHepoll	typeref:struct:_GHepoll::epoll_event
+fd	event/GHepoll.h	/^    int fd;$/;"	m	struct:_event
+fd	rpc.h	/^    int  fd;$/;"	m	struct:rpc
+fd_event	event/GHepoll.h	/^    struct _event *fd_event;$/;"	m	struct:_GHepoll	typeref:struct:_GHepoll::_event
+first	hashmap/list.h	/^    struct hlist_node *first;$/;"	m	struct:hlist_head	typeref:struct:hlist_head::hlist_node
+g_fp	log.c	/^static FILE* g_fp ;$/;"	v	file:
+g_level_str	log.c	/^const char* g_level_str[] = {$/;"	v
+g_local_level	event/util.c	/^static int g_local_level = LOG_LEVEL_INFO;$/;"	v	file:
+g_log_level	log.c	/^static int   g_log_level = GH_LOG_DEBUG;$/;"	v	file:
+get_chdir	log.c	/^static int get_chdir(const char *logfile, char *dir, int size)$/;"	f	file:
+get_logfile_size	log.c	/^static long get_logfile_size(FILE *fp)$/;"	f	file:
+get_mac_by_name	1/skt.c	/^int get_mac_by_name(const char *device, unsigned char *buf)$/;"	f
+get_monotonic	event/util.c	/^int get_monotonic(struct timeval *tv)$/;"	f
+gid	rpc.h	/^    uint8_t  gid;$/;"	m	struct:rpc_msg
+global_pipe_fd	event/GHepoll.c	/^static int global_pipe_fd[SIGNAL_NUM_MAX + 1];$/;"	v	file:
+global_signal_init	event/GHepoll.c	/^static BOOL global_signal_init = False;$/;"	v	file:
+hash	hashmap/hashmap.h	/^    uint32_t hash;$/;"	m	struct:_item
+hashmap_create	hashmap/hashmap.c	/^hashmap_t* hashmap_create(uint32_t bucket, void (*destroy)(void *))$/;"	f
+hashmap_del	hashmap/hashmap.c	/^int hashmap_del(hashmap_t *hm, const char *key)$/;"	f
+hashmap_destroy	hashmap/hashmap.c	/^void hashmap_destroy(hashmap_t *hm)$/;"	f
+hashmap_get	hashmap/hashmap.c	/^void *hashmap_get(hashmap_t *hm, const char *key)$/;"	f
+hashmap_get_del	hashmap/hashmap.c	/^void *hashmap_get_del(hashmap_t *hm, const char *key)$/;"	f
+hashmap_lookup	hashmap/hashmap.c	/^static item_t* hashmap_lookup(hashmap_t *hm, const char *key, uint32_t *hash)$/;"	f	file:
+hashmap_pt	hashmap/hashmap.h	/^} hashmap_t, *hashmap_pt;$/;"	t	typeref:struct:_hashmap
+hashmap_put	hashmap/hashmap.c	/^int hashmap_put(hashmap_t *hm, const char *key, void *val)$/;"	f
+hashmap_t	hashmap/hashmap.h	/^} hashmap_t, *hashmap_pt;$/;"	t	typeref:struct:_hashmap
+hdr	rpc.h	/^    struct rpc_header hdr;$/;"	m	struct:rpc_packet	typeref:struct:rpc_packet::rpc_header
+help	test_server.c	/^void help(void *args)$/;"	f
+hlist_add_after	hashmap/list.h	/^static inline void hlist_add_after(struct hlist_node *n,$/;"	f
+hlist_add_before	hashmap/list.h	/^static inline void hlist_add_before(struct hlist_node *n,$/;"	f
+hlist_add_fake	hashmap/list.h	/^static inline void hlist_add_fake(struct hlist_node *n)$/;"	f
+hlist_add_head	hashmap/list.h	/^static inline void hlist_add_head(struct hlist_node *n, struct hlist_head *h)$/;"	f
+hlist_del	hashmap/list.h	/^static inline void hlist_del(struct hlist_node *n)$/;"	f
+hlist_del_init	hashmap/list.h	/^static inline void hlist_del_init(struct hlist_node *n)$/;"	f
+hlist_empty	hashmap/list.h	/^static inline int hlist_empty(const struct hlist_head *h)$/;"	f
+hlist_entry	hashmap/list.h	660;"	d
+hlist_entry_safe	hashmap/list.h	669;"	d
+hlist_for_each	hashmap/list.h	662;"	d
+hlist_for_each_entry	hashmap/list.h	680;"	d
+hlist_for_each_entry_continue	hashmap/list.h	690;"	d
+hlist_for_each_entry_from	hashmap/list.h	700;"	d
+hlist_for_each_entry_safe	hashmap/list.h	711;"	d
+hlist_for_each_safe	hashmap/list.h	665;"	d
+hlist_head	hashmap/list.h	/^struct hlist_head {$/;"	s
+hlist_move_list	hashmap/list.h	/^static inline void hlist_move_list(struct hlist_head *old,$/;"	f
+hlist_node	hashmap/list.h	/^struct hlist_node {$/;"	s
+hlist_unhashed	hashmap/list.h	/^static inline int hlist_unhashed(const struct hlist_node *h)$/;"	f
+init	rpc.h	/^    int (*init)(rpc_t *r);$/;"	m	struct:rpc_ops
+ip_get_mask	1/skt.c	/^unsigned long ip_get_mask(unsigned long addr)$/;"	f
+is_power_of_2	hashmap/hashmap.c	/^static inline int is_power_of_2(uint32_t n)$/;"	f	file:
+item_list	hashmap/hashmap.h	/^    void *item_list;$/;"	m	struct:_hashmap
+item_pt	hashmap/hashmap.h	/^} item_t, *item_pt;$/;"	t	typeref:struct:_item
+item_t	hashmap/hashmap.h	/^} item_t, *item_pt;$/;"	t	typeref:struct:_item
+key	hashmap/hashmap.h	/^    char *key;$/;"	m	struct:_item
+list	hashmap/hashmap.h	/^    struct hlist_node list;$/;"	m	struct:_item	typeref:struct:_item::hlist_node
+list_add_tail	hashmap/list.h	/^static inline void list_add_tail(struct list_head *new, struct list_head *head)$/;"	f
+list_cut_position	hashmap/list.h	/^static inline void list_cut_position(struct list_head *list,$/;"	f
+list_del	hashmap/list.h	/^static inline void list_del(struct list_head *entry)$/;"	f
+list_del_init	hashmap/list.h	/^static inline void list_del_init(struct list_head *entry)$/;"	f
+list_empty	hashmap/list.h	/^static inline int list_empty(const struct list_head *head)$/;"	f
+list_empty_careful	hashmap/list.h	/^static inline int list_empty_careful(const struct list_head *head)$/;"	f
+list_entry	hashmap/list.h	342;"	d
+list_first_entry	hashmap/list.h	353;"	d
+list_first_entry_or_null	hashmap/list.h	364;"	d
+list_for_each	hashmap/list.h	372;"	d
+list_for_each_entry	hashmap/list.h	410;"	d
+list_for_each_entry_continue	hashmap/list.h	446;"	d
+list_for_each_entry_continue_reverse	hashmap/list.h	460;"	d
+list_for_each_entry_from	hashmap/list.h	473;"	d
+list_for_each_entry_reverse	hashmap/list.h	421;"	d
+list_for_each_entry_safe	hashmap/list.h	484;"	d
+list_for_each_entry_safe_continue	hashmap/list.h	500;"	d
+list_for_each_entry_safe_from	hashmap/list.h	516;"	d
+list_for_each_entry_safe_reverse	hashmap/list.h	531;"	d
+list_for_each_prev	hashmap/list.h	380;"	d
+list_for_each_prev_safe	hashmap/list.h	399;"	d
+list_for_each_safe	hashmap/list.h	389;"	d
+list_head	hashmap/list.h	/^struct list_head {$/;"	s
+list_is_last	hashmap/list.h	/^static inline int list_is_last(const struct list_head *list,$/;"	f
+list_is_singular	hashmap/list.h	/^static inline int list_is_singular(const struct list_head *head)$/;"	f
+list_move	hashmap/list.h	/^static inline void list_move(struct list_head *list, struct list_head *head)$/;"	f
+list_move_tail	hashmap/list.h	/^static inline void list_move_tail(struct list_head *list,$/;"	f
+list_prepare_entry	hashmap/list.h	434;"	d
+list_replace	hashmap/list.h	/^static inline void list_replace(struct list_head *old,$/;"	f
+list_replace_init	hashmap/list.h	/^static inline void list_replace_init(struct list_head *old,$/;"	f
+list_rotate_left	hashmap/list.h	/^static inline void list_rotate_left(struct list_head *head)$/;"	f
+list_safe_reset_next	hashmap/list.h	549;"	d
+list_splice	hashmap/list.h	/^static inline void list_splice(const struct list_head *list,$/;"	f
+list_splice_init	hashmap/list.h	/^static inline void list_splice_init(struct list_head *list,$/;"	f
+list_splice_tail	hashmap/list.h	/^static inline void list_splice_tail(struct list_head *list,$/;"	f
+list_splice_tail_init	hashmap/list.h	/^static inline void list_splice_tail_init(struct list_head *list,$/;"	f
+listadd	hashmap/list.h	/^static inline void listadd(struct list_head *new, struct list_head *head)$/;"	f
+local_uuid	rpc.h	/^    uint32_t local_uuid;         \/* local uuid*\/$/;"	m	struct:rpc
+log_debug	log.c	/^void log_debug(const char *file, int line,  const char *fmt, ...)$/;"	f
+log_dirpath	log.c	/^static char  log_dirpath[256];$/;"	v	file:
+log_error	log.c	/^void log_error(int errcode, const char *file, int line, const char *fmt, ...)$/;"	f
+log_exit	log.c	/^static void log_exit(int errcode)$/;"	f	file:
+log_exit_cb	log.c	/^static log_exit_func  log_exit_cb = NULL;$/;"	v	file:
+log_exit_func	log.h	/^typedef void (*log_exit_func)(int);$/;"	t
+log_filename	log.c	/^static char  log_filename[256];$/;"	v	file:
+log_init	log.c	/^int log_init(int level, const char *logfile)$/;"	f
+log_level_type	event/util.c	/^static const char *log_level_type[] = {$/;"	v	file:
+log_print	log.c	/^static int log_print(int level, const char *file, int line,$/;"	f	file:
+log_set_exit_cb	log.c	/^void log_set_exit_cb(log_exit_func cb)$/;"	f
+log_warn	log.c	/^void log_warn(const char *file, int line, const char *fmt, ...)$/;"	f
+log_xerror	log.c	/^void log_xerror(int errcode, const char *file, int line, const char *fmt, ...)$/;"	f
+log_xmsg	log.c	/^void log_xmsg(const char *file, int line, const char *fmt, ...)$/;"	f
+log_xwarn	log.c	/^void log_xwarn(const char *file, int line, const char *fmt, ...)$/;"	f
+logd	log.h	92;"	d
+loge	log.h	87;"	d
+logm	log.h	91;"	d
+logw	log.h	89;"	d
+logxe	log.h	88;"	d
+logxw	log.h	90;"	d
+loop_time	event/GHepoll.h	/^    struct timeval loop_time;$/;"	m	struct:timeout_t	typeref:struct:timeout_t::timeval
+main	event/GHepoll.c	/^int main ()$/;"	f
+main	test_server.c	/^int main(int argc, char *argv[])$/;"	f
+msg_id	rpc.h	/^    uint32_t msg_id;$/;"	m	struct:rpc_header
+msgid	rpc.h	/^    unsigned int msgid;$/;"	m	struct:work_map
+mutex	rpc.c	/^pthread_mutex_t mutex;$/;"	v
+next	event/GHepoll.h	/^    struct _event *next;$/;"	m	struct:_event	typeref:struct:_event::_event
+next	hashmap/list.h	/^    struct hlist_node *next;$/;"	m	struct:hlist_node	typeref:struct:hlist_node::hlist_node
+next	hashmap/list.h	/^    struct list_head *next, *prev;$/;"	m	struct:list_head	typeref:struct:list_head::list_head
+now	event/GHepoll.h	/^    struct timeval now;$/;"	m	struct:_GHepoll	typeref:struct:_GHepoll::timeval
+on_client	rpc.c	/^void on_client(rpc_event_t *ev)$/;"	f
+on_server	rpc.c	/^void on_server(rpc_event_t *ev)$/;"	f
+on_server_recv	rpc.c	/^void on_server_recv(rpc_event_t *ev)$/;"	f
+ops	rpc.h	/^    struct rpc_ops *ops;$/;"	m	struct:rpc	typeref:struct:rpc::rpc_ops
+owner	event/GHepoll.h	/^    GHepoll_s *owner;$/;"	m	struct:_event
+parse	rpc.h	/^    uint8_t  parse;$/;"	m	struct:rpc_msg
+payload_len	rpc.h	/^    uint32_t payload_len;$/;"	m	struct:rpc_header
+pprev	hashmap/list.h	/^    struct hlist_node **pprev;$/;"	m	struct:hlist_node	typeref:struct:hlist_node::hlist_node
+prev	hashmap/list.h	/^    struct list_head *next, *prev;$/;"	m	struct:list_head	typeref:struct:list_head::
+proc_callback	event/GHepoll.h	/^typedef void (*proc_callback)(struct _event *);$/;"	t
+recv	rpc.h	/^    size_t (*recv)(rpc_t *r);$/;"	m	struct:rpc_ops
+recv_pkt	rpc.h	/^    struct rpc_packet recv_pkt;$/;"	m	struct:rpc	typeref:struct:rpc::rpc_packet
+ret	rpc.h	/^    uint8_t  ret;$/;"	m	struct:rpc_msg
+role	rpc.h	/^    rpc_role role;$/;"	m	struct:rpc
+rpc	rpc.h	/^struct rpc {$/;"	s
+rpc_call	rpc.c	/^int rpc_call(rpc_t *r, uint32_t msg_id, void *payload, size_t payload_len)$/;"	f
+rpc_client	rpc.h	/^    rpc_client,$/;"	e	enum:__anon6
+rpc_connected	rpc.h	/^    rpc_connected,$/;"	e	enum:__anon7
+rpc_disconnected	rpc.h	/^    rpc_disconnected,$/;"	e	enum:__anon7
+rpc_event_t	rpc.h	/^typedef struct _event   rpc_event_t;$/;"	t	typeref:struct:_event
+rpc_eventbases_t	rpc.h	/^typedef struct _GHepoll rpc_eventbases_t;$/;"	t	typeref:struct:_GHepoll
+rpc_find_work_map	rpc.c	/^work_map_t * rpc_find_work_map(uint32_t msgid)$/;"	f
+rpc_generate_uuid	common.h	/^static uint32_t rpc_generate_uuid(int fd, uint32_t ip, uint16_t port)$/;"	f
+rpc_get_msec	common.h	/^static uint64_t rpc_get_msec(void)$/;"	f
+rpc_header	rpc.h	/^struct rpc_header {$/;"	s
+rpc_header_t	rpc.h	/^typedef struct rpc_header rpc_header_t;$/;"	t	typeref:struct:rpc_header
+rpc_init	rpc.c	/^rpc_t * rpc_init(const char *host, uint16_t port, rpc_role role)$/;"	f
+rpc_inited	rpc.h	/^    rpc_inited,$/;"	e	enum:__anon7
+rpc_msg	rpc.h	/^typedef struct rpc_msg {$/;"	s
+rpc_msg_t	rpc.h	/^} rpc_msg_t;$/;"	t	typeref:struct:rpc_msg
+rpc_ops	rpc.h	/^struct rpc_ops {$/;"	s
+rpc_pack_header	rpc.c	/^static int rpc_pack_header(rpc_t *r, uint32_t msg_id, size_t payload_len)$/;"	f	file:
+rpc_packet	rpc.h	/^struct rpc_packet {$/;"	s
+rpc_packet_t	rpc.h	/^typedef struct rpc_packet rpc_packet_t;$/;"	t	typeref:struct:rpc_packet
+rpc_register_works	test_server.c	/^int rpc_register_works(work_map_t w[], unsigned int size)$/;"	f
+rpc_role	rpc.h	/^} rpc_role;$/;"	t	typeref:enum:__anon6
+rpc_server	rpc.h	/^    rpc_server$/;"	e	enum:__anon6
+rpc_skt_init	rpc_skt.c	/^int rpc_skt_init(rpc_t *r)$/;"	f
+rpc_skt_recv	rpc_skt.c	/^ssize_t rpc_skt_recv(int fd, char *buf, size_t len)$/;"	f
+rpc_skt_send	rpc_skt.c	/^ssize_t rpc_skt_send(int fd, char *buf, size_t len)$/;"	f
+rpc_state	rpc.h	/^} rpc_state;$/;"	t	typeref:enum:__anon7
+rpc_t	rpc.h	/^typedef struct rpc rpc_t;$/;"	t	typeref:struct:rpc
+s_host	rpc.h	/^    char *s_host;               \/* rpc server host *\/$/;"	m	struct:rpc
+s_port	rpc.h	/^    uint16_t s_port;            \/* rpc server port *\/$/;"	m	struct:rpc
+s_uuid	rpc.h	/^    uint32_t s_uuid;$/;"	m	struct:rpc_header
+save_logfile	log.c	/^static FILE *save_logfile(FILE *fp)$/;"	f	file:
+send	rpc.h	/^    size_t (*send)(rpc_t *r);$/;"	m	struct:rpc_ops
+send_pkt	rpc.h	/^    struct rpc_packet send_pkt;$/;"	m	struct:rpc	typeref:struct:rpc::rpc_packet
+server_uuid	rpc.h	/^    uint32_t server_uuid;       \/* rpc server uuid *\/$/;"	m	struct:rpc
+set_cloexec	event/util.c	/^int set_cloexec (int fd) $/;"	f
+set_nonblock	event/util.c	/^int set_nonblock (int fd)$/;"	f
+signal	event/GHepoll.h	/^    int signal;$/;"	m	struct:_event
+signal_callback	event/GHepoll.c	/^void signal_callback(event_s *ev)$/;"	f
+skt_addr_ntop	1/skt.c	/^int skt_addr_ntop(char *str, size_t size, uint32_t ip)$/;"	f
+skt_addr_pton	1/skt.c	/^uint32_t skt_addr_pton(const char *ip)$/;"	f
+skt_close	1/skt.c	/^void skt_close(int fd)$/;"	f
+skt_close	rpc_skt.c	/^void skt_close(int fd)$/;"	f
+skt_destory	1/skt.c	/^void skt_destory()$/;"	f
+skt_get_local_info	1/skt.c	/^int skt_get_local_info(void)$/;"	f
+skt_get_remote_addr_by_fd	1/skt.c	/^int skt_get_remote_addr_by_fd(int fd, uint32_t ip, uint16_t port)$/;"	f
+skt_get_tcp_info	1/skt.c	/^int skt_get_tcp_info(int fd, struct tcp_info *tcpi)$/;"	f
+skt_getaddr_by_fd	1/skt.c	/^int skt_getaddr_by_fd(int fd, uint32_t ip, uint16_t port)$/;"	f
+skt_open_tcpfd	1/skt.c	/^int skt_open_tcpfd(const char *host, uint16_t port)$/;"	f
+skt_open_tcpfd	rpc_skt.c	/^int skt_open_tcpfd(const char *host, uint16_t port)$/;"	f
+skt_open_udpfd	1/skt.c	/^int skt_open_udpfd(const char *host, uint16_t port)$/;"	f
+skt_openfd_of_hostname	1/skt.c	/^static int skt_openfd_of_hostname(const char *hostname, const char *port,$/;"	f	file:
+skt_openfd_of_hostname	rpc_skt.c	/^static int skt_openfd_of_hostname(const char *hostname, const char *port,$/;"	f	file:
+skt_recv	1/skt.c	/^int skt_recv(int fd, void *buf, size_t len)$/;"	f
+skt_recvfrom	1/skt.c	/^int skt_recvfrom(int fd, uint32_t *ip, uint16_t *port, void *buf, size_t len)$/;"	f
+skt_rio_readn	1/skt.c	/^ssize_t skt_rio_readn(int fd, void *buf, size_t n)$/;"	f
+skt_rio_writen	1/skt.c	/^ssize_t skt_rio_writen(int fd, void *buf, size_t n)$/;"	f
+skt_send	1/skt.c	/^int skt_send(int fd, const void *buf, size_t len)$/;"	f
+skt_send_sync_recv	1/skt.c	/^int skt_send_sync_recv(int fd, const void *sbuf, size_t slen,$/;"	f
+skt_sendto	1/skt.c	/^int skt_sendto(int fd, const char *ip, uint16_t port,$/;"	f
+skt_set_block	1/skt.c	/^int skt_set_block(int fd)$/;"	f
+skt_set_buflen	1/skt.c	/^int skt_set_buflen(int fd, int size)$/;"	f
+skt_set_noblk	1/skt.c	/^int skt_set_noblk(int fd, int enable)$/;"	f
+skt_set_noblk	rpc_skt.c	/^int skt_set_noblk(int fd, int enable)$/;"	f
+skt_set_nonblock	1/skt.c	/^int skt_set_nonblock(int fd)$/;"	f
+skt_set_reuse	1/skt.c	/^int skt_set_reuse(int fd, int enable)$/;"	f
+skt_set_reuse	rpc_skt.c	/^int skt_set_reuse(int fd, int enable)$/;"	f
+skt_set_tcp_keepalive	1/skt.c	/^int skt_set_tcp_keepalive(int fd, int enable)$/;"	f
+skt_tcp_connect	1/skt.c	/^int skt_tcp_connect(const char *host, uint16_t port)$/;"	f
+skt_tcp_connect	rpc_skt.c	/^int skt_tcp_connect(const char *host, uint16_t port)$/;"	f
+skt_udp_connect	1/skt.c	/^int skt_udp_connect(const char *host, uint16_t port)$/;"	f
+start_time	event/GHepoll.h	/^    struct timeval start_time;$/;"	m	struct:timeout_t	typeref:struct:timeout_t::timeval
+state	rpc.h	/^    rpc_state state;$/;"	m	struct:rpc
+str_is_ip	1/skt.c	/^int str_is_ip(const char *str, int str_len)$/;"	f
+tcp_socket	event/GHepoll.c	/^int tcp_socket(const char *host, uint16_t port)$/;"	f
+timeout_callback	event/GHepoll.c	/^void timeout_callback(event_s *ev)$/;"	f
+timeout_curr_size	event/GHepoll.h	/^    size_t timeout_curr_size;$/;"	m	struct:_GHepoll
+timeout_t	event/GHepoll.h	/^struct timeout_t {$/;"	s
+timeouts	event/GHepoll.h	/^    struct _event *timeouts;$/;"	m	struct:_GHepoll	typeref:struct:_GHepoll::_event
+timestamp	rpc.h	/^    uint64_t timestamp;$/;"	m	struct:rpc_header
+type	event/GHepoll.h	/^    GHEPOLL_TYPE_E type;$/;"	m	struct:_event
+up_power2_u32	hashmap/hashmap.c	/^static inline uint32_t up_power2_u32(uint32_t c)$/;"	f	file:
+util_log	event/util.c	/^int util_log (int level, const char *fmt, ...) $/;"	f
+util_set_log_level	event/util.c	/^void util_set_log_level (int level)$/;"	f
+val	hashmap/hashmap.h	/^    void *val;$/;"	m	struct:_item
+value	rpc.h	/^    void *value;$/;"	m	struct:rpc_packet
+when	event/GHepoll.h	/^    struct timeout_t when;$/;"	m	struct:_event	typeref:struct:_event::timeout_t
+work	rpc.h	/^    work_cb work;$/;"	m	struct:work_map
+work_cb	rpc.h	/^typedef void (*work_cb)(void *args);$/;"	t
+work_map	rpc.h	/^typedef struct work_map {$/;"	s
+work_map_t	rpc.h	/^} work_map_t;$/;"	t	typeref:struct:work_map
+works_hash	rpc.c	/^hashmap_t *works_hash;$/;"	v
+xmalloc	event/util.c	/^void* xmalloc(size_t size)$/;"	f
+xrealloc	event/util.c	/^void* xrealloc(void *ptr, size_t size)$/;"	f
+xzalloc	event/util.c	/^void* xzalloc(size_t size)$/;"	f
