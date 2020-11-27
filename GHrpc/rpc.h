@@ -171,8 +171,16 @@ typedef struct {
     int sockfd;      // client和server通信socket
     struct rpc *r;
     uint32_t msgid;
-    char data[1024]; // client发送给server的参数
+    void *args; // client发送给server的参数
 } work_args_t;
+static void free_work_args(void *args) {
+    work_args_t *wa = (work_args_t *)args;
+    if (wa) {
+        if(wa->args) free(wa->args);
+        free(wa);
+    }
+
+}
 
 // for msg_id
 enum {

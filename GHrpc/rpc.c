@@ -113,10 +113,10 @@ void on_server_recv(rpc_event_t *ev)
 
     int fd = ev->fd;
     rpc_t *r = (rpc_t *)ev->args;
-    // char rbuff[1024] = {0};
+    char rbuff[1024] = {0};
     size_t rlen;
     rpc_header_t *hdr = &r->recv_pkt.hdr;
-    work_args_t wargs = {0, NULL, 0,  {0}};
+    work_args_t wargs = {0, NULL, 0, NULL};
 
     logd("on_server_recv befor");
     rlen = rpc_skt_recv(fd, (char *)hdr, RPC_HDR_LEN);
@@ -144,7 +144,7 @@ void on_server_recv(rpc_event_t *ev)
     }
 
     if (hdr->payload_len != 0) {
-        rlen = rpc_skt_recv(fd, wargs.data, hdr->payload_len);
+        rlen = rpc_skt_recv(fd, rbuff, hdr->payload_len);
         if (rlen < 0) {
             logw("on_client recv error");
             return;
@@ -166,6 +166,7 @@ void on_server_recv(rpc_event_t *ev)
         wargs.r = r;
         wargs.msgid = hdr->msg_id;
         wargs.sockfd = fd;
+        wargs.args = strdup(rbuff);
         workq_add(r->workq, wm->work, (void*)&wargs, sizeof wargs, NULL);
         pthread_cond_signal(&r->workq->cond);
     }
@@ -384,7 +385,7 @@ rpc_t * rpc_init(const char *host, uint16_t port, rpc_role role)
             goto err;
         }
 
-        rpc->workq = workq_create("rpc_workq");
+        rpc->workq = workq_create("rpc_workq", free_work_args);
         if (!rpc->workq) {
             logxw("workq_create failed");
             goto err;

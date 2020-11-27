@@ -126,9 +126,9 @@ PIPE_READ	event/GHepoll.c	216;"	d	file:
 PIPE_WRITE	event/GHepoll.c	217;"	d	file:
 RED	log.h	13;"	d
 RED	log.h	44;"	d
-RPC_BUILD_MSG_ID	rpc.h	241;"	d
-RPC_CMDID_BIT	rpc.h	239;"	d
-RPC_CMDID_MASK	rpc.h	238;"	d
+RPC_BUILD_MSG_ID	rpc.h	248;"	d
+RPC_CMDID_BIT	rpc.h	246;"	d
+RPC_CMDID_MASK	rpc.h	245;"	d
 RPC_CMD_EXTER	rpc.h	/^    RPC_CMD_EXTER$/;"	e	enum:__anon15
 RPC_CMD_EXTER_0	test_client.c	/^    RPC_CMD_EXTER_0 = RPC_CMD_EXTER,$/;"	e	enum:__anon7	file:
 RPC_CMD_EXTER_0	test_server.c	/^    RPC_CMD_EXTER_0 = RPC_CMD_EXTER,$/;"	e	enum:__anon5	file:
@@ -148,10 +148,10 @@ RPC_CMD_INNER_4	rpc.h	/^    RPC_CMD_INNER_4,$/;"	e	enum:__anon15
 RPC_CMD_INNER_5	rpc.h	/^    RPC_CMD_INNER_5,$/;"	e	enum:__anon15
 RPC_CMD_INNER_6	rpc.h	/^    RPC_CMD_INNER_6,$/;"	e	enum:__anon15
 RPC_CMD_INNER_7	rpc.h	/^    RPC_CMD_INNER_7,$/;"	e	enum:__anon15
-RPC_DIR_BIT	rpc.h	233;"	d
-RPC_DIR_MASK	rpc.h	232;"	d
+RPC_DIR_BIT	rpc.h	240;"	d
+RPC_DIR_MASK	rpc.h	239;"	d
 RPC_DOWN	rpc.h	/^    RPC_DOWN, \/\/ server to client$/;"	e	enum:__anon12
-RPC_GROUP_BIT	rpc.h	227;"	d
+RPC_GROUP_BIT	rpc.h	234;"	d
 RPC_GROUP_EXTER	rpc.h	/^    RPC_GROUP_EXTER$/;"	e	enum:__anon14
 RPC_GROUP_EXTER_0	test_client.c	/^    RPC_GROUP_EXTER_0 = RPC_GROUP_EXTER,$/;"	e	enum:__anon6	file:
 RPC_GROUP_EXTER_0	test_server.c	/^    RPC_GROUP_EXTER_0 = RPC_GROUP_EXTER,$/;"	e	enum:__anon4	file:
@@ -171,27 +171,27 @@ RPC_GROUP_INNER_4	rpc.h	/^    RPC_GROUP_INNER_4,$/;"	e	enum:__anon14
 RPC_GROUP_INNER_5	rpc.h	/^    RPC_GROUP_INNER_5,$/;"	e	enum:__anon14
 RPC_GROUP_INNER_6	rpc.h	/^    RPC_GROUP_INNER_6,$/;"	e	enum:__anon14
 RPC_GROUP_INNER_7	rpc.h	/^    RPC_GROUP_INNER_7,$/;"	e	enum:__anon14
-RPC_GROUP_MASK	rpc.h	226;"	d
+RPC_GROUP_MASK	rpc.h	233;"	d
 RPC_HDR_LEN	rpc.h	111;"	d
 RPC_JSON	rpc.h	/^    RPC_JSON,$/;"	e	enum:__anon13
-RPC_MSG_CMDID	rpc.h	260;"	d
-RPC_MSG_DIR	rpc.h	254;"	d
-RPC_MSG_GROUP_ID	rpc.h	248;"	d
-RPC_MSG_PARSE	rpc.h	257;"	d
-RPC_MSG_RET	rpc.h	251;"	d
-RPC_PARSE_BIT	rpc.h	236;"	d
-RPC_PARSE_MASK	rpc.h	235;"	d
+RPC_MSG_CMDID	rpc.h	267;"	d
+RPC_MSG_DIR	rpc.h	261;"	d
+RPC_MSG_GROUP_ID	rpc.h	255;"	d
+RPC_MSG_PARSE	rpc.h	264;"	d
+RPC_MSG_RET	rpc.h	258;"	d
+RPC_PARSE_BIT	rpc.h	243;"	d
+RPC_PARSE_MASK	rpc.h	242;"	d
 RPC_PROROBUF	rpc.h	/^    RPC_PROROBUF,$/;"	e	enum:__anon13
-RPC_REGISTER_WORKS_MAP	rpc.h	271;"	d
-RPC_RET_BIT	rpc.h	230;"	d
-RPC_RET_MASK	rpc.h	229;"	d
+RPC_REGISTER_WORKS_MAP	rpc.h	278;"	d
+RPC_RET_BIT	rpc.h	237;"	d
+RPC_RET_MASK	rpc.h	236;"	d
 RPC_UNUSE1	rpc.h	/^    RPC_UNUSE1,$/;"	e	enum:__anon13
 RPC_UNUSE2	rpc.h	/^    RPC_UNUSE2,$/;"	e	enum:__anon13
 RPC_UP	rpc.h	/^    RPC_UP, \/\/ client to server$/;"	e	enum:__anon12
-RPC_WORK_MAP_ADD	rpc.h	269;"	d
-RPC_WORK_MAP_BEGIN	rpc.h	265;"	d
+RPC_WORK_MAP_ADD	rpc.h	276;"	d
+RPC_WORK_MAP_BEGIN	rpc.h	272;"	d
 RPC_WORK_MAP_BEGIN	test_server.c	/^RPC_WORK_MAP_BEGIN(test)$/;"	f
-RPC_WORK_MAP_END	rpc.h	268;"	d
+RPC_WORK_MAP_END	rpc.h	275;"	d
 SIGNAL_NUM_MAX	event/GHepoll.h	16;"	d
 TARGET1	Makefile	/^TARGET1=test_client$/;"	m
 TARGET2	Makefile	/^TARGET2=test_server$/;"	m
@@ -243,13 +243,16 @@ _signal_handler	event/GHepoll.c	/^void _signal_handler(int signum)$/;"	f
 _skt_connect	1/skt.c	/^static int _skt_connect(const char *host, uint16_t port, int type)$/;"	f	file:
 _skt_connect	rpc_skt.c	/^static int _skt_connect(const char *host, uint16_t port, int type)$/;"	f	file:
 _warn	event/util.h	18;"	d
+a	workq/workq.c	/^    int a;$/;"	m	struct:st	file:
 accept_callback	event/GHepoll.c	/^void accept_callback(event_s *ev)$/;"	f
 acept	rpc.h	/^    int (*acept)(rpc_t *r);$/;"	m	struct:rpc_ops
 args	event/GHepoll.h	/^    void *args;$/;"	m	struct:_event
+args	rpc.h	/^    void *args; \/\/ client发送给server的参数$/;"	m	struct:__anon10
 args	workq/workq.h	/^    void *args;$/;"	m	struct:workr
 args_len	event/GHepoll.h	/^    uint32_t args_len;$/;"	m	struct:_event
 bind	rpc.h	/^    int (*bind)(rpc_t *r);$/;"	m	struct:rpc_ops
 bucket	hashmap/hashmap.h	/^    uint32_t bucket;$/;"	m	struct:_hashmap
+c	workq/workq.c	/^    char c;$/;"	m	struct:st	file:
 callback	event/GHepoll.h	/^    proc_callback callback;$/;"	m	struct:_event
 checksum	rpc.h	/^    uint32_t checksum;$/;"	m	struct:rpc_header
 client_callback	event/GHepoll.c	/^void client_callback(event_s *ev)$/;"	f
@@ -264,7 +267,6 @@ create_new_epoll	event/GHepoll.c	/^GHepoll_s *create_new_epoll (size_t epoll_siz
 create_signal_event	event/GHepoll.c	/^event_s* create_signal_event (int signum, uint32_t events, proc_callback cfunc, void *data, size_t datalen)$/;"	f
 create_timeout_event	event/GHepoll.c	/^event_s* create_timeout_event (struct timeout_t *tt, proc_callback cfunc, void *data, size_t datalen)$/;"	f
 d_uuid	rpc.h	/^    uint32_t d_uuid;$/;"	m	struct:rpc_header
-data	rpc.h	/^    char data[1024];$/;"	m	struct:__anon10
 deinit	rpc.h	/^    int (*deinit)(rpc_t *r);$/;"	m	struct:rpc_ops
 destroy	hashmap/hashmap.h	/^    void (*destroy)(void *);$/;"	m	struct:_hashmap
 dir	rpc.h	/^    uint8_t  dir;$/;"	m	struct:rpc_msg
@@ -283,6 +285,9 @@ fd_event	event/GHepoll.h	/^    struct _event *fd_event;$/;"	m	struct:_GHepoll	ty
 fds	rpc.c	/^int fds[2];$/;"	v
 first	hashmap/list.h	/^    struct hlist_node *first;$/;"	m	struct:hlist_head	typeref:struct:hlist_head::hlist_node
 first	workq/list.h	/^    struct hlist_node *first;$/;"	m	struct:hlist_head	typeref:struct:hlist_head::hlist_node
+free_args	workq/workq.h	/^    free_func_t free_args;$/;"	m	struct:work_queue
+free_func_t	workq/workq.h	/^typedef void (*free_func_t)(void *args);$/;"	t
+free_work_args	rpc.h	/^static void free_work_args(work_args_t *wa) {$/;"	f
 func	workq/workq.h	/^    work_func_t func;$/;"	m	struct:workr
 g_fp	log.c	/^static FILE* g_fp ;$/;"	v	file:
 g_level_str	log.c	/^const char* g_level_str[] = {$/;"	v
@@ -456,6 +461,7 @@ loop_time	event/GHepoll.h	/^    struct timeval loop_time;$/;"	m	struct:timeout_t
 main	event/GHepoll.c	/^int main ()$/;"	f
 main	test_client.c	/^int main(int argc, char *argv[])$/;"	f
 main	test_server.c	/^int main(int argc, char *argv[])$/;"	f
+main	workq/workq.c	/^int main(int argc, char *argv[])$/;"	f
 msg_id	rpc.h	/^    uint32_t msg_id;$/;"	m	struct:rpc_header
 msgid	rpc.h	/^    uint32_t msgid;$/;"	m	struct:__anon10
 msgid	rpc.h	/^    unsigned int msgid;$/;"	m	struct:work_map
@@ -560,7 +566,8 @@ skt_set_tcp_keepalive	1/skt.c	/^int skt_set_tcp_keepalive(int fd, int enable)$/;
 skt_tcp_connect	1/skt.c	/^int skt_tcp_connect(const char *host, uint16_t port)$/;"	f
 skt_tcp_connect	rpc_skt.c	/^int skt_tcp_connect(const char *host, uint16_t port)$/;"	f
 skt_udp_connect	1/skt.c	/^int skt_udp_connect(const char *host, uint16_t port)$/;"	f
-sockfd	rpc.h	/^    int sockfd;      \/\/ client 和 server 通信socket$/;"	m	struct:__anon10
+sockfd	rpc.h	/^    int sockfd;      \/\/ client和server通信socket$/;"	m	struct:__anon10
+st	workq/workq.c	/^struct st {$/;"	s	file:
 start_time	event/GHepoll.h	/^    struct timeval start_time;$/;"	m	struct:timeout_t	typeref:struct:timeout_t::timeval
 state	rpc.h	/^    rpc_state state;$/;"	m	struct:rpc
 str_is_ip	1/skt.c	/^int str_is_ip(const char *str, int str_len)$/;"	f
@@ -571,6 +578,8 @@ timeout_curr_size	event/GHepoll.h	/^    size_t timeout_curr_size;$/;"	m	struct:_
 timeout_t	event/GHepoll.h	/^struct timeout_t {$/;"	s
 timeouts	event/GHepoll.h	/^    struct _event *timeouts;$/;"	m	struct:_GHepoll	typeref:struct:_GHepoll::_event
 timestamp	rpc.h	/^    uint64_t timestamp;$/;"	m	struct:rpc_header
+tttt	workq/workq.c	/^void tttt(void *args)$/;"	f
+tttt2	workq/workq.c	/^void tttt2(void *args)$/;"	f
 type	event/GHepoll.h	/^    GHEPOLL_TYPE_E type;$/;"	m	struct:_event
 up_power2_u32	hashmap/hashmap.c	/^static inline uint32_t up_power2_u32(uint32_t c)$/;"	f	file:
 util_log	event/util.c	/^int util_log (int level, const char *fmt, ...) $/;"	f
@@ -589,7 +598,7 @@ work_queue	workq/workq.h	/^typedef struct work_queue {$/;"	s
 work_queue_t	workq/workq.h	/^} work_queue_t;$/;"	t	typeref:struct:work_queue
 workq	rpc.h	/^    work_queue_t *workq;       \/* for server, work queue *\/$/;"	m	struct:rpc
 workq_add	workq/workq.c	/^int workq_add(work_queue_t *wq, work_func_t func, void *args,$/;"	f
-workq_create	workq/workq.c	/^work_queue_t * workq_create(const char *workq_name)$/;"	f
+workq_create	workq/workq.c	/^work_queue_t * workq_create(const char *workq_name, free_func_t func)$/;"	f
 workq_del	workq/workq.c	/^void workq_del(work_queue_t *wq, workr_t *w)$/;"	f
 workq_destory	workq/workq.c	/^void workq_destory(work_queue_t *wq)$/;"	f
 workq_start	workq/workq.c	/^void workq_start(work_queue_t *wq)$/;"	f

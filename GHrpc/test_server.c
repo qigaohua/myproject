@@ -36,7 +36,7 @@ void help(void *args)
 {
     work_args_t *wa = (work_args_t *)args;
 
-    printf("recv msg: %s\n", wa->data);
+    printf("recv msg: %s\n", (char *)wa->args);
 }
 
 void get_info(void *args)
