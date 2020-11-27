@@ -34,8 +34,8 @@ int main(int argc, char *argv[])
         exit(1);
     }
 
-    uint32_t msgid = RPC_BUILD_MSG_ID(RPC_GROUP_EXTER_0, 0, 0, 0, RPC_CMD_EXTER_0);
-    rpc_call(r, msgid, NULL, 0);
+    uint32_t msgid = RPC_BUILD_MSG_ID(RPC_GROUP_EXTER_0, 1, 0, 0, RPC_CMD_EXTER_0);
+    rpc_call(r, msgid, "hello rpc", 10);
 
     while(1)
         sleep(10);

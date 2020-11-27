@@ -4,7 +4,7 @@ CFLAGS = -Wall -O2 -s
 
 #CFLAGS += -DDEBUG
 
-OBJS = $(patsubst %.c,%.o,$(wildcard *.c ./event/*.c ./hashmap/*.c))
+OBJS = $(patsubst %.c,%.o,$(wildcard *.c ./event/*.c ./hashmap/*.c ./workq/*.c))
 
 DEPS = $(patsubst %.o,%.d,$(OBJS))
 CFLAGS += -MD

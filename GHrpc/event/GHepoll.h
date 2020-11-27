@@ -87,7 +87,6 @@ int _GHepoll_signal_pipe(int pipefd[2]) ;
 int _GHepoll_signal_hander(int signum);
 event_s* create_signal_event (int signum, uint32_t events, proc_callback cfunc, void *data, size_t datalen);
 int _add_signal_event (GHepoll_s *base, event_s *event);
-GHepoll_s *create_new_epoll (size_t epoll_size) ;
 uint32_t GHepoll_event_convert(uint32_t events);
 int _epoll_mod (GHepoll_s *base, event_s *event) ;
 void _event_free(event_s *event);
@@ -96,6 +95,7 @@ GHEPOLL_TYPE_E GHepoll_check_event_type(uint32_t events);
 
 
 /* API */
+GHepoll_s *create_new_epoll (size_t epoll_size) ;
 event_s* GHepoll_create_event (int fd, struct timeout_t *tt, uint32_t events,proc_callback pfunc, void *data, size_t datalen);
 int GHepoll_add_event (GHepoll_s *base, event_s *event);
 int GHepoll_del_event (GHepoll_s *base, event_s *event);

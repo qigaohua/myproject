@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <inttypes.h>
+#include <errno.h>
 
 
 static unsigned int BKDRHash(char *str)
@@ -39,3 +40,70 @@ static uint64_t rpc_get_msec(void)
 
     return msec;
 }
+
+
+/**
+ * @brief rio_readn 一次性读n个字节
+ *
+ * @param fd
+ * @param buf
+ * @param n
+ *
+ * @return
+ */
+static ssize_t rio_readn(int fd, void *buf, size_t n)
+{
+    size_t nleft = n;
+    ssize_t nread;
+    char *ptr = (char *)buf;
+
+    while (nleft > 0) {
+        if ((nread = read(fd, ptr, nleft)) < 0) {
+            if (errno == EINTR)
+                nread = 0;
+            else
+                return (-1);   // error
+        }
+        else if (nread == 0)   // EOF
+            break;
+
+        ptr += nread;
+        nleft -= nread;
+    }
+
+    return (n - nleft);
+}
+
+
+
+/**
+ * @brief rio_writen 一次性写n个字节
+ *
+ * @param fd
+ * @param buf
+ * @param n
+ *
+ * @return
+ */
+static ssize_t rio_writen(int fd, void *buf, size_t n)
+{
+    size_t nleft = n;
+    ssize_t nwrite;
+
+    char *ptr = (char *)buf;
+
+    while (nleft > 0) {
+        if ((nwrite = write(fd, ptr, nleft)) <= 0) {
+            if (errno == EINTR)
+                nwrite = 0;
+            else
+                return (-1); // error
+        }
+
+        ptr += nwrite;
+        nleft -= nwrite;
+    }
+
+    return n;
+}
+

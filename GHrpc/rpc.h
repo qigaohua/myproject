@@ -1,7 +1,6 @@
 #ifndef __GH_RPC_H
 #define __GH_RPC_H
 
-#include <inttypes.h>
 
 
 /******************************************************************************
@@ -73,6 +72,10 @@
  *       3. define GET_RPC_FOO;
  *       4. define enum of foo value;
  ******************************************************************************/
+#include <inttypes.h>
+#include "hashmap/hashmap.h"
+#include "workq/workq.h"
+
 
 #define CHECK_ARGS(x, ret) {\
     if (x) {\
@@ -130,10 +133,18 @@ struct rpc {
     rpc_eventbases_t *eventbases;
     struct rpc_packet send_pkt;
     struct rpc_packet recv_pkt;
-    char *s_host;               /* rpc server host */
-    uint16_t s_port;            /* rpc server port */
-    uint32_t server_uuid;       /* rpc server uuid */
-    uint32_t local_uuid;         /* local uuid*/
+    char *s_host;              /* rpc server host */
+    uint16_t s_port;           /* rpc server port */
+    uint32_t server_uuid;      /* rpc server uuid */
+    uint32_t local_uuid;       /* local uuid */
+
+    hashmap_t *works_hash;     /* for server, works map hash */
+    work_queue_t *workq;       /* for server, work queue */
+
+    hashmap_t *ret_hash;       /* for server , need return hash */
+
+    pthread_cond_t cond;
+    pthread_mutex_t mutex;
 };
 typedef struct rpc rpc_t;
 
@@ -156,6 +167,34 @@ typedef struct work_map {
 } work_map_t;
 
 
+typedef struct {
+    int sockfd;      // client和server通信socket
+    struct rpc *r;
+    uint32_t msgid;
+    char data[1024]; // client发送给server的参数
+} work_args_t;
+
+// for msg_id
+enum {
+    NO_NEED_RETURN,
+    NEED_RETURN,
+};
+
+// for msg_id
+enum {
+    RPC_UP, // client to server
+    RPC_DOWN, // server to client
+};
+
+//for msg_id
+enum {
+    RPC_JSON,
+    RPC_PROROBUF,
+    RPC_UNUSE1,
+    RPC_UNUSE2,
+};
+
+
 // rpc 内部使用组id
 enum {
     RPC_GROUP_INNER_0,
@@ -170,6 +209,7 @@ enum {
 };
 
 
+// rpc 内部使用cmd_id
 enum {
     RPC_CMD_INNER_0,
     RPC_CMD_INNER_1,
@@ -228,8 +268,8 @@ static work_map_t rpc_work_map_##name[] = {
 #define RPC_WORK_MAP_END()   };
 #define RPC_WORK_MAP_ADD(msgid, work) {msgid, work},
 
-#define RPC_REGISTER_WORKS_MAP(name) \
-    rpc_register_works(rpc_work_map_##name,   \
+#define RPC_REGISTER_WORKS_MAP(rpc, name) \
+    rpc_register_works(rpc, rpc_work_map_##name,   \
             sizeof(rpc_work_map_##name)/sizeof(rpc_work_map_##name[0]))
 
 
@@ -241,7 +281,9 @@ int rpc_peer_call(rpc_t *r, uint32_t *d_uuid, uint32_t msg_id);
 
 // commom APIs
 rpc_t * rpc_init(const char *host, uint16_t port, rpc_role role);
-work_map_t * rpc_find_work_map(uint32_t msgid);
+int rpc_pack_header(rpc_t *r, uint32_t msg_id, size_t payload_len);
+work_map_t * rpc_find_work_map(rpc_t *r, uint32_t msgid);
+void * rpc_find_return_info(rpc_t *r, uint32_t msgid);
 
 
 #endif /* ifndef __GH_RPC_H */

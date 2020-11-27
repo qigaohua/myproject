@@ -16,7 +16,8 @@
 #include "rpc_skt.h"
 #include "event/GHepoll.h"
 #include "log.h"
-#include "hashmap/hashmap.h"
+// #include "hashmap/hashmap.h"
+// #include "workq/workq.h"
 
 
 #define CHECK_ARGS(x, ret) {\
@@ -26,25 +27,83 @@
     }\
 }
 
-pthread_mutex_t mutex;
-pthread_cond_t cond;
+// hashmap_t *ret_hash;
+// hashmap_t *works_hash;
+int fds[2];
 
-hashmap_t *works_hash;
-
-
-
-work_map_t * rpc_find_work_map(uint32_t msgid)
+work_map_t * rpc_find_work_map(rpc_t *r, uint32_t msgid)
 {
     char buff[128] = {0};
     work_map_t *wm = NULL;
 
     snprintf(buff, sizeof buff, "%08x", msgid);
-    wm = (work_map_t *)hashmap_get(works_hash, buff);
+    wm = (work_map_t *)hashmap_get(r->works_hash, buff);
     if (!wm) {
-        logxw("msgid(%u) map work no exist", msgid);
+        logxw("msgid(%p:%s) map work no exist", r->works_hash, buff);
     }
     return wm;
 }
+
+
+void * rpc_find_return_info(rpc_t *r, uint32_t msgid)
+{
+    char buff[128] = {0};
+    char *info = NULL;
+
+    snprintf(buff, sizeof buff, "%08x", msgid);
+    info = (char *)hashmap_get(r->ret_hash, buff);
+    if (!info) {
+        logxw("msgid(%u) map work no exist", msgid);
+    }
+
+    return info;
+}
+
+
+void * rpc_send_ret_thread(void *args)
+{
+    CHECK_ARGS(!args, 0);
+    rpc_t *r = (rpc_t *)args;
+    int fd;
+    uint32_t msgid = 0;
+    char rbuff[1024] = {0};
+    size_t rlen;
+
+    while(1) {
+        logd("return_thread recv info.....");
+        rlen = rio_readn(fds[0], rbuff, sizeof(work_args_t));
+        if (rlen < 0) {
+            logw("rio_readn failed");
+            continue;
+        } else if (rlen == 0) {
+            logw("pipe close !!! why ? ?");
+            continue;
+        }
+
+        work_args_t *wa = (work_args_t *)rbuff;
+        fd = wa->sockfd;
+        msgid = wa->msgid;
+
+        char *info = rpc_find_return_info(r, msgid);
+        if (info) {
+            size_t len = strlen(info);
+
+            logd("send client info: %s", info);
+            rpc_pack_header(r, msgid, len);
+            if (RPC_HDR_LEN != rpc_skt_send(fd, (char *)&r->send_pkt.hdr, RPC_HDR_LEN)) {
+                logw("rpc send hdr failed");
+                continue;
+            }
+
+            if (len != rpc_skt_send(fd, info, len)) {
+                logw("rpc send info failed");
+            }
+        }
+    }
+
+    return 0;
+}
+
 
 
 void on_server_recv(rpc_event_t *ev)
@@ -54,9 +113,10 @@ void on_server_recv(rpc_event_t *ev)
 
     int fd = ev->fd;
     rpc_t *r = (rpc_t *)ev->args;
-    char rbuff[1024] = {0};
+    // char rbuff[1024] = {0};
     size_t rlen;
     rpc_header_t *hdr = &r->recv_pkt.hdr;
+    work_args_t wargs = {0, NULL, 0,  {0}};
 
     logd("on_server_recv befor");
     rlen = rpc_skt_recv(fd, (char *)hdr, RPC_HDR_LEN);
@@ -84,7 +144,7 @@ void on_server_recv(rpc_event_t *ev)
     }
 
     if (hdr->payload_len != 0) {
-        rlen = rpc_skt_recv(fd, rbuff, hdr->payload_len);
+        rlen = rpc_skt_recv(fd, wargs.data, hdr->payload_len);
         if (rlen < 0) {
             logw("on_client recv error");
             return;
@@ -100,15 +160,38 @@ void on_server_recv(rpc_event_t *ev)
             return ;
         }
     }
-    if (RPC_MSG_RET(hdr->msg_id) == 1) {
-        // TODO
-        logd("rpc need return");
+
+    work_map_t *wm = rpc_find_work_map(r, hdr->msg_id);
+    if (wm) {
+        wargs.r = r;
+        wargs.msgid = hdr->msg_id;
+        wargs.sockfd = fd;
+        workq_add(r->workq, wm->work, (void*)&wargs, sizeof wargs, NULL);
+        pthread_cond_signal(&r->workq->cond);
     }
 
-    // work_map_t *wm = rpc_find_work_map(hdr->msg_id);
-    // if (wm) {
-    //     wm->work(NULL);
-    // }
+    if (RPC_MSG_RET(hdr->msg_id) == NEED_RETURN) {
+        logd("rpc need return");
+        // pthread_mutex_lock(&r->mutex);
+        // pthread_cond_wait(&r->cond, &r->mutex);
+        // pthread_mutex_unlock(&r->mutex);
+
+        // char *info = rpc_find_return_info(r, hdr->msg_id);
+        // if (info) {
+        //     size_t len = strlen(info);
+
+        //     logd("send client info: %s", info);
+        //     rpc_pack_header(r, hdr->msg_id, len);
+        //     if (RPC_HDR_LEN != rpc_skt_send(fd, (char *)&r->send_pkt.hdr, RPC_HDR_LEN)) {
+        //         logw("rpc send hdr failed");
+        //         return ;
+        //     }
+
+        //     if (len != rpc_skt_send(fd, info, len)) {
+        //         logw("rpc send info failed");
+        //     }
+        // }
+    }
 
     logd("on_server_recv after");
 }
@@ -183,11 +266,25 @@ void on_client(rpc_event_t *ev)
         logd("on client connect ok !!!")
         r->server_uuid = hdr->s_uuid;
         r->local_uuid = hdr->d_uuid;
-    logd("s_uuid: %08x d_uuid: %08d", r->local_uuid, r->server_uuid);
         r->state = rpc_connected;
-        pthread_cond_signal(&cond);
+        pthread_cond_signal(&r->cond);
         return ;
     }
+
+    char ret[1024] = {0};
+
+    logd("recv server length: %d", hdr->payload_len);
+    rlen = rpc_skt_recv(fd, ret, hdr->payload_len);
+    if (rlen < 0) {
+        logw("on_client recv error");
+        return;
+    } else if (rlen == 0) {
+        close(fd);
+        GHepoll_del_event(r->eventbases, ev);
+        return ;
+    }
+    logd("recv return info: %s", ret);
+
 
     logd("on client after");
 }
@@ -262,8 +359,8 @@ rpc_t * rpc_init(const char *host, uint16_t port, rpc_role role)
 
         pthread_t ev_pid;
 
-        pthread_mutex_init(&mutex, NULL);
-        pthread_cond_init(&cond, NULL);
+        pthread_mutex_init(&rpc->mutex, NULL);
+        pthread_cond_init(&rpc->cond, NULL);
 
         if(0 != pthread_create(&ev_pid, NULL, event_pthread, rpc)) {
             logw("pthread create failed");
@@ -271,9 +368,9 @@ rpc_t * rpc_init(const char *host, uint16_t port, rpc_role role)
         }
 
         logd("client pthread mutex lock");
-        pthread_mutex_lock(&mutex);
-        pthread_cond_wait(&cond, &mutex);
-        pthread_mutex_unlock(&mutex);
+        pthread_mutex_lock(&rpc->mutex);
+        pthread_cond_wait(&rpc->cond, &rpc->mutex);
+        pthread_mutex_unlock(&rpc->mutex);
         logd("client pthread mutex unlock");
     }
     else {
@@ -287,11 +384,31 @@ rpc_t * rpc_init(const char *host, uint16_t port, rpc_role role)
             goto err;
         }
 
+        rpc->workq = workq_create("rpc_workq");
+        if (!rpc->workq) {
+            logxw("workq_create failed");
+            goto err;
+        }
+
         pthread_t ev_pid;
+
+        pthread_mutex_init(&rpc->mutex, NULL);
+        pthread_cond_init(&rpc->cond, NULL);
 
         if(0 != pthread_create(&ev_pid, NULL, event_pthread, rpc)) {
             logw("pthread create failed");
             goto err;
+        }
+
+        if (-1 == pipe(fds)) {
+            logw("pipe failed");
+            exit(1);
+        }
+
+        pthread_t pid;
+        if(0 != pthread_create(&pid, NULL, rpc_send_ret_thread, rpc)) {
+            logw("pthread create failed");
+            exit(1);
         }
     }
 
@@ -304,7 +421,7 @@ err:
 }
 
 
-static int rpc_pack_header(rpc_t *r, uint32_t msg_id, size_t payload_len)
+int rpc_pack_header(rpc_t *r, uint32_t msg_id, size_t payload_len)
 {
     logd("s_uuid: %08x d_uuid: %08d", r->local_uuid, r->server_uuid);
     rpc_header_t *hdr = &r->send_pkt.hdr;

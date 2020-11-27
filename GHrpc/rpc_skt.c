@@ -108,7 +108,7 @@ static int skt_openfd_of_hostname(const char *hostname, const char *port,
 {
     int sfd, s;
     struct addrinfo hints, *listp, *p;
-    char port_str[8] = {0};
+    // char port_str[8] = {0};
 
     memset(&hints, 0, sizeof hints);
     hints.ai_socktype = type; // SOCK_DGRAM or SOCK_STREAM
