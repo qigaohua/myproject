@@ -19,11 +19,15 @@ __list_cut_position	list.h	/^static inline void __list_cut_position(struct list_
 __list_del	list.h	/^static inline void __list_del(struct list_head * prev, struct list_head * next)$/;"	f
 __list_del_entry	list.h	/^static inline void __list_del_entry(struct list_head *entry)$/;"	f
 __list_splice	list.h	/^static inline void __list_splice(const struct list_head *list,$/;"	f
+a	workq.c	/^    int a;$/;"	m	struct:st	file:
 args	workq.h	/^    void *args;$/;"	m	struct:workr
+c	workq.c	/^    char c;$/;"	m	struct:st	file:
 cond	workq.h	/^    pthread_cond_t cond;$/;"	m	struct:work_queue
 container_of	list.h	6;"	d
 entry	workq.h	/^    struct list_head entry;$/;"	m	struct:workr	typeref:struct:workr::list_head
 first	list.h	/^    struct hlist_node *first;$/;"	m	struct:hlist_head	typeref:struct:hlist_head::hlist_node
+free_args	workq.h	/^    free_func_t free_args;$/;"	m	struct:work_queue
+free_func_t	workq.h	/^typedef void (*free_func_t)(void *args);$/;"	t
 func	workq.h	/^    work_func_t func;$/;"	m	struct:workr
 hlist_add_after	list.h	/^static inline void hlist_add_after(struct hlist_node *n,$/;"	f
 hlist_add_before	list.h	/^static inline void hlist_add_before(struct hlist_node *n,$/;"	f
@@ -90,14 +94,16 @@ next	list.h	/^    struct hlist_node *next;$/;"	m	struct:hlist_node	typeref:struc
 next	list.h	/^    struct list_head *next, *prev;$/;"	m	struct:list_head	typeref:struct:list_head::list_head
 pprev	list.h	/^    struct hlist_node **pprev;$/;"	m	struct:hlist_node	typeref:struct:hlist_node::hlist_node
 prev	list.h	/^    struct list_head *next, *prev;$/;"	m	struct:list_head	typeref:struct:list_head::
+st	workq.c	/^struct st {$/;"	s	file:
 timeout	workq.h	/^    struct timeval timeout;$/;"	m	struct:workr	typeref:struct:workr::timeval
 tttt	workq.c	/^void tttt(void *args)$/;"	f
+tttt2	workq.c	/^void tttt2(void *args)$/;"	f
 wlist	workq.h	/^    struct list_head wlist;$/;"	m	struct:work_queue	typeref:struct:work_queue::list_head
 work_func_t	workq.h	/^typedef void (*work_func_t)(void *args);$/;"	t
 work_queue	workq.h	/^typedef struct work_queue {$/;"	s
 work_queue_t	workq.h	/^} work_queue_t;$/;"	t	typeref:struct:work_queue
 workq_add	workq.c	/^int workq_add(work_queue_t *wq, work_func_t func, void *args,$/;"	f
-workq_create	workq.c	/^work_queue_t * workq_create(const char *workq_name)$/;"	f
+workq_create	workq.c	/^work_queue_t * workq_create(const char *workq_name, free_func_t func)$/;"	f
 workq_del	workq.c	/^void workq_del(work_queue_t *wq, workr_t *w)$/;"	f
 workq_destory	workq.c	/^void workq_destory(work_queue_t *wq)$/;"	f
 workq_start	workq.c	/^void workq_start(work_queue_t *wq)$/;"	f
