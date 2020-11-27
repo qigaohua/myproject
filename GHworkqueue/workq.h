@@ -5,6 +5,7 @@
 #include "list.h"
 
 typedef void (*work_func_t)(void *args);
+typedef void (*free_func_t)(void *args);
 
 typedef struct workr {
     struct timeval timeout;
@@ -20,10 +21,11 @@ typedef struct work_queue {
     char *name;
     pthread_mutex_t mutex;
     pthread_cond_t cond;
+    free_func_t free_args;
 } work_queue_t;
 
 
-work_queue_t * workq_create(const char *workq_name);
+work_queue_t * workq_create(const char *workq_name, free_func_t func);
 void workq_destory(work_queue_t *wq);
 int  workq_add(work_queue_t *wq, work_func_t func, void *args,
         size_t args_len, struct timeval *timeout);

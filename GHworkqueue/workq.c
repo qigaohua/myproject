@@ -13,7 +13,7 @@
     fprintf(stderr, "%s:%d "fmt"\r\n", __FILE__, __LINE__, ##__VA_ARGS__)
 
 
-work_queue_t * workq_create(const char *workq_name)
+work_queue_t * workq_create(const char *workq_name, free_func_t func)
 {
     work_queue_t *workq = NULL;
 
@@ -25,6 +25,9 @@ work_queue_t * workq_create(const char *workq_name)
 
     if (workq_name)
         workq->name = strdup(workq_name);
+
+    if (func)
+        workq->free_args = func;
 
     workq->loop = 1;
     INIT_LIST_HEAD(&workq->wlist);
@@ -81,8 +84,13 @@ void workq_destory(work_queue_t *wq)
 
     workr_t *w, *n;
     list_for_each_entry_safe(w, n, &wq->wlist, entry) {
-       if (w->args)
-          free(w->args);
+        if (w->args) {
+            if (wq->free_args) {
+                wq->free_args(w->args);
+                continue;
+            }
+            free(w->args);
+        }
     }
     pthread_mutex_destroy(&wq->mutex);
     pthread_cond_destroy(&wq->cond);
@@ -173,7 +181,7 @@ int main(int argc, char *argv[])
 {
     work_queue_t *wq = NULL;
 
-    wq = workq_create("test_queue");
+    wq = workq_create("test_queue", NULL);
 
     int i = 0;
     for(;i < 10;i++) {
@@ -208,6 +216,8 @@ int main(int argc, char *argv[])
         sleep(2);
         break;
     }
+
+    workq_destory(wq);
     return 0;
 }
 
