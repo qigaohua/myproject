@@ -164,7 +164,7 @@ int skt_open_tcpfd(const char *host, uint16_t port)
     struct sockaddr_in si;
 
     if ( !host || port > USHRT_MAX ) {
-        fprintf(stderr, "args is invaild.\n");
+        fprintf(stderr, "Args is invaild.\n");
         return -1;
     }
 

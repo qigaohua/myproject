@@ -79,7 +79,7 @@
 
 #define CHECK_ARGS(x, ret) {\
     if (x) {\
-        fprintf(stderr, "%s:%d invailed args !!!", __FILE__, __LINE__); \
+        fprintf(stderr, "%s:%d invailed args !!!\r\n", __FILE__, __LINE__); \
         return ret; \
     }\
 }
@@ -138,13 +138,18 @@ struct rpc {
     uint32_t server_uuid;      /* rpc server uuid */
     uint32_t local_uuid;       /* local uuid */
 
-    hashmap_t *works_hash;     /* for server, works map hash */
+    hashmap_t *works_hash;     /* for server, works map hash
+                                  for client, process return info hash */
     work_queue_t *workq;       /* for server, work queue */
 
-    hashmap_t *ret_hash;       /* for server , need return hash */
+    hashmap_t *ret_hash;       /* for server , need return info hash */
 
     pthread_cond_t cond;
     pthread_mutex_t mutex;
+
+#define readfd  fds[0]
+#define writefd fds[1]
+    int fds[2];                /* for server, 任务完成后，通知发送client返回信息 */
 };
 typedef struct rpc rpc_t;
 
@@ -171,16 +176,25 @@ typedef struct {
     int sockfd;      // client和server通信socket
     struct rpc *r;
     uint32_t msgid;
-    void *args; // client发送给server的参数
+    void *args;      // client发送给server的参数
 } work_args_t;
-static void free_work_args(void *args) {
+inline static void free_work_args(void *args) {
     work_args_t *wa = (work_args_t *)args;
     if (wa) {
         if(wa->args) free(wa->args);
         free(wa);
     }
-
 }
+
+/**
+#define free_work_args(args) { \
+    work_args_t *__wa = (work_args_t *)args; \
+    if (__wa) {                              \
+        if(__wa->args) free(__wa->args);         \
+        free(__wa);                            \
+    }                                        \
+}
+*/
 
 // for msg_id
 enum {
@@ -286,12 +300,13 @@ int rpc_call(rpc_t *r, uint32_t msg_id, void *payload, size_t payload_len);
 int rpc_peer_call(rpc_t *r, uint32_t *d_uuid, uint32_t msg_id);
 
 
+// server APIs
+int rpc_call_send_thread(int fd, void *value, size_t len);
+
 
 // commom APIs
 rpc_t * rpc_init(const char *host, uint16_t port, rpc_role role);
-int rpc_pack_header(rpc_t *r, uint32_t msg_id, size_t payload_len);
-work_map_t * rpc_find_work_map(rpc_t *r, uint32_t msgid);
-void * rpc_find_return_info(rpc_t *r, uint32_t msgid);
+int rpc_register_works(rpc_t *r, work_map_t w[], unsigned int size);
 
 
 #endif /* ifndef __GH_RPC_H */

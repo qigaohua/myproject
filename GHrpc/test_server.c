@@ -7,7 +7,6 @@
 #if 1
 #include "rpc.h"
 #include "log.h"
-#include "common.h"
 // #include "hashmap/hashmap.h"
 // #include "workq/workq.h"
 
@@ -30,7 +29,7 @@ enum {
 
 // extern hashmap_t *ret_hash;
 // extern hashmap_t *works_hash;
-extern int fds[2];
+// extern int fds[2];
 
 void help(void *args)
 {
@@ -50,47 +49,49 @@ void get_info(void *args)
     snprintf(buf, sizeof buf, "%08x", wa->msgid);
     hashmap_put(wa->r->ret_hash, buf, info);
 
-    // pthread_cond_signal(&wa->r->cond);
-    rio_writen(fds[1], wa, sizeof(work_args_t));
+    rpc_call_send_thread(wa->r->writefd, wa, sizeof(work_args_t));
     logd("call get_info return");
 }
 
+
 RPC_WORK_MAP_BEGIN(test)
-    RPC_WORK_MAP_ADD(RPC_BUILD_MSG_ID(RPC_GROUP_EXTER_0, NEED_RETURN,0,0,
-                RPC_CMD_EXTER_0), get_info)
+    RPC_WORK_MAP_ADD(RPC_BUILD_MSG_ID(RPC_GROUP_EXTER_0, NEED_RETURN,
+                RPC_UP, RPC_UNUSE1, RPC_CMD_EXTER_0), get_info)
+    RPC_WORK_MAP_ADD(RPC_BUILD_MSG_ID(RPC_GROUP_EXTER_0, NO_NEED_RETURN,
+                RPC_UP, RPC_UNUSE1, RPC_CMD_EXTER_1), help)
 RPC_WORK_MAP_END()
 
 
 
-int rpc_register_works(rpc_t *r, work_map_t w[], unsigned int size)
-{
-    int  i = 0;
-    char buff[128] = {0};
-    work_map_t *wm;
+// int rpc_register_works(rpc_t *r, work_map_t w[], unsigned int size)
+// {
+//     int  i = 0;
+//     char buff[128] = {0};
+//     work_map_t *wm;
 
-    if (size == 0) return -1;
+//     if (size == 0) return -1;
 
-    if (r->works_hash)
-        r->works_hash = hashmap_create(10000000, NULL);
+//     if (r->works_hash)
+//         r->works_hash = hashmap_create(10000000, NULL);
 
-    for (; i < size; i++) {
-        snprintf(buff, sizeof buff, "%08x", w[i].msgid);
+//     for (; i < size; i++) {
+//         snprintf(buff, sizeof buff, "%08x", w[i].msgid);
 
-        logd("register msgid: %s", buff);
-        if((wm = hashmap_get(r->works_hash, buff)) && wm->msgid == w[i].msgid) {
-            logm("work[%d] already exist", i);
-            continue;
-        }
+//         logd("register msgid: %s", buff);
+//         if((wm = hashmap_get(r->works_hash, buff)) && wm->msgid == w[i].msgid) {
+//             logm("work[%d] already exist", i);
+//             continue;
+//         }
 
-        if (0 != hashmap_put(r->works_hash, buff, &w[i])) {
-            logxw("hashmap_put failed");
-            continue;
-        }
-        logd("register ok");
-    }
+//         if (0 != hashmap_put(r->works_hash, buff, &w[i])) {
+//             logxw("hashmap_put failed");
+//             continue;
+//         }
+//         logd("register ok");
+//     }
 
-    return 0;
-}
+//     return 0;
+// }
 
 
 int main(int argc, char *argv[])
@@ -99,6 +100,7 @@ int main(int argc, char *argv[])
 
     signal(SIGPIPE,SIG_IGN);
 
+    log_init(GH_LOG_WARN, NULL);
     r = rpc_init("127.0.0.1", 12345, rpc_server);
     if (!r) {
         logxw("rpc init failed");
@@ -107,16 +109,6 @@ int main(int argc, char *argv[])
 
     r->works_hash = hashmap_create(10000000, NULL);
     RPC_REGISTER_WORKS_MAP(r, test);
-
-    r->ret_hash = hashmap_create(10000000, NULL);
-
-    // uint32_t msgid = RPC_BUILD_MSG_ID(RPC_GROUP_EXTER_0,0,0,0, RPC_CMD_EXTER_0);
-    // work_map_t *wm = rpc_find_work_map(msgid);
-    // if (wm) {
-    //     logd(">>>msgid: %u  %u", wm->msgid, msgid);
-    //     wm->work("111");
-    // }
-
     workq_start(r->workq);
 
     while(1)
