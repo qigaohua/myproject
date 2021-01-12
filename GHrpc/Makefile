@@ -35,5 +35,5 @@ $(OBJS):%.o:%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f *.d *.s *.o $(TARGET)
+	rm -f *.d *.s *.o $(TARGET) $(OBJS)
 
