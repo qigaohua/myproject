@@ -33,7 +33,7 @@
 
 #define PAGER   "${PAGER:-more}"
 
-#define NOTES_FILE_PATH     "/home/qigaohua/work/gitcode/stydyNotes/"
+#define NOTES_FILE_PATH     "/home/qigaohua/gitcode/stydyNotes/"
 #define SAVE_DOC_INFO_FILE   NOTES_FILE_PATH"doc.info"
 #define NOTES_FILE_EXTENSION ".xx"   // 笔记文件扩展名
 
@@ -230,7 +230,6 @@ int collect_titles()
     return 0;
 }
 
-
 int query_text(const char *file, const char *const title)
 {
     FILE *fp, *pfp = NULL;
@@ -246,11 +245,12 @@ int query_text(const char *file, const char *const title)
 
     file_t *f = &g_doc.files[0];
 
-    for (int i = 0; i < g_doc.file_num ; f ++, i ++) {
+    int i, j;
+    for (i = 0; i < g_doc.file_num ; f ++, i ++) {
         if (strncmp(f->f_name, file, strlen(file)))
             continue;
-        for (int i = 0; i < f->title_num; i ++) {
-            if (strncmp(f->title[i].t_name, title, strlen(title)))
+        for (j = 0; j < f->title_num; j++) {
+            if (strncmp(f->title[j].t_name, title, strlen(title)))
                 continue;
             char newfile[512] = {0};
             snprintf(newfile, sizeof newfile, NOTES_FILE_PATH"%s"NOTES_FILE_EXTENSION, f->f_name);
@@ -259,7 +259,7 @@ int query_text(const char *file, const char *const title)
                 log_warn("fopen `%s' failed: %m.", newfile);
                 return -2;
             }
-            fseek(fp, f->title[i].offset, SEEK_CUR);
+            fseek(fp, f->title[j].offset, SEEK_CUR);
 
             /* 分页显示 */
             pfp = popen(PAGER, "w");
@@ -299,27 +299,28 @@ ERROR:
 int print_doc_info(const char *filename)
 {
     file_t *f = &g_doc.files[0];
-    int i = 0;
+    int i = 0, j = 0;
 
     for (; i < g_doc.file_num ; f ++, i ++) {
         if ( filename ) {
             if (strncmp(f->f_name, filename, strlen(f->f_name)))
                 continue;
-            for(int i = 0; i < f->title_num; i ++) {
-                printf("\t%s  %ld\n", f->title[i].t_name, f->title[i].offset);
+            for(; j < f->title_num; j ++) {
+                printf("\t%s  %ld\n", f->title[j].t_name, f->title[j].offset);
             }
             break;
         }
 
         printf("%s: \n", f->f_name);
-        for(int i = 0; i < f->title_num; i ++) {
-            printf("\t%s  %ld\n", f->title[i].t_name, f->title[i].offset);
+        for(j = 0; j < f->title_num; j++) {
+            printf("\t%s  %ld\n", f->title[j].t_name, f->title[j].offset);
         }
     }
 
     return 0;
 }
 
+#include "debug.h"
 
 int main(int argc, char *argv[])
 {
