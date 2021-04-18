@@ -298,6 +298,8 @@ int main()
 
     char buf[1024];
     int fd = open("test.txt", O_RDONLY);
+    if (fd < 0)
+        exit(1);
 
     while (read(fd, buf, 1024)) {
         ac_machine_settext(ac_machine, buf);
