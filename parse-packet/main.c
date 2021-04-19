@@ -16,18 +16,14 @@
 #include "hashmap.h"
 #include "min_heap_timer.h"
 #include "packet/decode.h"
+#include "save_packet.h"
 
 
 
 #define PCAP_FILTER_STR  "tcp and port 80"
 
-// typedef struct iface_dev_ {
-//     char *name;
-//     uint16_t id;
-// } iface_dev_t;
 
-
-static const int tuple_max = 4;
+static const int tuple_max = 4;  // for test
 static parse_pkt_t *parse_pkt_cfg;
 volatile static int is_exit = 0; // 结束进程时设置为1
 volatile static int main_exit = 0;
@@ -353,8 +349,21 @@ void PPktReleaceTuple(void *data)
        PACKET_FREE(tuple->p);
     }
 
-    if (tuple->email_info.subject)
-        free(tuple->email_info.subject);
+    /*
+     * 联合体union中的任何一个指针申请内存之后，其他的成员都指向这个
+     * 所以判断union任何一个指针成员是否为NULL就行
+     */
+    if (tuple->context.email) {
+        if (tuple->context.email->subject) {
+            free(tuple->context.email->subject);
+            free(tuple->context.email);
+        }
+        else
+            free(tuple->context.http);
+        tuple->context.email = NULL;
+        tuple->context.http = NULL;
+    }
+
 
     if (tuple->flags & TUPLE_IS_ALLOC) {
         logd("The tuple flags is TUPLE_IS_ALLOC, free tuple");
@@ -520,16 +529,85 @@ int PPktParseHttpHeader(tuple_t *tuple, const uint8_t *data, uint32_t data_len)
     }
 
     tuple->dir = 1; // client
-    tuple->http_info.url_len = snprintf(tuple->http_info.url, sizeof(tuple->http_info.url), "%s%s", host, urlpath);
-    if (tuple->http_info.url_len != (host_len + urlpath_len)) {
-        logxw("Wow, may be a error, url_len = %d", tuple->http_info.url_len);
-        return -1;
+
+    if (!tuple->context.http) {
+        tuple->context.http = calloc(1, sizeof(struct http_context));
+        if (!tuple->context.http) {
+            logxw("Can't calloc");
+            return -1;
+        }
+
+        struct http_context *http = tuple->context.http;
+
+        http->url_len = snprintf(http->url, sizeof(http->url), "%s%s", host, urlpath);
+        if (http->url_len != (host_len + urlpath_len)) {
+            logxw("Wow, may be a error, url_len = %d", http->url_len);
+            return -1;
+        }
+        http->domain = http->url;
+        http->domain_len = host_len; // %.*s
+        http->service = APP_SERVICE_HTTP; // http
+        tuple->app_service = APP_SERVICE_HTTP;
     }
-    tuple->http_info.domain = tuple->http_info.url;
-    tuple->http_info.domain_len = host_len; // %.*s
-    tuple->http_info.service = 1; // http
+    else
+        logd("Wow, why recv GET/POST twice");
 
     return 0;
+}
+
+
+int PPktParseHttpsHeader(tuple_t *tuple, const uint8_t *data, uint32_t data_len)
+{
+    const uint8_t *rest = data;
+    int rest_len = data_len;
+    uint8_t b;
+    uint16_t w;
+
+    if (rest_len < 43) { return -1;  }
+    rest += 43; rest_len -= 43; //next will be session id
+    if (rest_len < 1 ) { return -1;  }
+    b = *rest + 1;rest += b ; rest_len -= b ; //skip session id
+    if (rest_len < 2 ) { return -1;  }
+    w = ntohs(*(const uint16_t *)rest) + 2;
+    rest += w; rest_len -= w ; //skip cipher suites
+    if (rest_len < 1 ) { return -1;  }
+    b = *rest + 1; rest += b ; rest_len -= b ; //skip compression methods
+    rest += 2; rest_len -= 2; //next will be extension
+
+    for (;;) {
+        if (rest_len < 4) return -1;
+        if (rest[0] == 0 && rest[1] == 0) {// found server name extension
+
+            if (!tuple->context.http) {
+                tuple->context.http = calloc(1, sizeof(struct http_context));
+                if (!tuple->context.http) {
+                    logxw("Can't calloc");
+                    return -1;
+                }
+            }
+
+            struct http_context *http = tuple->context.http;
+
+            rest += 7;
+            rest_len -= 7;
+            w = ntohs(*(const uint16_t *)rest);
+            if (rest_len < w + 2) return -1;
+
+            // https中获取不到url,只能获取host(域名)
+            http->url_len = snprintf(http->url, sizeof(http->url)-1, "%.*s", w, rest + 2);
+            if (http->url_len > sizeof(http->url)-1)
+                http->url_len = sizeof(http->url)-1;
+            http->domain = http->url;
+            http->domain_len = http->url_len;
+            http->service = APP_SERVICE_HTTPS;
+            tuple->app_service = APP_SERVICE_HTTPS;
+            return 0;
+        } else {
+            w = ntohs(*(const uint16_t *)(rest+2)) + 4; if (w == 0) return -1;
+            rest += w ; rest_len -= w ;
+        }
+    }
+    return -1;
 }
 
 
@@ -542,37 +620,52 @@ int PPktParseEmailInfo(tuple_t *tuple, uint8_t *data, uint32_t data_len)
     if (GET_TCP_DST_PORT(tuple->p) != 25)
         return -1;
 
+    tuple->app_service = APP_SERVICE_EMAIL; // email
+
+    if (!tuple->context.email) {
+        tuple->context.email = calloc(1, sizeof(struct email_context));
+        if (!tuple->context.email) {
+            logxw("Can't calloc");
+            return -1;
+        }
+    }
+
+    struct email_context *email = tuple->context.email;
+
+    if (email->get_ok == 4)
+        return 0;
+
     uint8_t *p;
     // Date: Tue, 02 Mar 2021 22:45:38 +0800
     if ((p = (uint8_t *)strstr((const char *)data, "Date:")) != NULL) {
-        char *date = tuple->email_info.date;
-        int date_len = sizeof(tuple->email_info.date);
+        char *date = email->date;
+        int date_len = sizeof(email->date);
         p += 6;
         while(*p != '\r' && *p != '\n' && date_len-- > 0)
             *date++ = *p++;
-        tuple->email_info.get_ok++;
+        email->get_ok++;
         p = NULL;
     }
 
     // From: 1969555431@qq.com
     if ((p = (uint8_t *)strstr((const char *)data, "From:")) != NULL) {
-        char *sender = tuple->email_info.sender;
-        int sender_len = sizeof(tuple->email_info.sender);
+        char *sender = email->sender;
+        int sender_len = sizeof(email->sender);
         p += 6;
         while(*p != '\r' && *p != '\n' && sender_len-- > 0)
             *sender++ = *p++;
-        tuple->email_info.get_ok++;
+        email->get_ok++;
         p = NULL;
     }
 
     // To: qigaohua168@163.com
     if ((p = (uint8_t *)strstr((const char *)data, "To:")) != NULL) {
-        char *recver = tuple->email_info.recver;
-        int recver_len = sizeof(tuple->email_info.recver);
+        char *recver = email->recver;
+        int recver_len = sizeof(email->recver);
         p += 4;
         while(*p != '\r' && *p != '\n' && recver_len-- > 0)
             *recver++ = *p++;
-        tuple->email_info.get_ok++;
+        email->get_ok++;
         p = NULL;
     }
 
@@ -585,16 +678,16 @@ int PPktParseEmailInfo(tuple_t *tuple, uint8_t *data, uint32_t data_len)
             p++;
         }
 
-        tuple->email_info.subject = calloc(1, subject_len+1);
-        if (!tuple->email_info.subject) {
+        email->subject = calloc(1, subject_len+1);
+        if (!email->subject) {
             logw("Calloc mem(%d) failed", subject_len+1);
             return -1;
         }
 
-        memcpy(tuple->email_info.subject, p-subject_len, subject_len);
-        tuple->email_info.subject[subject_len+1] = '\0';
+        memcpy(email->subject, p-subject_len, subject_len);
+        email->subject[subject_len+1] = '\0';
 
-        tuple->email_info.get_ok++;
+        email->get_ok++;
     }
 
     return 0;
@@ -741,6 +834,8 @@ void *PPktProcessPacket(void *args)
     BUG_ON(timer == NULL);
     BUG_ON(tuple_hash == NULL);
 
+    start_save_packet("/tmp", 100);
+
     while(1) {
         if (1 == is_exit) break;
         pthread_mutex_lock(&pq->mutex);
@@ -751,6 +846,8 @@ void *PPktProcessPacket(void *args)
         pthread_mutex_unlock(&pq->mutex);
 
         if (!p) continue;
+
+        save_packet(GET_PKT_DATA(p), p->pktlen, "i:", "ens33", 5);
 
         tuple = PPktFindTuple(tuple_hash, GET_IPV4_SRC_ADDR_U32(p),
                 GET_IPV4_DST_ADDR_U32(p), TCP_GET_SRC_PORT(p),
@@ -1061,23 +1158,35 @@ void *PPktProcessPacket(void *args)
         // logm("%s", p->payload);
         if (p->payload_len > 0 && 0 == PPktParseHttpHeader(tuple, p->payload, p->payload_len)) {
             logm("====dir: %d", tuple->dir);
-            logm("====domain: %.*s", tuple->http_info.domain_len, tuple->http_info.domain);
-            logm("====url: %s", tuple->http_info.url);
+            logm("====domain: %.*s", tuple->context.http->domain_len, tuple->context.http->domain);
+            logm("====url: %s", tuple->context.http->url);
+        }
+
+        if (!tuple->context.http) {
+            int ret;
+            if (0 != (ret = PPktParseHttpHeader(tuple, p->payload, p->payload_len)))
+                ret = PPktParseHttpsHeader(tuple, p->payload, p->payload_len);
+            if (ret == 0) {
+                logm("====dir: %d", tuple->dir);
+                logm("====domain: %.*s", tuple->context.http->domain_len, tuple->context.http->domain);
+                logm("====url: %s", tuple->context.http->url);
+            }
         }
 
         if (p->payload_len > 0 && GET_TCP_DST_PORT(p) == 25) {
             PPktParseEmailInfo(tuple, p->payload, p->payload_len);
-            if (tuple->email_info.get_ok == 4) {
-                logm("====date: %s", tuple->email_info.date);
-                logm("====From: %s", tuple->email_info.sender);
-                logm("====To:   %s", tuple->email_info.recver);
-                logm("====Subject: %s", tuple->email_info.subject);
+            if (tuple->context.email->get_ok == 4) {
+                logm("====date: %s", tuple->context.email->date);
+                logm("====From: %s", tuple->context.email->sender);
+                logm("====To:   %s", tuple->context.email->recver);
+                logm("====Subject: %s", tuple->context.email->subject);
             }
         }
 
         // p->ReleasePacket(p);
         PACKET_FREE(p);
     }
+    stop_save_packet();
     logd("The process packet thread exit.");
 
     return NULL;

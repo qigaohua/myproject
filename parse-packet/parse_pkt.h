@@ -8,6 +8,17 @@
 // #define EXPIRES 600000UL  // 10 * 60 * 1000 默认10min后tuple释放
 #define EXPIRES 20000 // 20sec  for test
 
+
+enum APP_SERVICE {
+    APP_SERVICE_NO = 0,
+    APP_SERVICE_HTTP,
+    APP_SERVICE_HTTPS,
+    APP_SERVICE_EMAIL,
+    APP_SERVICE_TOTAL_NUM
+};
+
+
+
 enum TCP_STATE {
     TCP_OFF = 0,
     TCP_CONNECT_1, // syn c->s
@@ -31,6 +42,23 @@ enum TUPLE_FLAGS {
     TUPLE_IS_ALLOC = 4,
 };
 
+struct email_context {
+    char date[128]; // 发送时间
+    char sender[128];
+    char recver[128];
+    char *subject;
+    // char *message;
+    int get_ok; // 等于4表示所有信息都获取到了
+};
+
+struct http_context {
+    char url[256];
+    int  url_len;
+    char *domain;
+    int  domain_len;
+    enum APP_SERVICE  service; // http / https / other
+};
+
 typedef struct tuple_ {
     struct tuple_ *next;
     enum TUPLE_FLAGS flags;
@@ -39,28 +67,37 @@ typedef struct tuple_ {
     int  dir;     // server or client
     enum TCP_STATE state;
     uint32_t server_ip; // 用来判断数据包是服务器发的包还是客户端发的包
+
     unsigned long cs;  // create tuple time
     unsigned long expires; // 到期时间，释放掉
     unsigned long last_communicate; // 最近通信时间
 
     pthread_mutex_t mutex;
 
-    struct http_ {
-        char url[256];
-        int  url_len;
-        char *domain;
-        int  domain_len;
-        int  service; // http / https / other
-    } http_info;
+    enum APP_SERVICE app_service; // http / https / email / ...
 
-    struct email_ {
-        char date[128]; // 发送时间
-        char sender[128];
-        char recver[128];
-        char *subject;
-        // char *message;
-        int get_ok; // 等于4表示所有信息都获取到了
-    } email_info;
+    union {
+        struct http_context *http;
+        struct email_context *email;
+        //TODO ftp smb
+    } context;
+
+    // struct http_ {
+    //     char url[256];
+    //     int  url_len;
+    //     char *domain;
+    //     int  domain_len;
+    //     int  service; // http / https / other
+    // } http_info;
+
+    // struct email_ {
+    //     char date[128]; // 发送时间
+    //     char sender[128];
+    //     char recver[128];
+    //     char *subject;
+    //     // char *message;
+    //     int get_ok; // 等于4表示所有信息都获取到了
+    // } email_info;
 
 } tuple_t;
 
@@ -74,8 +111,8 @@ typedef struct tuple_ {
     (tuple)->cs = 0;                                                \
     (tuple)->expires = 0;                                           \
     (tuple)->last_communicate = 0;                                  \
-    memset(&(tuple)->http_info, 0, sizeof((tuple)->http_info));     \
-    memset(&(tuple)->email_info, 0, sizeof((tuple)->email_info));   \
+    (tuple)->context.http = NULL;                                           \
+    (tuple)->context.email = NULL;                                          \
 } while(0)
 
 
