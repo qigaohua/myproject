@@ -829,7 +829,7 @@ void *PPktProcessPacket(void *args)
     BUG_ON(timer == NULL);
     BUG_ON(tuple_hash == NULL);
 
-    start_save_packet("/tmp", 100);
+    if(0) start_save_packet("/tmp", 100);
 
     while(1) {
         if (1 == is_exit) break;
