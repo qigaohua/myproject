@@ -354,12 +354,7 @@ void PPktReleaceTuple(void *data)
      * 所以判断union任何一个指针成员是否为NULL就行
      */
     if (tuple->context.email) {
-        if (tuple->context.email->subject) {
-            free(tuple->context.email->subject);
-            free(tuple->context.email);
-        }
-        else
-            free(tuple->context.http);
+        free(tuple->context.email);
         tuple->context.email = NULL;
         tuple->context.http = NULL;
     }
@@ -678,13 +673,13 @@ int PPktParseEmailInfo(tuple_t *tuple, uint8_t *data, uint32_t data_len)
             p++;
         }
 
-        email->subject = calloc(1, subject_len+1);
-        if (!email->subject) {
-            logw("Calloc mem(%d) failed", subject_len+1);
-            return -1;
-        }
+        // email->subject = calloc(1, subject_len+1);
+        // if (!email->subject) {
+        //     logw("Calloc mem(%d) failed", subject_len+1);
+        //     return -1;
+        // }
 
-        memcpy(email->subject, p-subject_len, subject_len);
+        memcpy(email->subject, p-subject_len, sizeof(email->subject));
         email->subject[subject_len+1] = '\0';
 
         email->get_ok++;
@@ -813,8 +808,8 @@ int PPktAddTupleToTimer(minheap_t *timer,  tuple_t *tuple, unsigned int expires_
         return -1;
     }
 
-    if (MinHeapTimerIsWait())
-        TellMinHeapTimer(CMD_HAVE_DATA);
+    // if (MinHeapTimerIsWait())
+    //     TellMinHeapTimer(CMD_HAVE_DATA);
 
     return 0;
 }
@@ -964,7 +959,7 @@ void *PPktProcessPacket(void *args)
                  * 注意: 可能tcp四次挥手断开tcp连接实际上只有三次，有的服务端会将四次挥手
                  * 第二三次挥手合并为1个报文，也就是FIN+ACK，捎带ACK机制
                  */
-// #define ADD_TIMER
+#define ADD_TIMER
 #ifdef ADD_TIMER
                 if (tuple->state == TCP_DISCONNECT_OK) {
                     tuple->last_communicate = 0;

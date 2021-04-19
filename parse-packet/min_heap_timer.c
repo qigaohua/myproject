@@ -1,3 +1,12 @@
+/**
+ * @file min_heap_timer.c
+ * @brief 最小堆定时器实现代码
+ * @author qigaohua, qigaohua168@163.com
+ * @version 1.0.0
+ * @date 2021-04-19
+ */
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -25,6 +34,46 @@
  */
 
 
+
+static int pipe_fd[2];
+#define READER pipe_fd[0]
+#define WRITER pipe_fd[1]
+#define MAX_EVENTS  8
+
+volatile static int is_wait = 0;
+
+// 是否在阻塞中， 1是0否
+int MinHeapTimerIsWait()
+{
+    // return atomic32_read(&is_wait) == 1;
+    return is_wait == 1;
+}
+
+int TellMinHeapTimer(enum minheaptimer_cmd cmd)
+{
+    if (WRITER <= 0) {
+        fprintf(stderr, "Wow, Did you call MinHeapTimerInit? \r\n ");
+        return -1;
+    }
+
+    // 如果不在阻塞中，直接返回
+    if (cmd == CMD_HAVE_DATA) {
+        if (MinHeapTimerIsWait() == 0)
+            return 0;
+        else
+            is_wait = 0;
+            // atomic32_set(&is_wait, 0);
+    }
+
+    if (4 != write(WRITER, &cmd, 4)) {
+        fprintf(stderr, "Call write failed: %m\r\n");
+        return -1;
+    }
+
+    return 0;
+}
+
+
 static void swap(minheap_node_t *a, minheap_node_t *b)
 {
     minheap_node_t temp;
@@ -38,8 +87,6 @@ static void swap(minheap_node_t *a, minheap_node_t *b)
     b->data = temp.data;
     b->time_ms = temp.time_ms;
 }
-
-
 
 minheap_t *MinHeapInit(unsigned int node_num, ProcessFunc func)
 {
@@ -162,7 +209,7 @@ int MinHeapAddNode(minheap_t *mp, void *data, unsigned long time_ms)
     // printf(">>>>>>>%s %d\n", mp->node_list[mp->lastindex].data, mp->node_list[mp->lastindex].time_ms);
 
     if (mp->lastindex <= 2) {
-        if (mp->node_list[mp->headindex].time_ms < time_ms)
+        if (mp->node_list[mp->headindex].time_ms > time_ms)
             swap(&mp->node_list[mp->headindex], last_node);
     }
     else {
@@ -173,6 +220,10 @@ int MinHeapAddNode(minheap_t *mp, void *data, unsigned long time_ms)
 #ifdef MULTI_PTHREAD
     pthread_mutex_unlock(&mp->mutex);
 #endif
+
+    // 当添加的定时器到期时间最小时，发送命令
+    if (time_ms == mp->node_list[mp->headindex].time_ms)
+        TellMinHeapTimer(CMD_ADD_NODE);
 
     return 0;
 }
@@ -229,8 +280,10 @@ int MinHeapDelNode(minheap_t *mp, void **data, unsigned long *time_ms)
         return -1;
     }
 
-    *data = mp->node_list[mp->headindex].data;
-    *time_ms = mp->node_list[mp->headindex].time_ms;
+    if (data != NULL && time_ms != NULL) {
+        *data = mp->node_list[mp->headindex].data;
+        *time_ms = mp->node_list[mp->headindex].time_ms;
+    }
 
     minheap_node_t *last_node = &mp->node_list[mp->lastindex-1]; // mp->lastindex 是最后节点的后一个空节点
     swap(last_node, &mp->node_list[mp->headindex]);
@@ -246,6 +299,29 @@ int MinHeapDelNode(minheap_t *mp, void **data, unsigned long *time_ms)
 
     return 0;
 }
+
+
+
+int MinHeapGetMinNode(minheap_t *mp, void **data, unsigned long *time_ms)
+{
+#ifdef MULTI_PTHREAD
+    pthread_mutex_lock(&mp->mutex);
+#endif
+    if (mp->lastindex == mp->headindex) {
+#ifdef MULTI_PTHREAD
+        pthread_mutex_unlock(&mp->mutex);
+#endif
+        fprintf(stderr, "Wow, minheap is empty !\r\n");
+        return -1;
+    }
+
+    *data = mp->node_list[mp->headindex].data;
+    *time_ms = mp->node_list[mp->headindex].time_ms;
+    pthread_mutex_unlock(&mp->mutex);
+
+    return 0;
+}
+
 
 
 static int get_monotonic(struct timeval *tv)
@@ -265,46 +341,6 @@ static int get_monotonic(struct timeval *tv)
 
 
 
-static int pipe_fd[2];
-#define READER pipe_fd[0]
-#define WRITER pipe_fd[1]
-#define MAX_EVENTS  8
-
-#include "atomic.h"
-
-// volatile static int is_wait = 0;
-atomic32_t is_wait;
-
-// 是否在阻塞中， 1是0否
-int MinHeapTimerIsWait()
-{
-    return atomic32_read(&is_wait) == 1;
-}
-
-int TellMinHeapTimer(enum minheaptimer_cmd cmd)
-{
-    if (WRITER <= 0) {
-        fprintf(stderr, "Wow, Did you call MinHeapTimerInit? \r\n ");
-        return -1;
-    }
-
-    // 如果不在阻塞中，直接返回
-    if (cmd == CMD_HAVE_DATA) {
-        if (MinHeapTimerIsWait() == 0)
-            return 0;
-        else
-            atomic32_set(&is_wait, 0);
-    }
-
-    if (4 != write(WRITER, &cmd, 4)) {
-        fprintf(stderr, "Call write failed: %m\r\n");
-        return -1;
-    }
-
-    return 0;
-}
-
-
 int MinHeapTimerLoop(minheap_t *mp)
 {
     int epoll_fd;
@@ -312,7 +348,7 @@ int MinHeapTimerLoop(minheap_t *mp)
     struct epoll_event ev;
     struct timeval tv;
     static int is_exit = 0;
-    atomic32_init(&is_wait);
+
 
     epoll_fd = epoll_create(MAX_EVENTS);
     if (epoll_fd == -1) {
@@ -341,14 +377,15 @@ int MinHeapTimerLoop(minheap_t *mp)
 
     int i, nfds;
     unsigned long now_msecs, expires = 0;
-    long long timeout;
+    long long timeout = -1;
     void *data;
 
     while(!is_exit) {
-        if (expires == 0 && 0 != MinHeapDelNode(mp, &data, &expires)) {
+        // if (expires == 0 && 0 != MinHeapDelNode(mp, &data, &expires)) {
+        if (0 != MinHeapGetMinNode(mp, &data, &expires)) {
             /* 最小堆中没有定时事件 */
             timeout = -1;
-            atomic32_set(&is_wait, 1); // 在epoll_wait阻塞中
+            is_wait = 1;
         }
         else {
             get_monotonic(&tv);
@@ -357,6 +394,7 @@ int MinHeapTimerLoop(minheap_t *mp)
             timeout = expires - now_msecs;
             if (timeout <= 0) {
                 /* do something */
+                MinHeapDelNode(mp, NULL, NULL);
                 mp->ProcessMinHeapNodeData(data);
                 expires = 0;
                 continue;
@@ -371,6 +409,7 @@ int MinHeapTimerLoop(minheap_t *mp)
                 expires = 0;
         }
 
+        fprintf(stdout, ">>>>>>>>>>>>>>>>>timeout: %lld\n", timeout);
         nfds = epoll_wait(epoll_fd, events, MAX_EVENTS, timeout);
         if (-1 == nfds) {
             if (errno == EINTR)
@@ -381,6 +420,7 @@ int MinHeapTimerLoop(minheap_t *mp)
             // fprintf(stdout, "timeout\r\n");
             if (expires == 0) {
                 /* TODO */
+                MinHeapDelNode(mp, NULL, NULL);
                 mp->ProcessMinHeapNodeData(data);
             }
             continue;
@@ -397,13 +437,16 @@ int MinHeapTimerLoop(minheap_t *mp)
                 continue;
             }
             switch(cmd) {
-                case CMD_HAVE_DATA:
-                    atomic32_set(&is_wait, 0);
+                case CMD_HAVE_DATA: // 这个是在没有CMD_ADD_NODE命令前添加的
+                    is_wait = 0;
                     fprintf(stdout, "minheap already has data\r\n");
                     break;
                 case CMD_EXIT:
                     fprintf(stdout, "Exit minheap timer.\r\n");
                     is_exit = 1;
+                    break;
+                case CMD_ADD_NODE: // 防止在运行时添加比较小的定时器，而epoll在比较大的定时器上wait
+                    fprintf(stdout, "minheap add node.\r\n");
                     break;
                 default:
                     fprintf(stderr, "Wow, don't know cmd: %d\r\n", cmd);

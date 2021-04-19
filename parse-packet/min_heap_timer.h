@@ -34,6 +34,7 @@ enum minheaptimer_cmd {
     CMD_OFF = 0,
     CMD_EXIT,
     CMD_HAVE_DATA,
+    CMD_ADD_NODE,
 };
 
 

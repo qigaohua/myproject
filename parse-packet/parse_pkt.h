@@ -46,7 +46,7 @@ struct email_context {
     char date[128]; // 发送时间
     char sender[128];
     char recver[128];
-    char *subject;
+    char subject[256];
     // char *message;
     int get_ok; // 等于4表示所有信息都获取到了
 };
