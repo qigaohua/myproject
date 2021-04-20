@@ -28,6 +28,9 @@ static parse_pkt_t *parse_pkt_cfg;
 volatile static int is_exit = 0; // 结束进程时设置为1
 volatile static int main_exit = 0;
 
+// 是否保持处理过的数据包到pcap文件
+static const int save_packet_switch = 0;
+static const int save_packet_count = 10000;
 
 static int get_monotonic(struct timeval *tv)
 {
@@ -208,6 +211,12 @@ Packet *PPktPacketDequeue(PacketQueue *pq)
     p->prev = NULL;
 
     return p;
+}
+
+
+int PPktPacketIsEmpty(PacketQueue *pq)
+{
+    return pq->size == 0;
 }
 
 
@@ -829,12 +838,13 @@ void *PPktProcessPacket(void *args)
     BUG_ON(timer == NULL);
     BUG_ON(tuple_hash == NULL);
 
-    if(0) start_save_packet("/tmp", 100);
+    if(save_packet_switch)
+        start_save_packet("/tmp", save_packet_count);
 
     while(1) {
         if (1 == is_exit) break;
         pthread_mutex_lock(&pq->mutex);
-        if (pq->size == 0) {
+        if (PPktPacketIsEmpty(pq)) {
             pthread_cond_wait(&pq->cont, &pq->mutex);
         }
         p = PPktPacketDequeue(pq);
@@ -842,7 +852,8 @@ void *PPktProcessPacket(void *args)
 
         if (!p) continue;
 
-        save_packet(GET_PKT_DATA(p), p->pktlen, "i:", "ens33", 5);
+        if(save_packet_switch)
+            save_packet(GET_PKT_DATA(p), p->pktlen, "i:", "ens33", 5);
 
         tuple = PPktFindTuple(tuple_hash, GET_IPV4_SRC_ADDR_U32(p),
                 GET_IPV4_DST_ADDR_U32(p), TCP_GET_SRC_PORT(p),
@@ -1181,7 +1192,7 @@ void *PPktProcessPacket(void *args)
         // p->ReleasePacket(p);
         PACKET_FREE(p);
     }
-    stop_save_packet();
+    if(save_packet_switch) stop_save_packet();
     logd("The process packet thread exit.");
 
     return NULL;

@@ -88,6 +88,8 @@ static void swap(minheap_node_t *a, minheap_node_t *b)
     b->time_ms = temp.time_ms;
 }
 
+
+
 minheap_t *MinHeapInit(unsigned int node_num, ProcessFunc func)
 {
     minheap_t *minheap;
@@ -193,7 +195,7 @@ int MinHeapAddNode(minheap_t *mp, void *data, unsigned long time_ms)
 #ifdef MULTI_PTHREAD
     pthread_mutex_lock(&mp->mutex);
 #endif
-    if (mp->lastindex == mp->max_num) {
+    if (MinHeapIsFull(mp)) {
         fprintf(stderr, "Wow, the minheap already full\r\n");
 #ifdef MULTI_PTHREAD
         pthread_mutex_unlock(&mp->mutex);
@@ -207,7 +209,8 @@ int MinHeapAddNode(minheap_t *mp, void *data, unsigned long time_ms)
     last_node->time_ms = time_ms;
 
     // printf(">>>>>>>%s %d\n", mp->node_list[mp->lastindex].data, mp->node_list[mp->lastindex].time_ms);
-
+#if 0
+    // fix bug: 优化代码, 这段代码比较冗余，选用使用下段代码
     if (mp->lastindex <= 2) {
         if (mp->node_list[mp->headindex].time_ms > time_ms)
             swap(&mp->node_list[mp->headindex], last_node);
@@ -215,6 +218,17 @@ int MinHeapAddNode(minheap_t *mp, void *data, unsigned long time_ms)
     else {
         MinHeapAddAdjest(mp, mp->lastindex);
     }
+#else
+    int child = mp->lastindex, parent = child / 2;
+
+    for (;parent > 0; parent /= 2) {
+        if (mp->node_list[child].time_ms >= mp->node_list[parent].time_ms)
+            break;
+        swap(&mp->node_list[child], &mp->node_list[parent]);
+        child = parent;
+    }
+#endif
+
 
     mp->lastindex++;
 #ifdef MULTI_PTHREAD
@@ -285,6 +299,8 @@ int MinHeapDelNode(minheap_t *mp, void **data, unsigned long *time_ms)
         *time_ms = mp->node_list[mp->headindex].time_ms;
     }
 
+#if 0
+    // fix bug: 优化代码, 这段代码比较冗余，选用使用下段代码
     minheap_node_t *last_node = &mp->node_list[mp->lastindex-1]; // mp->lastindex 是最后节点的后一个空节点
     swap(last_node, &mp->node_list[mp->headindex]);
     last_node->data = NULL;
@@ -292,6 +308,30 @@ int MinHeapDelNode(minheap_t *mp, void **data, unsigned long *time_ms)
 
     mp->lastindex--;
     MinHeapDelAdjuet(mp, mp->headindex);
+#else
+
+    int lastindex = mp->lastindex-1; // 最后一个节点索引
+    int parent = mp->headindex;
+    int child = LEFTCHILD(parent);
+    uint32_t total_node = mp->lastindex-2;  // 去掉最小节点后剩余的总节点数量
+
+    for (; child <= total_node; child = LEFTCHILD(parent)) {
+        // 判断左节点与右节点谁更小
+        if (child + 1 <= total_node
+                && mp->node_list[child].time_ms > mp->node_list[child+1].time_ms)
+            child += 1; // right node min
+
+        // 判断child节点与最后的节点最小
+        if (mp->node_list[child].time_ms < mp->node_list[lastindex].time_ms) {
+            swap(&mp->node_list[child], &mp->node_list[parent]);
+            parent = child;
+        }
+        else
+            break;
+    }
+    swap(&mp->node_list[parent], &mp->node_list[lastindex]);
+    mp->lastindex--;
+#endif
 
 #ifdef MULTI_PTHREAD
     pthread_mutex_unlock(&mp->mutex);
@@ -300,6 +340,17 @@ int MinHeapDelNode(minheap_t *mp, void **data, unsigned long *time_ms)
     return 0;
 }
 
+
+int MinHeapIsFull(minheap_t *mp)
+{
+    return mp->lastindex > mp->max_num; // 因为lastindex指向最后一个空节点
+}
+
+
+int MinHeapIsEmpty(minheap_t *mp)
+{
+    return mp->lastindex == mp->headindex;
+}
 
 
 int MinHeapGetMinNode(minheap_t *mp, void **data, unsigned long *time_ms)
@@ -554,28 +605,21 @@ int main(int argc, char *argv[])
     now_msecs = tv.tv_sec * 1000 + tv.tv_usec / 1000;
 
     for (i = 0; i < TEST_NUM; i++) {
-        int random = rand() % TEST_NUM;
+        int random = rand() % 100;
         char *str = calloc(1, 20);
-        snprintf(str, 20, "%lu|%d", now_msecs + random * 1000, random);
+        snprintf(str, 20, "%lu|%d", now_msecs + random * 100, random);
 
         printf("== %u -> \"%s\"\n", random,  (char *)str);
-        MinHeapAddNode(mp, (void *)str, now_msecs + random * 1000);
+        MinHeapAddNode(mp, (void *)str, now_msecs + random * 100);
     }
 
     printf("==========================================\n");
 
-    pthread_t pid;
-    pthread_create(&pid, NULL, test_pthread, mp);
+    // 多线程运行时添加
+    // pthread_t pid;
+    // pthread_create(&pid, NULL, test_pthread, mp);
 
     MinHeapTimerLoop(mp);
-
-    // void *str;
-    // uint64_t time_ms;
-    // for(i = 1; i < TEST_NUM + 2; i++) {
-    //     MinHeapDelNode(mp, &str, &time_ms);
-    //     printf("== %u -> \"%s\"\n", time_ms,  (char *)str);
-    // }
-    printf("\r\n");
 
     MinHeapDestroy(mp);
     return 0;
