@@ -3,46 +3,71 @@
 !_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
-!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+!_TAG_PROGRAM_VERSION	5.8	//
+BT_SIZE	debug.c	38;"	d	file:
+CMD_SIZE	debug.c	39;"	d	file:
+DEBUG_FILE	debug.c	43;"	d	file:
+LIBDEBUG_H	debug.h	2;"	d
 NOTES_FILE_EXTENSION	main.c	38;"	d	file:
 NOTES_FILE_PATH	main.c	36;"	d	file:
 PAGER	main.c	34;"	d	file:
 PROGRAM	main.c	59;"	d	file:
 SAVE_DOC_INFO_FILE	main.c	37;"	d	file:
+_GNU_SOURCE	debug.c	23;"	d	file:
 __CMD_H_	cmd.h	2;"	d
 __DEBUG__	main.c	17;"	d	file:
+__anon1::file_num	main.c	/^    unsigned int file_num;$/;"	m	struct:__anon1	file:	access:public
+__anon1::files	main.c	/^    file_t files[128];$/;"	m	struct:__anon1	file:	access:public
 _file	main.c	/^typedef struct _file {$/;"	s	file:
+_file::f_name	main.c	/^    char f_name[256];$/;"	m	struct:_file	file:	access:public
+_file::title	main.c	/^    title_t title[128];$/;"	m	struct:_file	file:	access:public
+_file::title_num	main.c	/^    int title_num;$/;"	m	struct:_file	file:	access:public
 _title	main.c	/^typedef struct _title {$/;"	s	file:
+_title::offset	main.c	/^    long  offset;$/;"	m	struct:_title	file:	access:public
+_title::t_name	main.c	/^    char t_name[256];$/;"	m	struct:_title	file:	access:public
+backtrace_handler	debug.c	/^static void backtrace_handler(int sig_num, siginfo_t *info, void *ucontext)$/;"	f	file:	signature:(int sig_num, siginfo_t *info, void *ucontext)
+backtrace_symbols_detail	debug.c	/^static void backtrace_symbols_detail(void *array[], int size)$/;"	f	file:	signature:(void *array[], int size)
 cmd_error	main.c	/^char  cmd_error;$/;"	v
 cmd_file	main.c	/^char *cmd_file;$/;"	v
 cmd_info	main.c	/^char  cmd_info;$/;"	v
 cmd_info_file	main.c	/^char *cmd_info_file;$/;"	v
 cmd_title	main.c	/^char *cmd_title;$/;"	v
 cmd_update	main.c	/^char  cmd_update;$/;"	v
-collect_files	main.c	/^int collect_files(const char *dirpath)$/;"	f
+collect_files	main.c	/^int collect_files(const char *dirpath)$/;"	f	signature:(const char *dirpath)
 collect_titles	main.c	/^int collect_titles()$/;"	f
+debug_backtrace_dump	debug.c	/^void debug_backtrace_dump(void)$/;"	f	signature:(void)
+debug_backtrace_dump	debug.h	/^void debug_backtrace_dump();$/;"	p	signature:()
+debug_backtrace_init	debug.c	/^int debug_backtrace_init(void)$/;"	f	signature:(void)
+debug_backtrace_init	debug.h	/^int debug_backtrace_init();$/;"	p	signature:()
+debug_signal_handler	debug.c	/^static void debug_signal_handler(int signo, siginfo_t *siginfo, void *ucontext)$/;"	f	file:	signature:(int signo, siginfo_t *siginfo, void *ucontext)
+debug_signals_init	debug.c	/^int debug_signals_init(void)$/;"	f	signature:(void)
+debug_signals_init	debug.h	/^int debug_signals_init();$/;"	p	signature:()
 doc_info_update	main.c	/^static int doc_info_update;$/;"	v	file:
 doc_t	main.c	/^} doc_t;$/;"	t	typeref:struct:__anon1	file:
-f_name	main.c	/^    char f_name[256];$/;"	m	struct:_file	file:
-file_num	main.c	/^    unsigned int file_num;$/;"	m	struct:__anon1	file:
+f_name	main.c	/^    char f_name[256];$/;"	m	struct:_file	file:	access:public
+file_num	main.c	/^    unsigned int file_num;$/;"	m	struct:__anon1	file:	access:public
 file_t	main.c	/^} file_t;$/;"	t	typeref:struct:_file	file:
-files	main.c	/^    file_t files[128];$/;"	m	struct:__anon1	file:
+files	main.c	/^    file_t files[128];$/;"	m	struct:__anon1	file:	access:public
 g_doc	main.c	/^doc_t g_doc;$/;"	v
+get_uc_mcontext_pc	debug.c	/^static void *get_uc_mcontext_pc(ucontext_t *uc)$/;"	f	file:	signature:(ucontext_t *uc)
 load_doc_info	main.c	/^int load_doc_info()$/;"	f
 log_error	main.c	19;"	d	file:
 log_info	main.c	27;"	d	file:
 log_info	main.c	30;"	d	file:
 log_warn	main.c	23;"	d	file:
 long_opt	cmd.c	/^const struct option long_opt[] = {$/;"	v	typeref:struct:option
-main	main.c	/^int main(int argc, char *argv[])$/;"	f
-offset	main.c	/^    long  offset;$/;"	m	struct:_title	file:
-option_parse	cmd.c	/^int option_parse(char argc, char **argv)$/;"	f
+main	main.c	/^int main(int argc, char *argv[])$/;"	f	signature:(int argc, char *argv[])
+offset	main.c	/^    long  offset;$/;"	m	struct:_title	file:	access:public
+option_parse	cmd.c	/^int option_parse(char argc, char **argv)$/;"	f	signature:(char argc, char **argv)
+option_parse	cmd.h	/^int option_parse(char argc, char **argv);$/;"	p	signature:(char argc, char **argv)
 optstr	cmd.c	/^const char *optstr = "hvf:t:i::u";$/;"	v
-print_doc_info	main.c	/^int print_doc_info(const char *filename)$/;"	f
-query_text	main.c	/^int query_text(const char *file, const char *const title)$/;"	f
+print_doc_info	main.c	/^int print_doc_info(const char *filename)$/;"	f	signature:(const char *filename)
+query_text	main.c	/^int query_text(const char *file, const char *const title)$/;"	f	signature:(const char *file, const char *const title)
 save_doc_info	main.c	/^int save_doc_info()$/;"	f
-t_name	main.c	/^    char t_name[256];$/;"	m	struct:_title	file:
-title	main.c	/^    title_t title[128];$/;"	m	struct:_file	file:
-title_num	main.c	/^    int title_num;$/;"	m	struct:_file	file:
+signals_all	debug.c	/^static int signals_all[] = {$/;"	v	file:
+signals_trace	debug.c	/^static int signals_trace[] =$/;"	v	file:
+t_name	main.c	/^    char t_name[256];$/;"	m	struct:_title	file:	access:public
+title	main.c	/^    title_t title[128];$/;"	m	struct:_file	file:	access:public
+title_num	main.c	/^    int title_num;$/;"	m	struct:_file	file:	access:public
 title_t	main.c	/^} title_t;$/;"	t	typeref:struct:_title	file:
 usage	main.c	/^const char *usage = "名称:\\n"$/;"	v
